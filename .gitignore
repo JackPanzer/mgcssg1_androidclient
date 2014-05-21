@@ -1,4 +1,8 @@
 *.class
+*.dex
+*.apk
+*.ap_
+*.cache
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
