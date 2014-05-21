@@ -1,0 +1,2 @@
+mgcssg1_androidclient
+=====================
