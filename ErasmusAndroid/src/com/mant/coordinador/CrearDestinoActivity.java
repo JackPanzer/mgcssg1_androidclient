@@ -9,6 +9,9 @@ import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
 
+// En esta clase habría que crear una función que guardará los datos
+//que introduce el coordinador en la base de datos
+
 public class CrearDestinoActivity extends Activity {
 
 	@Override
@@ -19,9 +22,10 @@ public class CrearDestinoActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
+		
 		getMenuInflater().inflate(R.menu.crear_destino, menu);
 		return true;
+		
 	}
 	
 	public void clickVolver(View v){

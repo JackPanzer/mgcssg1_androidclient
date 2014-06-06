@@ -1,5 +1,9 @@
 package com.mant.auxiliares_coordinador;
 
+//Esta clase almacenará los datos de la base de datos y luego será usada
+//por la clase AdaptadorDestinosCoordinador para cargarlo en el layout
+//coorespondiente
+
 public class Nombre_Destino {
 	String nombre_destino;
 

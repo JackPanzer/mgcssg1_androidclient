@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ExpandableListView;
 
+//Se debe añadir una función que almacene los cambios 
 public class ModificarDestinosActivity extends Activity {
 	
 	AdaptadorDestinosCoordinador adaptador_destinos;
@@ -29,6 +30,7 @@ public class ModificarDestinosActivity extends Activity {
 		
 		lista_expandible = (ExpandableListView) findViewById(R.id.expandableListView3);
 		
+		//LLama y carga los datos de la bases de datos
 		PrepararDatos();
 		
 		adaptador_destinos = new AdaptadorDestinosCoordinador(this, cabecera_lista, contenido_lista);
@@ -52,11 +54,12 @@ public class ModificarDestinosActivity extends Activity {
 		
 	}
 	
+	//Esta funcion debe de cargar los datos de la base de datos
 	private void PrepararDatos() {
 		cabecera_lista = new ArrayList<String>();
 		contenido_lista = new HashMap<String, List<Nombre_Destino>>();
  
-        // Adding child data
+       
         cabecera_lista.add("Destino 1");
         cabecera_lista.add("Destino 2");
         cabecera_lista.add("Destino 3");
@@ -76,7 +79,7 @@ public class ModificarDestinosActivity extends Activity {
         d4.add(new Nombre_Destino("Universidad de Mexico"));
         
  
-        contenido_lista.put(cabecera_lista.get(0), d1); // Header, Child data
+        contenido_lista.put(cabecera_lista.get(0), d1); 
         contenido_lista.put(cabecera_lista.get(1), d2);
         contenido_lista.put(cabecera_lista.get(2), d3);
         contenido_lista.put(cabecera_lista.get(3), d4);

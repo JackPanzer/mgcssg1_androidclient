@@ -17,12 +17,14 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ExpandableListView;
 
+//Hay que crear una funcion que despues de pulsar el boton elimine
+//los destinos que se hayan elegido tras pulsar el check
 public class EliminarDestinoActivity extends Activity {
 
-	AdaptadorDestinosCoordinador2 adaptador_destinos;
+	AdaptadorDestinosCoordinador2 adaptador_destinos; 
     ExpandableListView lista_expandible;
-    List<String> cabecera_lista;
-    HashMap<String, List<Nombre_Destino2>> contenido_lista;
+    List<String> cabecera_lista;//contenido de la cabecera, puede ser una numeracion
+    HashMap<String, List<Nombre_Destino2>> contenido_lista;//contiene los nombre de los destinos
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class EliminarDestinoActivity extends Activity {
 		
 		lista_expandible = (ExpandableListView) findViewById(R.id.expandableListView4);
 		
+		//carga los datos de la base de datos
 		PrepararDatos();
 		
 		adaptador_destinos = new AdaptadorDestinosCoordinador2(this, cabecera_lista, contenido_lista);
@@ -40,7 +43,6 @@ public class EliminarDestinoActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.eliminar_destino, menu);
 		return true;
 	}
@@ -55,6 +57,7 @@ public class EliminarDestinoActivity extends Activity {
 		
 	}
 	
+	//Esta función debe cargar los datos del servidor
 	private void PrepararDatos() {
 		cabecera_lista = new ArrayList<String>();
 		contenido_lista = new HashMap<String, List<Nombre_Destino2>>();

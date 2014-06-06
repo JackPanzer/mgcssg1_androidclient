@@ -23,28 +23,29 @@ public class AceptarPropuestaActivity extends Activity {
 	
 	AdaptadorPropuesta adaptador_propuesta;
     ExpandableListView expandible_propuesta;
-    List<String> cabecera_propuesta;
-    HashMap<String, List<Propuesta>> contenido_propuesta;
+    List<String> cabecera_propuesta;//cabecera del expandible
+    HashMap<String, List<Propuesta>> contenido_propuesta;//contenido del expandible
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_aceptar_propuesta);
 		
+		//Creo el objeto que maneja el expandible
 		expandible_propuesta = (ExpandableListView) findViewById(R.id.expandableListView5);
-		 
+		//Añado los datos a los arrays
 		preparar_datos();
- 
+		//LLamo al adaptador que cargará los datos en el layout
 		adaptador_propuesta = new AdaptadorPropuesta(this, cabecera_propuesta, contenido_propuesta);
  
-        // setting list adapter
+        //Se carga en la aplicancion
 		expandible_propuesta.setAdapter(adaptador_propuesta);
 	}
 	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
+		
 		getMenuInflater().inflate(R.menu.aceptar_propuesta, menu);
 		return true;
 	}
@@ -54,6 +55,7 @@ public class AceptarPropuestaActivity extends Activity {
 		
 	}
 	
+	//funcion de prueba que será sustituida por consulta a la base de datos
 	private void preparar_datos() {
 		cabecera_propuesta = new ArrayList<String>();
 		contenido_propuesta = new HashMap<String, List<Propuesta>>();
