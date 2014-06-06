@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.erasmusandroid"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.example.erasmusandroid.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.mant.alumno.Principal_Alumno"
+            android:label="@string/title_activity_principal__alumno" >
+        </activity>
+        <activity
+            android:name="com.mant.alumno.DestinoAlumnoActivity"
+            android:label="@string/title_activity_destino_alumno" >
+        </activity>
+        <activity
+            android:name="com.mant.alumno.DestinoAsignaturaActivity"
+            android:label="@string/title_activity_destino_asignatura" >
+        </activity>
+        <activity
+            android:name="com.mant.alumno.AceptarPrecontratoActivity"
+            android:label="@string/title_activity_aceptar_precontrato" >
+        </activity>
+        <activity
+            android:name="com.mant.coordinador.PricipalCoordinadorActivity"
+            android:label="@string/title_activity_pricipal_coordinador" >
+        </activity>
+        <activity
+            android:name="com.mant.coordinador.CrearDestinoActivity"
+            android:label="@string/title_activity_crear_destino" >
+        </activity>
+        <activity
+            android:name="com.mant.coordinador.ModificarDestinosActivity"
+            android:label="@string/title_activity_modificar_destinos" >
+        </activity>
+        <activity
+            android:name="com.mant.coordinador.EliminarDestinoActivity"
+            android:label="@string/title_activity_eliminar_destino" >
+        </activity>
+        <activity
+            android:name="com.mant.coordinador.GestionarDestinosActivity"
+            android:label="@string/title_activity_gestionar_destinos" >
+        </activity>
+        <activity
+            android:name="com.mant.coordinador.AceptarPropuestaActivity"
+            android:label="@string/title_activity_aceptar_propuesta" >
+        </activity>
+        <activity
+            android:name="com.mant.administrador.BaseDeDatosActivity"
+            android:label="@string/title_activity_base_de_datos" >
+        </activity>
+        <activity
+            android:name="com.mant.administrador.FormularioActivity"
+            android:label="@string/title_activity_formulario" >
+        </activity>
+        <activity
+            android:name="com.mant.administrador.SentenciaActivity"
+            android:label="@string/title_activity_sentencia" >
+        </activity>
+        <activity
+            android:name="com.example.erasmusandroid.AlumnoDestinosActivity"
+            android:label="@string/title_activity_alumno_destinos" >
+        </activity>
+        <activity
+            android:name="com.example.erasmusandroid.DestinosActivity"
+            android:label="@string/title_activity_destinos" >
+        </activity>
+        <activity
+            android:name="com.example.erasmusandroid.Destinos2Activity"
+            android:label="@string/title_activity_destinos2" >
+        </activity>
+        <activity
+            android:name="com.example.erasmusandroid.AsignaturasActivity"
+            android:label="@string/title_activity_asignaturas" >
+        </activity>
+        <activity
+            android:name="com.example.erasmusandroid.Destinos3Activity"
+            android:label="@string/title_activity_destinos3" >
+        </activity>
+        <activity
+            android:name="com.example.erasmusandroid.PrecontratoActivity"
+            android:label="@string/title_activity_precontrato" >
+        </activity>
+        <activity
+            android:name="com.example.erasmusandroid.Asignaturas2Activity"
+            android:label="@string/title_activity_asignaturas2" >
+        </activity>
+    </application>
+
+</manifest>

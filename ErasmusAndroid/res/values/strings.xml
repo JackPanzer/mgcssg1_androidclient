@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ErasmusAndroid</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_principal__alumno">Principal_Alumno</string>
+    <string name="title_activity_destino_alumno">MainActivity</string>
+    <string name="title_activity_destino_asignatura">MainActivity</string>
+    <string name="title_activity_aceptar_precontrato">MainActivity</string>
+    <string name="title_activity_pricipal_coordinador">MainActivity</string>
+    <string name="title_activity_crear_destino">MainActivity</string>
+    <string name="title_activity_modificar_destinos">MainActivity</string>
+    <string name="title_activity_eliminar_destino">MainActivity</string>
+    <string name="title_activity_gestionar_destinos">MainActivity</string>
+    <string name="title_activity_aceptar_propuesta">MainActivity</string>
+    <string name="title_activity_base_de_datos">MainActivity</string>
+    <string name="title_activity_formulario">MainActivity</string>
+    <string name="title_activity_sentencia">MainActivity</string>
+    <string name="title_activity_alumno_destinos">MainActivity</string>
+    <string name="title_activity_destinos">MainActivity</string>
+    <string name="title_activity_destinos2">MainActivity</string>
+    <string name="title_activity_asignaturas">MainActivity</string>
+    <string name="title_activity_destinos3">MainActivity</string>
+    <string name="title_activity_precontrato">MainActivity</string>
+    <string name="title_activity_asignaturas2">MainActivity</string>
+
+</resources>
