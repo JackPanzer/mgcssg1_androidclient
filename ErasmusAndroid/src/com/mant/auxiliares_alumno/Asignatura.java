@@ -1,5 +1,10 @@
 package com.mant.auxiliares_alumno;
 
+//En esta clase se guardaran las asignaturas que el alumno puede elegir
+//para ese destino en concreto, el check servirá para enviar a la base 
+//de datos las asignaturas que ha elegido de ese destino, lo usará la clase
+// AdaptadorDestinoAsignatura del paquete adaptadores_alumno
+
 public class Asignatura {
 	private String nombre;
 	private boolean estado;

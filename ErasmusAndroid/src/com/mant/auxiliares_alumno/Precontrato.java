@@ -2,7 +2,9 @@ package com.mant.auxiliares_alumno;
 
 import java.util.ArrayList;
 
-
+//Clase auxiliar que guardará los precontratos y dará la posibilidad de enviarlos al
+//coordinador académico, esta clase será usada por AdaptadorPrecontratos, se le deben
+//de añadir mas atributos
 public class Precontrato {
 	private String nombre;
 	private String telefono;

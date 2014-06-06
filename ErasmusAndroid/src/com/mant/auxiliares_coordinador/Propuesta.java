@@ -2,7 +2,8 @@ package com.mant.auxiliares_coordinador;
 
 import java.util.ArrayList;
 
-
+//Clase auxiliar que cargará los precontratos que han sido enviados 
+//y guardados en la base de datos
 public class Propuesta {
 	private String nombre;
 	private String telefono;

@@ -1,5 +1,9 @@
 package com.mant.auxiliares_alumno;
 
+//Carga los destinos disponibles para ese alumno en concreto, los cuales se podrán
+//elegir con un check, no se puede permitir mas de tres, será usada por el 
+//la clase Adaptadordestinos dentro del paquete adaptadores_alumno
+
 public class Destinos {
 	private String destino;
 	private boolean estado;
