@@ -27,7 +27,7 @@ public class DestinoAlumnoActivity extends Activity {
 
 	
 		ArrayList<Destinos> todos_destinos = new ArrayList<Destinos>();
-		/
+		
 		ListView lstLista;
 		
 		Adaptadordestinos adaptador;
@@ -47,10 +47,10 @@ public class DestinoAlumnoActivity extends Activity {
 		
 				adaptador = new Adaptadordestinos(this, todos_destinos);
 
-				//Se establece el adaptador en la Listview
+				
 				lstLista.setAdapter(adaptador);
 
-				//Esto es mas que nada es a nivel de diseño con el objetivo de crear unas lineas mas anchas entre item y item
+				
 				lstLista.setDividerHeight(3);
 
 				//Se le aplica un Listener donde ira lo que tiene que hacer en caso de que sea pulsado
@@ -75,7 +75,7 @@ public class DestinoAlumnoActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
+		
 		getMenuInflater().inflate(R.menu.destino_alumno, menu);
 		return true;
 	}

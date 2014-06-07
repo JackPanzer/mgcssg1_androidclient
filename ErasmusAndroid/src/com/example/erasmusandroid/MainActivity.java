@@ -30,7 +30,13 @@ public class MainActivity extends Activity {
 		
 	}
 	
-	public void clickAlumnos(View v){
+	public void clickLogin(View v){
+		
+		Intent act = new Intent(this, Principal_Alumno.class);
+		startActivity(act);
+	}
+	
+	/*public void clickAlumnos(View v){
 		//Se va a la ventana de alumnos
 		Intent act = new Intent(this, Principal_Alumno.class);
 		startActivity(act);
@@ -49,7 +55,7 @@ public class MainActivity extends Activity {
 		Intent act = new Intent(this, BaseDeDatosActivity.class);
 		startActivity(act);
 		
-	}
+	}*/
 	
 
 }

@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
 
+//Esta activity previsualiza los precontratos
 public class AceptarPrecontratoActivity extends Activity {
 	
 	AdaptadorPrecontrado adaptador_precontrato;
@@ -33,26 +34,27 @@ public class AceptarPrecontratoActivity extends Activity {
 		
 		expListView = (ExpandableListView) findViewById(R.id.expandableListView2);
 		 
-        // preparing list data
+		
         prepareListData();
  
         adaptador_precontrato = new AdaptadorPrecontrado(this, lista_Destinos, contenido_destino);
  
-        // setting list adapter
+        
         expListView.setAdapter(adaptador_precontrato);
 	}
-
+	
+	//Clase que servirá para cargar los datos desde la base de datos
 	private void prepareListData() {
 		lista_Destinos = new ArrayList<String>();
 		contenido_destino = new HashMap<String, List<Precontrato>>();
  
-        // Adding child data
+        
 		lista_Destinos.add("Destino 1");
 		lista_Destinos.add("Destino 2");
 		lista_Destinos.add("Destino 3");
 		lista_Destinos.add("Destino 4");
  
-        // Adding child data
+        
         ArrayList<Asignatura2> d1 = new ArrayList<Asignatura2>();
         d1.add(new Asignatura2("Asignatura 1"));
         d1.add(new Asignatura2("Asignatura 2"));
@@ -63,7 +65,7 @@ public class AceptarPrecontratoActivity extends Activity {
         p1.add(new Precontrato("Jacinto Mata", "677234568", "Aeronautica", "Huelva", "B1", d1));
         
  
-        contenido_destino.put(lista_Destinos.get(0), p1); // Header, Child data
+        contenido_destino.put(lista_Destinos.get(0), p1); 
         contenido_destino.put(lista_Destinos.get(1), p1);
         contenido_destino.put(lista_Destinos.get(2), p1);
         contenido_destino.put(lista_Destinos.get(3), p1);
