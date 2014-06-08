@@ -1,14 +1,17 @@
 package com.mant.alumno;
 
+import com.mant.TareasAsincronas.aTaskLogin;
 import com.example.erasmusandroid.R;
 import com.example.erasmusandroid.R.layout;
 import com.example.erasmusandroid.R.menu;
+import com.mant.TareasAsincronas.aTaskLogin;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.TextView;
 
 public class Principal_Alumno extends Activity {
 
@@ -16,6 +19,13 @@ public class Principal_Alumno extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_principal__alumno);
+		
+		Intent i = getIntent();
+		String nick = i.getStringExtra("nick");
+		String pass = i.getStringExtra("pass");
+		
+		aTaskLogin aTask = new aTaskLogin(nick, pass);
+		aTask.execute();
 	}
 
 	@Override

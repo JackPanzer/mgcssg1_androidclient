@@ -102,6 +102,10 @@
             android:name="com.example.erasmusandroid.Asignaturas2Activity"
             android:label="@string/title_activity_asignaturas2" >
         </activity>
+        <activity
+            android:name="com.example.erasmusandroid.AtaskloginActivity"
+            android:label="@string/title_activity_atasklogin" >
+        </activity>
     </application>
 
 </manifest>
