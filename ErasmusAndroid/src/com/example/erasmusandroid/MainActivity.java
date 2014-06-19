@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.EditText;
 
 public class MainActivity extends Activity {
 
@@ -34,6 +35,13 @@ public class MainActivity extends Activity {
 		
 		Intent act = new Intent(this, Principal_Alumno.class);
 		startActivity(act);
+		
+		
+		/* "Empaquetamos" parametros en el intent */
+		String nick = ((EditText) findViewById(R.id.am_usuario)).getText().toString();
+		String pass = ((EditText)findViewById(R.id.am_pass)).getText().toString();
+		act.putExtra("nick", nick);
+		act.putExtra("pass", pass);
 	}
 	
 	/*public void clickAlumnos(View v){
