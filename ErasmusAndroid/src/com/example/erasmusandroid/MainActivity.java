@@ -1,5 +1,6 @@
 package com.example.erasmusandroid;
 
+import com.mant.TareasAsincronas.aTaskLogin;
 import com.mant.administrador.BaseDeDatosActivity;
 import com.mant.alumno.Principal_Alumno;
 import com.mant.coordinador.PricipalCoordinadorActivity;
@@ -33,15 +34,12 @@ public class MainActivity extends Activity {
 	
 	public void clickLogin(View v){
 		
-		Intent act = new Intent(this, Principal_Alumno.class);
-		startActivity(act);
-		
-		
 		/* "Empaquetamos" parametros en el intent */
 		String nick = ((EditText) findViewById(R.id.am_usuario)).getText().toString();
 		String pass = ((EditText)findViewById(R.id.am_pass)).getText().toString();
-		act.putExtra("nick", nick);
-		act.putExtra("pass", pass);
+		
+		aTaskLogin atl = new aTaskLogin(nick, pass);
+		atl.execute();
 	}
 	
 	/*public void clickAlumnos(View v){
