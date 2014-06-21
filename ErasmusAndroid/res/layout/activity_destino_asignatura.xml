@@ -24,7 +24,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:onClick="clickAceptar"
-        android:text="Aceptar" />
+        android:text="Solicitar" />
 
     <TextView
         android:id="@+id/textView1"

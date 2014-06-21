@@ -20,8 +20,7 @@ public class aTaskLogin extends AsyncTask <Void, Void, Void>{
 	private ComplexUsuario respuesta;
 	private Activity context;
 	
-	/*TODO
-	CAMBIAR POR LOS NUESTROS*/
+	
 	final String NAMESPACE = "urn:Erasmus";
 	final String URL = "http://10.0.2.2/services.php";
 	final String METHOD_NAME = "loginUsuario";
@@ -76,6 +75,8 @@ public class aTaskLogin extends AsyncTask <Void, Void, Void>{
 						break;
 					}
 				}
+				
+				
 			}
 		}catch(Exception e){
 			e.printStackTrace();
