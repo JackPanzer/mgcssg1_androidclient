@@ -2,20 +2,23 @@ package com.mant.TareasAsincronas;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
-import com.mant.modelo.ComplexUsuario;
-
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
+
+import com.mant.alumno.Principal_Alumno;
+import com.mant.coordinador.PricipalCoordinadorActivity;
+import com.mant.modelo.ComplexUsuario;
 
 public class aTaskLogin extends AsyncTask <Void, Void, Void>{
 
 	private String nick;
 	private String password;
 	private ComplexUsuario respuesta;
+	private Activity context;
 	
 	/*TODO
 	CAMBIAR POR LOS NUESTROS*/
@@ -24,9 +27,10 @@ public class aTaskLogin extends AsyncTask <Void, Void, Void>{
 	final String METHOD_NAME = "loginUsuario";
 	final String SOAP_ACTION = "urn:Erasmus";
 	
-	public aTaskLogin(String _nick, String _password){
+	public aTaskLogin(Activity context, String _nick, String _password){
 		this.nick = _nick;
 		this.password = _password;
+		this.context = context;
 	}
 	
 	@Override
@@ -54,6 +58,24 @@ public class aTaskLogin extends AsyncTask <Void, Void, Void>{
 			if (envelope.getResponse() != null){
 				respuesta = new ComplexUsuario((SoapObject)envelope.getResponse());
 				//Si hasta aquí todo ha ido bien, lo siguiente será abrir la nueva interfaz
+				if(respuesta.getErrno() == 0){
+					//Todo ha ido bien, hay que cargar la interfaz
+					//en base al rol
+					Intent act;
+					switch(respuesta.getRol()){
+					case 1:
+						act = new Intent(this.context, Principal_Alumno.class);
+						this.context.startActivity(act);
+						break;
+					case 2:
+						act = new Intent(this.context, PricipalCoordinadorActivity.class);
+						this.context.startActivity(act);
+						break;
+					default:
+						//Rol desconocido, posible error en el servidor/cliente
+						break;
+					}
+				}
 			}
 		}catch(Exception e){
 			e.printStackTrace();

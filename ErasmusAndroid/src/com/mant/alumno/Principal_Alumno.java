@@ -16,14 +16,16 @@ public class Principal_Alumno extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		/*
 		setContentView(R.layout.activity_principal__alumno);
 		
 		Intent i = getIntent();
 		String nick = i.getStringExtra("nick");
 		String pass = i.getStringExtra("pass");
 		
-		aTaskLogin aTask = new aTaskLogin(nick, pass);
+		aTaskLogin aTask = new aTaskLogin(this, nick, pass);
 		aTask.execute();
+		*/
 	}
 
 	@Override

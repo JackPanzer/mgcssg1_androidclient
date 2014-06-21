@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
 		String nick = ((EditText) findViewById(R.id.am_usuario)).getText().toString();
 		String pass = ((EditText)findViewById(R.id.am_pass)).getText().toString();
 		
-		aTaskLogin atl = new aTaskLogin(nick, pass);
+		aTaskLogin atl = new aTaskLogin(this, nick, pass);
 		atl.execute();
 	}
 	
