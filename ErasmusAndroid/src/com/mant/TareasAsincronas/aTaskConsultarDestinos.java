@@ -15,6 +15,7 @@ import android.os.AsyncTask;
 
 import com.mant.alumno.Principal_Alumno;
 import com.mant.coordinador.PricipalCoordinadorActivity;
+import com.mant.modelo.ArrayDestinos;
 import com.mant.modelo.ComplexDestino;
 import com.mant.modelo.ComplexUsuario;
 
@@ -59,18 +60,14 @@ public class aTaskConsultarDestinos extends AsyncTask <Void, Void, Void>{
 			
 			if (envelope.getResponse() != null){
 				
-			//	Vector<SoapObject> vectorOfSoapObject = (Vector<SoapObject>)envelope.getResponse();
+				ArrayDestinos misDestinos = new ArrayDestinos((SoapObject)envelope.getResponse());
 				
-		//		for (SoapObject soapObject : vectorOfSoapObject) {
-				   // put all properties into  DataPlusID  object
-				//   DataPlusID  dataPlusIDObj = new DataPlusID();
-				   
-			//	   dataPlusIDObj.setData(soapObject.getPropertyAsString("data"));
-			//	}
+			//	respuesta = new ArrayList<ComplexDestino>(collection)
+
 				
-				//respuesta = new ArrayList<ComplexDestino>(collection) 
+ 
 						
-						//new ComplexUsuario((SoapObject)envelope.getResponse());
+				
 			}
 			
 		} catch (Exception e) {

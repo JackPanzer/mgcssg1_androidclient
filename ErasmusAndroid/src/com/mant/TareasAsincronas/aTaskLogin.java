@@ -7,6 +7,8 @@ import org.ksoap2.transport.HttpTransportSE;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 
 import com.mant.alumno.Principal_Alumno;
@@ -20,16 +22,19 @@ public class aTaskLogin extends AsyncTask <Void, Void, Void>{
 	private ComplexUsuario respuesta;
 	private Activity context;
 	
+	private SessionManager session; //SESSION OBJECT
+	
 	
 	final String NAMESPACE = "urn:Erasmus";
 	final String URL = "http://10.0.2.2/services.php";
 	final String METHOD_NAME = "loginUsuario";
 	final String SOAP_ACTION = "urn:Erasmus";
 	
-	public aTaskLogin(Activity context, String _nick, String _password){
+	public aTaskLogin(Activity context, SessionManager _session, String _nick, String _password){
 		this.nick = _nick;
 		this.password = _password;
 		this.context = context;
+		session = _session;
 	}
 	
 	@Override
@@ -56,9 +61,16 @@ public class aTaskLogin extends AsyncTask <Void, Void, Void>{
 			//SoapPrimitive response = (SoapPrimitive)envelope.getResponse();
 			if (envelope.getResponse() != null){
 				respuesta = new ComplexUsuario((SoapObject)envelope.getResponse());
+				
 				//Si hasta aquí todo ha ido bien, lo siguiente será abrir la nueva interfaz
 				if(respuesta.getErrno() == 0){
 					//Todo ha ido bien, hay que cargar la interfaz
+					
+					/**
+					 * Creamos la sesion					
+					 * */
+					session.createLoginSession(respuesta);
+					
 					//en base al rol
 					Intent act;
 					switch(respuesta.getRol()){

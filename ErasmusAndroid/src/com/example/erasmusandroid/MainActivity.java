@@ -1,5 +1,6 @@
 package com.example.erasmusandroid;
 
+import com.mant.TareasAsincronas.SessionManager;
 import com.mant.TareasAsincronas.aTaskLogin;
 import com.mant.administrador.BaseDeDatosActivity;
 import com.mant.alumno.Principal_Alumno;
@@ -13,11 +14,17 @@ import android.view.View;
 import android.widget.EditText;
 
 public class MainActivity extends Activity {
+	
+	// Session Manager Class
+    public SessionManager session;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		// Session Manager
+        session = new SessionManager(getApplicationContext());
 	}
 
 	@Override
@@ -38,7 +45,7 @@ public class MainActivity extends Activity {
 		String nick = ((EditText) findViewById(R.id.am_usuario)).getText().toString();
 		String pass = ((EditText)findViewById(R.id.am_pass)).getText().toString();
 		
-		aTaskLogin atl = new aTaskLogin(this, nick, pass);
+		aTaskLogin atl = new aTaskLogin(this, session, nick, pass);
 		atl.execute();
 	}
 	
