@@ -46,10 +46,10 @@ public class CrearDestinoActivity extends Activity {
 	public void clickFinalizar(View v){
 		String nombre = ((EditText) findViewById(R.id.acd_nombre)).getText().toString();
 		int pais = Integer.parseInt(((EditText) findViewById(R.id.acd_pais)).getText().toString());
-		int idioma = Integer.parseInt(((EditText) findViewById(R.id.acd_pais)).getText().toString());
-		int disponible = Integer.parseInt(((EditText) findViewById(R.id.acd_pais)).getText().toString());
-		int plazas = Integer.parseInt(((EditText) findViewById(R.id.acd_pais)).getText().toString());
-		int nivel = Integer.parseInt(((EditText) findViewById(R.id.acd_pais)).getText().toString());
+		int idioma = Integer.parseInt(((EditText) findViewById(R.id.acd_idioma)).getText().toString());
+		int disponible = Integer.parseInt(((EditText) findViewById(R.id.acd_disponible)).getText().toString());
+		int plazas = Integer.parseInt(((EditText) findViewById(R.id.acd_plazas)).getText().toString());
+		int nivel = Integer.parseInt(((EditText) findViewById(R.id.acd_nivel)).getText().toString());
 	
 		session.checkLogin(); 
 		

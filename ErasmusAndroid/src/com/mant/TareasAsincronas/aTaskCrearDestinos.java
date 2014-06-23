@@ -19,11 +19,12 @@ import com.mant.coordinador.PricipalCoordinadorActivity;
 import com.mant.modelo.ArrayDestinos;
 import com.mant.modelo.ComplexDestino;
 import com.mant.modelo.ComplexUsuario;
+import com.mant.modelo.GenericResult;
 
 public class aTaskCrearDestinos extends AsyncTask<Void, Void, Void> {
 	//Esto es un comentario
 	// private int idUsu;
-	private ComplexUsuario respuesta;
+	private GenericResult respuesta;
 	private SessionManager session; // SESSION OBJECT
 	private Activity context;
 	private String nombre;
@@ -82,16 +83,34 @@ public class aTaskCrearDestinos extends AsyncTask<Void, Void, Void> {
 			// se obtiene la respuesta
 			// SoapPrimitive response = (SoapPrimitive)envelope.getResponse();
 			if (envelope.getResponse() != null) {
-				respuesta = new ComplexUsuario(
-						(SoapObject) envelope.getResponse());
+				respuesta = new GenericResult((SoapObject) envelope.getResponse());
 
 				// Si hasta aquí todo ha ido bien, lo siguiente será abrir la
 				// nueva interfaz
 				if (respuesta.getErrno() == 0) {
 					// Todo ha ido bien, mostramos un Toast
 
-					Toast t = Toast.makeText(context, "Destino Creado", Toast.LENGTH_SHORT);
-					t.show();
+					//Toast t = Toast.makeText(context, "Destino Creado", Toast.LENGTH_SHORT);
+					//t.show();
+
+					// en base al rol
+					
+				}
+				else if (respuesta.getErrno() == -2) {
+					// Todo ha ido bien, mostramos un Toast
+
+					//Toast t = Toast.makeText(context, "Sentencia Incorrecta", Toast.LENGTH_SHORT);
+					//t.show();
+
+					// en base al rol
+					
+				}
+				else{
+					// Todo ha ido bien, mostramos un Toast
+
+					//Toast t = Toast.makeText(context, "Fallo en Conexion", Toast.LENGTH_SHORT);
+					//t.show();
+					
 
 					// en base al rol
 					
