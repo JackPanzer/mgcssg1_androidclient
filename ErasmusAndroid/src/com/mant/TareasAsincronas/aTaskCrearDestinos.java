@@ -21,7 +21,7 @@ import com.mant.modelo.ComplexDestino;
 import com.mant.modelo.ComplexUsuario;
 
 public class aTaskCrearDestinos extends AsyncTask<Void, Void, Void> {
-
+	//Esto es un comentario
 	// private int idUsu;
 	private ComplexUsuario respuesta;
 	private SessionManager session; // SESSION OBJECT
