@@ -69,11 +69,9 @@ public class aTaskCrearDestinos extends AsyncTask<Void, Void, Void> {
 			request.addProperty("nvlRequerido", nivel);
 
 			/* Creamos un envelop <Sobre> */
-			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
-					SoapEnvelope.VER11);
+			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 			envelope.dotNet = true;
-			envelope.setOutputSoapObject(request); // Aquí metemos la peticion
-													// en el "Sobre"
+			envelope.setOutputSoapObject(request); // Aquí metemos la peticion en el "Sobre"
 
 			/* Definimos un objeto transporte para dirigir el Sobre */
 			HttpTransportSE transporte = new HttpTransportSE(URL);
