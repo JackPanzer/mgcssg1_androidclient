@@ -14,29 +14,47 @@ public class ArrayDestinos {
 		if(obj != null){
 			destinos = new Vector<ComplexDestino>();
 			
+			/**
+			 * La primera properti es el errno, es lo mismo que poner:
+			 * String _errno = obj.getProperty(0)
+			 * */
 			String _errno = obj.getPrimitivePropertyAsString("errno");
-			Object o = obj.getAttributeSafely("destinos");
-			
-			
-			
 			if(_errno.equals("")){
 				errno = -2;
 			} else {
 				errno = Integer.parseInt(_errno);
 			}
+			
+			//Obtengo el numero de filas del "array bidimensional"
+			int nFil = obj.getPropertyCount();
+			
+			for(int i=1; i<nFil ;i++){
+				SoapObject f = (SoapObject) obj.getProperty(i);
+							
+				/**
+				 * Creamos un nuevo destino y lo añadimos a la lista
+				 * */
+				ComplexDestino auxDestino = new ComplexDestino(f);
+				destinos.add(auxDestino);
+				
+			}		
 		}
-		
-		
-		//(Vector<SoapObject>)envelope.getResponse();
-		
-		//for (SoapObject soapObject : vectorOfSoapObject) {
-		  //  put all properties into  DataPlusID  object
-		  //  DataPlusID  dataPlusIDObj = new DataPlusID();
-		   
-		  // dataPlusIDObj.setData(soapObject.getPropertyAsString("data"));
-			//}
-		
+	}
 	
+	public int getErrno() {
+		return errno;
+	}
+
+	public void setErrno(int errno) {
+		this.errno = errno;
+	}
+
+	public Vector<ComplexDestino> getDestinos() {
+		return destinos;
+	}
+
+	public void setDestinos(Vector<ComplexDestino> destinos) {
+		this.destinos = destinos;
 	}
 
 }

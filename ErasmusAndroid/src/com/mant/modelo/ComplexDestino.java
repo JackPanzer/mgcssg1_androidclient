@@ -24,10 +24,10 @@ public class ComplexDestino {
 			String _idioma = obj.getPrimitivePropertyAsString("idioma");
 			String _disponible = obj.getPrimitivePropertyAsString("disponible");
 			String _numplazas = obj.getPrimitivePropertyAsString("numplazas");
-			String _nvlrequerido = obj.getPrimitivePropertyAsString("nlvrequerido");
+			String _nvlrequerido = obj.getPrimitivePropertyAsString("nvlrequerido");
 			
 			if(_errno.equals("")){
-				setErrno(-2);
+				setErrno(0);
 			} else {
 				setErrno(Integer.parseInt(_errno));
 			}

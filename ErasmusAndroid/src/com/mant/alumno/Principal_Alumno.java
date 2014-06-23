@@ -59,11 +59,11 @@ public class Principal_Alumno extends Activity {
 		session.checkLogin(); 
 		
 		// get user data from session
-        HashMap<String, String> user = session.getUserDetails();
+       // HashMap<String, String> user = session.getUserDetails();
 
-        String idUsu = user.get(SessionManager.KEY_ID);
+        //String idUsu = user.get(SessionManager.KEY_ID);
         
-		aTaskConsultarDestinos atl = new aTaskConsultarDestinos(this, Integer.parseInt(idUsu));
+		aTaskConsultarDestinos atl = new aTaskConsultarDestinos(this, session);
 		atl.execute();
 		
 	}
