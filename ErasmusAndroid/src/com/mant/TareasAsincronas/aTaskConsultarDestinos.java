@@ -25,7 +25,7 @@ public class aTaskConsultarDestinos extends AsyncTask <Void, Void, Void>{
 
 	//private int idUsu;
 	private SessionManager session; //SESSION OBJECT
-	private ArrayList<ComplexDestino> respuesta;
+	private ArrayDestinos respuesta;
 	private Activity context;
 	
 
@@ -44,6 +44,7 @@ public class aTaskConsultarDestinos extends AsyncTask <Void, Void, Void>{
 	protected Void doInBackground(Void... arg0) {
 
 		try {
+			
 			
 			/* Conectando ...*/
 			SoapObject request= new SoapObject(NAMESPACE, METHOD_NAME);
@@ -68,15 +69,13 @@ public class aTaskConsultarDestinos extends AsyncTask <Void, Void, Void>{
 			
 			if (envelope.getResponse() != null){
 				
-				ArrayDestinos misDestinos = new ArrayDestinos((SoapObject)envelope.getResponse());
+				respuesta = new ArrayDestinos((SoapObject)envelope.getResponse());
+				
+				
 				
 			/**
 			 * MOSTRAR LOS DESTINOS EN LA LISTA
 			 */
-
-				
- 
-						
 				
 			}
 			
