@@ -8,13 +8,13 @@ public class ComplexDestino {
 	private int id;
 	private String nombre;
 	private String pais;
-	private int id_pais;//nuevo
+	private int idpais;//nuevo
 	private String idioma;
 	private int id_idioma;//nuevo
 	private boolean disponible;
 	private int numplazas;
 	private String nvlrequerido;
-	private int id_nvlrequerido;//nuevo
+	private int idnvlrequerido;//nuevo
 	
 	public ComplexDestino(SoapObject obj){
 		if(obj != null){
@@ -24,13 +24,13 @@ public class ComplexDestino {
 			String _id = obj.getPrimitivePropertyAsString("id");
 			String _nombre = obj.getPrimitivePropertyAsString("nombre");
 			String _pais = obj.getPrimitivePropertyAsString("pais");
-			String _id_pais = obj.getPrimitivePropertyAsString("id_pais");
+			String _idpais = obj.getPrimitivePropertyAsString("idpais");
 			String _idioma = obj.getPrimitivePropertyAsString("idioma");
 			String _id_idioma = obj.getPrimitivePropertyAsString("id_idioma");
 			String _disponible = obj.getPrimitivePropertyAsString("disponible");
 			String _numplazas = obj.getPrimitivePropertyAsString("numplazas");
 			String _nvlrequerido = obj.getPrimitivePropertyAsString("nvlrequerido");
-			String _id_nvlrequerido = obj.getPrimitivePropertyAsString("id_nvlrequerido");
+			String _idnvlrequerido = obj.getPrimitivePropertyAsString("idnvlrequerido");
 			
 			if(_errno.equals("")){
 				setErrno(0);
@@ -62,10 +62,10 @@ public class ComplexDestino {
 			
 			nvlrequerido = _nvlrequerido;
 			
-			if(_id_pais.equals("")){
-				id_pais = 0;
+			if(_idpais.equals("")){
+				idpais = 0;
 			} else{
-				id_pais = Integer.parseInt(_id_pais);
+				idpais = Integer.parseInt(_idpais);
 			}
 			
 			if(_id_idioma.equals("")){
@@ -74,10 +74,10 @@ public class ComplexDestino {
 				id_idioma = Integer.parseInt(_id_idioma);
 			}
 			
-			if(_id_nvlrequerido.equals("")){
-				id_nvlrequerido = 0;
+			if(_idnvlrequerido.equals("")){
+				idnvlrequerido = 0;
 			} else{
-				id_nvlrequerido = Integer.parseInt(_id_nvlrequerido);
+				idnvlrequerido = Integer.parseInt(_idnvlrequerido);
 			}
 		}
 		
@@ -148,12 +148,12 @@ public class ComplexDestino {
 	}
 	
 
-	public int getId_pais() {
-		return id_pais;
+	public int getIdpais() {
+		return idpais;
 	}
 
-	public void setId_pais(int id_pais) {
-		this.id_pais = id_pais;
+	public void setIdpais(int idpais) {
+		this.idpais = idpais;
 	}
 
 	public int getId_idioma() {
@@ -164,12 +164,12 @@ public class ComplexDestino {
 		this.id_idioma = id_idioma;
 	}
 
-	public int getId_nvlrequerido() {
-		return id_nvlrequerido;
+	public int getIdnvlrequerido() {
+		return idnvlrequerido;
 	}
 
-	public void setId_nvlrequerido(int id_nvlrequerido) {
-		this.id_nvlrequerido = id_nvlrequerido;
+	public void setIdnvlrequerido(int idnvlrequerido) {
+		this.idnvlrequerido = idnvlrequerido;
 	}
 
 }

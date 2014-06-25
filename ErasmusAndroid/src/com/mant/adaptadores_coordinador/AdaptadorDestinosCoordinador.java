@@ -75,13 +75,13 @@ public class AdaptadorDestinosCoordinador extends BaseExpandableListAdapter {
 		
 		//plazas
 		EditText txt_plazas = (EditText) convertView.findViewById(R.id.mnd_plazas);
-		
-		txt_plazas.setText(nombre_destino.getPlazas());
+		int plazas = nombre_destino.getPlazas();
+		txt_plazas.setText(Integer.toString(plazas));
 		
 		//nivel
 		EditText txt_nivel = (EditText) convertView.findViewById(R.id.mnd_nivel);
 		
-		txt_nivel.setText(nombre_destino.getPlazas());
+		txt_nivel.setText(nombre_destino.getNivel());
 		
 		return convertView;
 	}

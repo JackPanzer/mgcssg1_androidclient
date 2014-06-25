@@ -48,12 +48,6 @@ public class ModificarDestinosActivity extends Activity {
 				session);
 		atl.execute();
 
-		lista_expandible = (ExpandableListView) findViewById(R.id.expandableListView3);
-
-		adaptador_destinos = new AdaptadorDestinosCoordinador(this,
-				cabecera_lista, contenido_lista);
-
-		lista_expandible.setAdapter(adaptador_destinos);
 	}
 
 	@Override
@@ -70,6 +64,18 @@ public class ModificarDestinosActivity extends Activity {
 	public void clickFinalizar(View v) {
 		finish();
 
+	}
+	
+	public void cargarLista(){
+		lista_expandible = (ExpandableListView) findViewById(R.id.expandableListView3);
+
+		adaptador_destinos = new AdaptadorDestinosCoordinador(this,
+				cabecera_lista, contenido_lista);
+
+		lista_expandible.setAdapter(adaptador_destinos);
+		
+		View v = this.findViewById(R.id.expandableListView3);
+		
 	}
 
 	private class aTaskConsultarTodosDestinos extends
@@ -97,6 +103,9 @@ public class ModificarDestinosActivity extends Activity {
 
 				/* Conectando ... */
 				SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
+				
+				/* Indicamos parametros */
+				request.addProperty("entero", 1);
 
 				/* Creamos un envelop <Sobre> */
 				SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
@@ -154,6 +163,15 @@ public class ModificarDestinosActivity extends Activity {
 								.getDestinos().get(i).getNvlrequerido()));
 				contenido_lista.put(cabecera_lista.get(i), d);
 			}
+			
+			//lista_expandible = (ExpandableListView) findViewById(R.id.expandableListView3);
+
+			//adaptador_destinos = new AdaptadorDestinosCoordinador(this,
+			//		cabecera_lista, contenido_lista);
+
+			//lista_expandible.setAdapter(adaptador_destinos);
+			
+			cargarLista();
 		}
 
 	}
