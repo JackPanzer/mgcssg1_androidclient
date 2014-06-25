@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -52,10 +53,35 @@ public class AdaptadorDestinosCoordinador extends BaseExpandableListAdapter {
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = infalInflater.inflate(R.layout.modificar_nombre_destino, null);
 		}
+		//Nombre
+		EditText nombre = (EditText) convertView.findViewById(R.id.mnd_nombre);
 		
-		EditText txt_destino = (EditText) convertView.findViewById(R.id.EditTextModDestino);
+		nombre.setText(nombre_destino.getNombre_destino());
 		
-		txt_destino.setText(nombre_destino.getNombre_destino());
+		//Pais
+		EditText txt_pais = (EditText) convertView.findViewById(R.id.mnd_pais);
+		
+		txt_pais.setText(nombre_destino.getPais());
+		
+		//idioma
+		EditText txt_idioma = (EditText) convertView.findViewById(R.id.mnd_idioma);
+		
+		txt_idioma.setText(nombre_destino.getIdioma());
+		
+		//disponible
+		CheckBox bol_disponible = (CheckBox) convertView.findViewById(R.id.mnd_disponible);
+		
+		bol_disponible.setChecked(nombre_destino.getDisponible());
+		
+		//plazas
+		EditText txt_plazas = (EditText) convertView.findViewById(R.id.mnd_plazas);
+		
+		txt_plazas.setText(nombre_destino.getPlazas());
+		
+		//nivel
+		EditText txt_nivel = (EditText) convertView.findViewById(R.id.mnd_nivel);
+		
+		txt_nivel.setText(nombre_destino.getPlazas());
 		
 		return convertView;
 	}
