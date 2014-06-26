@@ -68,8 +68,10 @@ public class EliminarDestinoActivity extends Activity {
 
 	}
 
-	public void clickFinalizar(View v) {
-		finish();
+	public void clickActualizar(View v) {
+		aTaskEliminarDestinos atl = new aTaskEliminarDestinos(this,
+				session);
+		atl.execute();
 
 	}
 

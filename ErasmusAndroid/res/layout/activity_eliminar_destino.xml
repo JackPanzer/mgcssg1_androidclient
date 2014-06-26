@@ -23,8 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:onClick="clickFinalizar"
-        android:text="Finalizar" />
+        android:onClick="clickActualizar"
+        android:text="Actualizar" />
 
     <ExpandableListView
         android:id="@+id/expandableListView4"

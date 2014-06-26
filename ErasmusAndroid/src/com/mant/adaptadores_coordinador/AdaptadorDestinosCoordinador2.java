@@ -3,20 +3,32 @@ package com.mant.adaptadores_coordinador;
 import java.util.HashMap;
 import java.util.List;
 
+import org.ksoap2.SoapEnvelope;
+import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpTransportSE;
+
+import com.mant.TareasAsincronas.SessionManager;
+import com.mant.adaptadores_coordinador.AdaptadorDestinosCoordinador.aTaskModificarTodosDestinos;
 import com.mant.auxiliares_coordinador.Nombre_Destino;
 import com.mant.auxiliares_coordinador.Nombre_Destino2;
+import com.mant.modelo.GenericResult;
 
 import com.example.erasmusandroid.R;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class AdaptadorDestinosCoordinador2 extends BaseExpandableListAdapter {
@@ -24,6 +36,7 @@ public class AdaptadorDestinosCoordinador2 extends BaseExpandableListAdapter {
 	private Context _context;
 	private List<String> cabecera_lista;
 	private HashMap<String, List<Nombre_Destino2>> contenido_lista;
+	public SessionManager session;
 
 	public AdaptadorDestinosCoordinador2(Context context, List<String> cabecera_lista,
 			HashMap<String, List<Nombre_Destino2>> contenido_lista) {
@@ -47,7 +60,7 @@ public class AdaptadorDestinosCoordinador2 extends BaseExpandableListAdapter {
 	public View getChildView(int groupPosition, final int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
 
-		Nombre_Destino2 nombre_destino2 = (Nombre_Destino2) getChild(groupPosition, childPosition);
+		final Nombre_Destino2 nombre_destino2 = (Nombre_Destino2) getChild(groupPosition, childPosition);
 		
 		if (convertView == null) {
 			LayoutInflater infalInflater = (LayoutInflater) this._context
@@ -59,9 +72,28 @@ public class AdaptadorDestinosCoordinador2 extends BaseExpandableListAdapter {
 		
 		txt_destino.setText(nombre_destino2.getNombre_destino());
 		
-		CheckBox check = (CheckBox)convertView.findViewById(R.id.checkBoxeliminar);
+		final CheckBox check = (CheckBox)convertView.findViewById(R.id.checkBoxeliminar);
 		
 		check.setChecked(nombre_destino2.isCheck());
+		
+		//Boton guardar
+				Button guardar = (Button) convertView.findViewById(R.id.end_guardar);
+				
+				guardar.setOnClickListener(new View.OnClickListener() {
+					public void onClick(View v) {
+						
+						int id_nombre = nombre_destino2.getId_destino();
+						
+						if(check.isChecked()){
+							//crear y llamar a task
+							aTaskEliminarDestinos atl = new aTaskEliminarDestinos((Activity)_context, session,id_nombre);
+							atl.execute();
+						}
+						
+						
+
+					}
+				});
 		
 		return convertView;
 	}
@@ -115,5 +147,106 @@ public class AdaptadorDestinosCoordinador2 extends BaseExpandableListAdapter {
 		return true;
 	}
 
+	public class aTaskEliminarDestinos extends AsyncTask<Void, Void, Void> {
+		//Esto es un comentario
+		// private int idUsu;
+		private GenericResult respuesta;
+		private SessionManager session; // SESSION OBJECT
+		private Activity context;
+		private int id_nombre;
+
+		final String NAMESPACE = "urn:Erasmus";
+		final String URL = "http://10.0.2.2/services.php";
+		final String METHOD_NAME = "borrarDestino";
+		final String SOAP_ACTION = "urn:Erasmus";
+
+		public aTaskEliminarDestinos(Activity _ctxt, SessionManager _session,int id_nombre) {
+
+			this.context = _ctxt;
+			this.session = _session;
+			this.id_nombre= id_nombre;
+		}
+
+		@Override
+		protected Void doInBackground(Void... arg0) {
+
+			try {
+
+				/* Conectando ... */
+				SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
+
+				/* Indicamos parametros */
+				
+				request.addProperty("idDestino", id_nombre);
+
+				/* Creamos un envelop <Sobre> */
+				SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+				envelope.dotNet = true;
+				envelope.setOutputSoapObject(request); // Aquí metemos la peticion en el "Sobre"
+
+				/* Definimos un objeto transporte para dirigir el Sobre */
+				HttpTransportSE transporte = new HttpTransportSE(URL);
+				transporte.debug = true;
+				transporte.call(SOAP_ACTION, envelope); // Lanzamos la llamada
+
+				// Con call se produce la llamada, y se espera (bloquea) hasta que
+				// se obtiene la respuesta
+				// SoapPrimitive response = (SoapPrimitive)envelope.getResponse();
+				if (envelope.getResponse() != null) {
+					respuesta = new GenericResult((SoapObject) envelope.getResponse());
+
+					// Si hasta aquí todo ha ido bien, lo siguiente será abrir la
+					// nueva interfaz
+					if (respuesta.getErrno() == 0) {
+						// Todo ha ido bien, mostramos un Toast
+						System.out.println("Hola");
+						//Toast t = Toast.makeText(context, "Destino Creado", Toast.LENGTH_SHORT);
+						//t.show();
+
+						// en base al rol
+						
+					}
+					else if (respuesta.getErrno() == -2) {
+						// Todo ha ido bien, mostramos un Toast
+						System.out.println("Hola");
+						//Toast t = Toast.makeText(context, "Sentencia Incorrecta", Toast.LENGTH_SHORT);
+						//t.show();
+
+						// en base al rol
+						
+					}
+					
+					else if(respuesta.getErrno()==-3){
+						
+						System.out.println("Hola");
+					}
+					else{
+						// Todo ha ido bien, mostramos un Toast
+						System.out.println("Hola");
+						//Toast t = Toast.makeText(context, "Fallo en Conexion", Toast.LENGTH_SHORT);
+						//t.show();
+						
+
+						// en base al rol
+						
+					}
+
+				}
+
+			} catch (Exception e) {
+
+				String text = e.getMessage();
+				int duration = Toast.LENGTH_SHORT;
+
+				System.out.println(text);
+				Toast t = Toast.makeText(context, text, duration);
+				t.show();
+			}
+
+			return null;
+		}
+
+	}
+	
 }
 
