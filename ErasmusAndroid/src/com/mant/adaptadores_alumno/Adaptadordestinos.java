@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.example.erasmusandroid.R;
@@ -20,6 +21,8 @@ public class Adaptadordestinos extends ArrayAdapter<Destinos> {
 
 	Activity contexto;
 	ArrayList<Destinos> mis_destinos;
+	int max_check =3;
+	int check=0;
 
 	//Constructor del AdaptadorDias donde se le pasaran por parametro el contexto de la aplicacion y el ArrayList de los dias 
 	public Adaptadordestinos(Activity context, ArrayList<Destinos> mis_destinos) {
@@ -37,7 +40,7 @@ public class Adaptadordestinos extends ArrayAdapter<Destinos> {
 		View item = convertView;
 
 		//Creamos esta variable para almacen posteriormente en el la vista que ha dibujado
-		VistaItem vistaitem;
+		final VistaItem vistaitem;
 
 		//Si se decide que no existe una vista reutilizable para el proximo item entra en la condicion.
 		//De este modo tambien ahorramos tener que volver a generar vistas
@@ -53,10 +56,20 @@ public class Adaptadordestinos extends ArrayAdapter<Destinos> {
 			vistaitem = new VistaItem();
 
 			//Almacenamos en el objeto la referencia del TextView buscandolo por ID
-			vistaitem.nombre = (TextView) item.findViewById(R.id.txtDia);
+			vistaitem.nombre = (TextView) item.findViewById(R.id.dest_nombre);
 
 			//tambien almacenamos en el objeto la referencia del CheckBox buscandolo por ID
-			vistaitem.chkEstado = (CheckBox) item.findViewById(R.id.chkEstado);
+			vistaitem.chkEstado = (CheckBox) item.findViewById(R.id.dest_check);
+			
+			vistaitem.chkEstado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                    if(check==max_check){
+                    	
+                    	vistaitem.chkEstado.setChecked(false);
+                    }
+                }
+            });
 
 			//Ahora si, guardamos en el tag de la vista el objeto vistaitem 
 			item.setTag(vistaitem);

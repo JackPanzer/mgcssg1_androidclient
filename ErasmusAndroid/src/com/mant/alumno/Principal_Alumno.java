@@ -25,14 +25,7 @@ public class Principal_Alumno extends Activity {
 		setContentView(R.layout.activity_principal__alumno);
 		
 		session = new SessionManager(getApplicationContext());
-		/*
-		Intent i = getIntent();
-		String nick = i.getStringExtra("nick");
-		String pass = i.getStringExtra("pass");
 		
-		aTaskLogin aTask = new aTaskLogin(this, nick, pass);
-		aTask.execute();
-		*/
 	}
 
 	@Override
@@ -47,24 +40,17 @@ public class Principal_Alumno extends Activity {
 
 	
 	public void clickDestinos (View v){
-		/*
-		Intent act = new Intent(this, DestinoAlumnoActivity.class);
-		startActivity(act);
-		*/
-		
 		/**
 		 * Comprueba que el usuario este logeado
 		 * Redirecciona a la pantalla de Login si no es así
 		 * */
-		session.checkLogin(); 
 		
-		// get user data from session
-       // HashMap<String, String> user = session.getUserDetails();
-
-        //String idUsu = user.get(SessionManager.KEY_ID);
-        
-		aTaskConsultarDestinos atl = new aTaskConsultarDestinos(this, session);
-		atl.execute();
+		session.checkLogin(); 
+		Intent act = new Intent(this, DestinoAlumnoActivity.class);
+		startActivity(act);
+		
+		
+		
 		
 	}
 }

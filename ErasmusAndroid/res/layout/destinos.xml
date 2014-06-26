@@ -11,7 +11,7 @@
         android:orientation="vertical" >
 
         <CheckBox
-            android:id="@+id/chkEstado"
+            android:id="@+id/dest_check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="false"
@@ -20,7 +20,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/txtDia"
+        android:id="@+id/dest_nombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Large Text"
