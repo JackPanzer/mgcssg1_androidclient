@@ -6,12 +6,22 @@ package com.mant.auxiliares_coordinador;
 
 public class Nombre_Destino2 {
 	String nombre_destino;
+	int id_destino;
 	boolean check;
 
-	public Nombre_Destino2(String nombre_destino, boolean check) {
+	public Nombre_Destino2(String nombre_destino, int id_destino, boolean check) {
 		super();
 		this.nombre_destino = nombre_destino;
+		this.id_destino = id_destino;
 		this.check = check;
+	}
+
+	public int getId_destino() {
+		return id_destino;
+	}
+
+	public void setId_destino(int id_destino) {
+		this.id_destino = id_destino;
 	}
 
 	public boolean isCheck() {

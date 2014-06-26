@@ -74,7 +74,6 @@ public class ModificarDestinosActivity extends Activity {
 
 		lista_expandible.setAdapter(adaptador_destinos);
 
-		View v = this.findViewById(R.id.expandableListView3);
 
 	}
 

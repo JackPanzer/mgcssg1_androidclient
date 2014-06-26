@@ -112,12 +112,13 @@ public class AdaptadorDestinosCoordinador extends BaseExpandableListAdapter {
 				int disponible;
 				//int pais = Integer.parseInt(((EditText) findViewById(R.id.acd_pais)).getText().toString());
 				//int idioma = Integer.parseInt(((EditText) findViewById(R.id.acd_idioma)).getText().toString());
-				if(bol_disponible.isEnabled()){
+				if(bol_disponible.isChecked()){
 					disponible = 1;
 					
 				}
 				else
-					disponible =0;
+					disponible = 0;
+				
 				int plazas=Integer.parseInt(txt_plazas.getText().toString());
 				//crear y llamar a task
 				aTaskModificarTodosDestinos atl = new aTaskModificarTodosDestinos((Activity)_context, session,nombre_destino.getIdDestino() ,nombre_mod,nombre_destino.getIdPais(),nombre_destino.getIdIdioma(),disponible,plazas,nombre_destino.getIdNivel());
