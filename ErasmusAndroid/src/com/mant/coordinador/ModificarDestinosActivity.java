@@ -65,17 +65,17 @@ public class ModificarDestinosActivity extends Activity {
 		finish();
 
 	}
-	
-	public void cargarLista(){
+
+	public void cargarLista() {
 		lista_expandible = (ExpandableListView) findViewById(R.id.expandableListView3);
 
 		adaptador_destinos = new AdaptadorDestinosCoordinador(this,
 				cabecera_lista, contenido_lista);
 
 		lista_expandible.setAdapter(adaptador_destinos);
-		
+
 		View v = this.findViewById(R.id.expandableListView3);
-		
+
 	}
 
 	private class aTaskConsultarTodosDestinos extends
@@ -103,7 +103,7 @@ public class ModificarDestinosActivity extends Activity {
 
 				/* Conectando ... */
 				SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
-				
+
 				/* Indicamos parametros */
 				request.addProperty("entero", 1);
 
@@ -160,17 +160,19 @@ public class ModificarDestinosActivity extends Activity {
 						respuesta.getDestinos().get(i).getIdioma(), respuesta
 								.getDestinos().get(i).isDisponible(), respuesta
 								.getDestinos().get(i).getNumplazas(), respuesta
-								.getDestinos().get(i).getNvlrequerido()));
+								.getDestinos().get(i).getNvlrequerido(),
+						respuesta.getDestinos().get(i).getId(), respuesta
+								.getDestinos().get(i).getIdpais(), respuesta
+								.getDestinos().get(i).getId_idioma(), respuesta
+								.getDestinos().get(i).getIdnvlrequerido()));
 				contenido_lista.put(cabecera_lista.get(i), d);
 			}
-			
-			//lista_expandible = (ExpandableListView) findViewById(R.id.expandableListView3);
 
-			//adaptador_destinos = new AdaptadorDestinosCoordinador(this,
-			//		cabecera_lista, contenido_lista);
+			/*
+			 * this.idDestino = idDestino; this.idPais = idPais; this.idIdioma =
+			 * idIdioma; this.idNivel = idNivel;
+			 */
 
-			//lista_expandible.setAdapter(adaptador_destinos);
-			
 			cargarLista();
 		}
 

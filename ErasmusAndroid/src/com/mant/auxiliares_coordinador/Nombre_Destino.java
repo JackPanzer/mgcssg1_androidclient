@@ -11,11 +11,15 @@ public class Nombre_Destino {
 	private boolean disponible;
 	private int plazas;
 	private String nivel;
-	
+	private int idDestino;
+	private int idPais;
+	private int idIdioma;
+	private int idNivel;
 	
 	
 	public Nombre_Destino(String nombre_destino, String pais, String idioma,
-			boolean disponible, int plazas, String nivel) {
+			boolean disponible, int plazas, String nivel, int idDestino,
+			int idPais, int idIdioma, int idNivel) {
 		super();
 		this.nombre_destino = nombre_destino;
 		this.pais = pais;
@@ -23,7 +27,53 @@ public class Nombre_Destino {
 		this.disponible = disponible;
 		this.plazas = plazas;
 		this.nivel = nivel;
+		this.idDestino = idDestino;
+		this.idPais = idPais;
+		this.idIdioma = idIdioma;
+		this.idNivel = idNivel;
 	}
+	
+	public int getIdDestino() {
+		return idDestino;
+	}
+
+
+	public void setIdDestino(int idDestino) {
+		this.idDestino = idDestino;
+	}
+
+
+	public int getIdPais() {
+		return idPais;
+	}
+
+
+	public void setIdPais(int idPais) {
+		this.idPais = idPais;
+	}
+
+
+	public int getIdIdioma() {
+		return idIdioma;
+	}
+
+
+	public void setIdIdioma(int idIdioma) {
+		this.idIdioma = idIdioma;
+	}
+
+
+	public int getIdNivel() {
+		return idNivel;
+	}
+
+
+	public void setIdNivel(int idNivel) {
+		this.idNivel = idNivel;
+	}
+
+
+	
 	
 
 	public String getPais() {
