@@ -125,7 +125,9 @@ public class DestinoAlumnoActivity extends Activity {
 				SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
 
 				/* Indicamos parametros */
-				request.addProperty("idAlumno", session.KEY_ID);
+				request.addProperty("idAlumno",
+						Integer.parseInt
+							(session.getUserDetails().get(SessionManager.KEY_ID)));
 
 				/* Creamos un envelop <Sobre> */
 				SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
