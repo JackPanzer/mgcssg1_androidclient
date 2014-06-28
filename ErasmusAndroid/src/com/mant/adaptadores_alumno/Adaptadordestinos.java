@@ -23,6 +23,7 @@ public class Adaptadordestinos extends ArrayAdapter<Destinos> {
 	ArrayList<Destinos> mis_destinos;
 	int max_check =3;
 	int check=0;
+	
 
 	//Constructor del AdaptadorDias donde se le pasaran por parametro el contexto de la aplicacion y el ArrayList de los dias 
 	public Adaptadordestinos(Activity context, ArrayList<Destinos> mis_destinos) {
@@ -36,7 +37,7 @@ public class Adaptadordestinos extends ArrayAdapter<Destinos> {
 	//Este metodo es el que se encarga de dibujar cada Item de la lista
 	//y se invoca cada vez que se necesita mostrar un nuevo item.
 	//En el se pasan parametros como la posicion del elemento mostrado, la vista (View) del elemento mostrado y el conjunto de vistas
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		View item = convertView;
 
 		//Creamos esta variable para almacen posteriormente en el la vista que ha dibujado
@@ -61,15 +62,7 @@ public class Adaptadordestinos extends ArrayAdapter<Destinos> {
 			//tambien almacenamos en el objeto la referencia del CheckBox buscandolo por ID
 			vistaitem.chkEstado = (CheckBox) item.findViewById(R.id.dest_check);
 			
-			vistaitem.chkEstado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                    if(check==max_check){
-                    	
-                    	vistaitem.chkEstado.setChecked(false);
-                    }
-                }
-            });
+			
 
 			//Ahora si, guardamos en el tag de la vista el objeto vistaitem 
 			item.setTag(vistaitem);
@@ -78,16 +71,42 @@ public class Adaptadordestinos extends ArrayAdapter<Destinos> {
 			//En caso de que la vista sea ya reutilizable se recupera el objeto VistaItem almacenada en su tag
 			vistaitem = (VistaItem) item.getTag();
 		}
-
+		
+		
 		//Se cargan los datos desde el ArrayList
-		vistaitem.nombre.setText(mis_destinos.get(position).getDia());
+		vistaitem.nombre.setText(mis_destinos.get(position).getDestino());
 		vistaitem.chkEstado.setChecked(mis_destinos.get(position).isChekeado());
+		
+		vistaitem.chkEstado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+            	mis_destinos.get(position).setChekeado(vistaitem.chkEstado.isChecked());
+            	
+            	if(vistaitem.chkEstado.isChecked()){
+            		check++;
+            	}
+            	
+            	if(!vistaitem.chkEstado.isChecked()){
+            		check--;
+            	}
+            	
+                if(check>max_check){
+                	
+                	vistaitem.chkEstado.setChecked(false);
+                	check--;
+                	mis_destinos.get(position).setChekeado(false);
+                }
+                
+            }
+            
+        });
 		
 		//Se devuelve ya la vista nueva o reutilizada que ha sido dibujada
 		return (item);
 	}
 
-
+	
+	
 	//Esta clase se usa para almacenar el TextView y el CheckBox de una vista y es donde esta el "truco" para que las vistas se guarden
 	static class VistaItem {
 		TextView nombre;

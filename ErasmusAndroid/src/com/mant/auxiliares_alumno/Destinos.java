@@ -5,22 +5,32 @@ package com.mant.auxiliares_alumno;
 //la clase Adaptadordestinos dentro del paquete adaptadores_alumno
 
 public class Destinos {
+	private int id;
 	private String destino;
 	private boolean estado;
 	
 	//CONSTRUCTOR DE LA CLASE//
-	public Destinos(String destino, boolean estado) {
+	public Destinos(int id,String destino, boolean estado) {
+		this.id =id;
 		this.destino = destino;
 		this.estado = estado;
 	}
 
 	//GETTERS Y SETTERS DE LA CLASE//
 	
-	public String getDia() {
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getDestino() {
 		return destino;
 	}
 
-	public void setDia(String destino) {
+	public void setDestino(String destino) {
 		this.destino = destino;
 	}
 

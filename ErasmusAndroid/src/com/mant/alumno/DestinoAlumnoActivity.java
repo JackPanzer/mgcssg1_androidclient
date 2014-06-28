@@ -84,8 +84,10 @@ public class DestinoAlumnoActivity extends Activity {
 	}
 
 	public void clickAceptar(View v) {
-		Intent act = new Intent(this, DestinoAsignaturaActivity.class);
-		startActivity(act);
+		for (int i = 0; i < todos_destinos.size(); i++) {
+			aTaskEnviarDestinos atl = new aTaskEnviarDestinos(this, session,todos_destinos.get(i));
+			atl.execute();
+		}
 
 	}
 	
@@ -207,10 +209,128 @@ public class DestinoAlumnoActivity extends Activity {
 		protected void onPostExecute(Void result) {
 			// TODO Auto-generated method stub
 			for (int i = 0; i < respuesta.getDestinos().size(); i++) {
-				todos_destinos.add(new Destinos(respuesta.getDestinos().get(i).getNombre(), false));	
+				todos_destinos.add(new Destinos(respuesta.getDestinos().get(i).getId(),respuesta.getDestinos().get(i).getNombre(), false));	
 			}
 			
 			cargarLista();
+			}
+			
+			/*
+			 * this.idDestino = idDestino; this.idPais = idPais; this.idIdioma =
+			 * idIdioma; this.idNivel = idNivel;
+			 */
+		
+	}
+	
+	private class aTaskEnviarDestinos extends AsyncTask<Void, Void, Void> {
+
+		private SessionManager session; // SESSION OBJECT
+		private ArrayDestinos respuesta;
+		private Activity context;
+		private Destinos destino;
+
+		final String NAMESPACE = "urn:Erasmus";
+		final String URL = "http://10.0.2.2/services.php";
+		final String METHOD_NAME = "crearSolicitud";
+		final String SOAP_ACTION = "urn:Erasmus";
+
+		public aTaskEnviarDestinos(Activity _ctxt, SessionManager _session, Destinos destino) {
+
+			this.context = _ctxt;
+			this.session = _session;
+			this.destino=destino;
+			
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			try {
+
+				/* Conectando ... */
+				SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
+
+				/* Indicamos parametros */
+				request.addProperty("idAlumno",
+						Integer.parseInt
+							(session.getUserDetails().get(SessionManager.KEY_ID)));
+				
+				request.addProperty("idDestino",destino.getId());
+
+				/* Creamos un envelop <Sobre> */
+				SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+						SoapEnvelope.VER11);
+				envelope.dotNet = true;
+				envelope.setOutputSoapObject(request); // Aquí metemos la
+														// peticion
+														// en el "Sobre"
+
+				/* Definimos un objeto transporte para dirigir el Sobre */
+				HttpTransportSE transporte = new HttpTransportSE(URL);
+				transporte.debug = true;
+				transporte.call(SOAP_ACTION, envelope); // Lanzamos la llamada
+
+				// Con call se produce la llamada, y se espera (bloquea) hasta
+				// que
+				// se obtiene la respuesta
+				// SoapPrimitive response =
+				// (SoapPrimitive)envelope.getResponse();
+				if (envelope.getResponse() != null) {
+
+					respuesta = new ArrayDestinos(
+							(SoapObject) envelope.getResponse());
+					
+					// Si hasta aquí todo ha ido bien, lo siguiente será abrir la
+					// nueva interfaz
+					if (respuesta.getErrno() == 0) {
+						// Todo ha ido bien, mostramos un Toast
+						System.out.println("Hola");
+						//Toast t = Toast.makeText(context, "Destino Creado", Toast.LENGTH_SHORT);
+						//t.show();
+
+						// en base al rol
+						
+					}
+					else if (respuesta.getErrno() == -2) {
+						// Todo ha ido bien, mostramos un Toast
+						System.out.println("Hola");
+						//Toast t = Toast.makeText(context, "Sentencia Incorrecta", Toast.LENGTH_SHORT);
+						//t.show();
+
+						// en base al rol
+						
+					}
+					
+					else{
+						// Todo ha ido bien, mostramos un Toast
+						System.out.println("Hola");
+						//Toast t = Toast.makeText(context, "Fallo en Conexion", Toast.LENGTH_SHORT);
+						//t.show();
+						
+
+						// en base al rol
+						
+					}
+
+				}
+
+			} catch (Exception e) {
+
+				String text = e.getMessage();
+				int duration = Toast.LENGTH_SHORT;
+
+				System.out.println(text);
+				Toast t = Toast.makeText(context, text, duration);
+				t.show();
+			}
+
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO Auto-generated method stub
+			Intent act = new Intent(context, DestinoAsignaturaActivity.class);
+			startActivity(act);
 			}
 			
 			/*
