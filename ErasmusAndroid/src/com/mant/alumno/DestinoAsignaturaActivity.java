@@ -37,6 +37,8 @@ import com.mant.adaptadores_alumno.AdaptadorDestinosAsignaturas;
 import com.mant.adaptadores_alumno.Adaptadordestinos;
 import com.mant.auxiliares_alumno.Asignatura;
 import com.mant.auxiliares_alumno.Destinos;
+import com.mant.auxiliares_coordinador.Propuesta;
+import com.mant.modelo.ArrayAsignaturasExt;
 import com.mant.modelo.ArrayDestinos;
 import com.mant.modelo.ArraySolicitudes;
 import com.mant.modelo.ComplexAsignaturaExt;
@@ -210,6 +212,8 @@ public class DestinoAsignaturaActivity extends Activity {
 			Intent act = new Intent(context, DestinoAsignaturaActivity.class);
 			startActivity(act);
 
+			NombreDestino = new ArrayList<String>();
+			
 			for (int i = 0; i < respuesta.getSolicitudes().size(); i++) {
 				NombreDestino.add("Destino " + i + " : "
 						+ respuesta.getSolicitudes().get(i).getNomDestino());
@@ -233,7 +237,7 @@ public class DestinoAsignaturaActivity extends Activity {
 
 		private SessionManager session; // SESSION OBJECT
 		private ArraySolicitudes arraysolicitudes;
-		private List<ComplexAsignaturaExt> respuesta;
+		private List<ArrayAsignaturasExt> respuesta;
 		private Activity context;
 
 		final String NAMESPACE = "urn:Erasmus";
@@ -247,7 +251,7 @@ public class DestinoAsignaturaActivity extends Activity {
 			this.context = _ctxt;
 			this.session = _session;
 			this.arraysolicitudes=arraysolicitudes;
-			respuesta = new ArrayList<ComplexAsignaturaExt>();
+			respuesta = new ArrayList<ArrayAsignaturasExt>();
 
 		}
 
@@ -289,7 +293,7 @@ public class DestinoAsignaturaActivity extends Activity {
 				// (SoapPrimitive)envelope.getResponse();
 				if (envelope.getResponse() != null) {
 
-					respuesta.add(new ComplexAsignaturaExt((SoapObject) envelope.getResponse()));
+					respuesta.add(new ArrayAsignaturasExt((SoapObject) envelope.getResponse()));
 
 					// Si hasta aquí todo ha ido bien, lo siguiente será abrir
 					// la
@@ -345,9 +349,18 @@ public class DestinoAsignaturaActivity extends Activity {
 		@Override
 		protected void onPostExecute(Void result) {
 			// TODO Auto-generated method stub
-			Intent act = new Intent(context, DestinoAsignaturaActivity.class);
-			startActivity(act);
-
+			ListaAsignaturas = new HashMap<String, List<Asignatura>>();
+			for(int i =0;i<arraysolicitudes.getSolicitudes().size();i++ ){
+				List<Asignatura> asignaturas = new ArrayList<Asignatura>();
+				for(int j=0; i<respuesta.get(i).getAsignaturas().size();j++){
+					asignaturas.add(new Asignatura(respuesta.get(i).getAsignaturas().get(j).getNombre(),false,respuesta.get(i).getAsignaturas().get(j).getCreditos()));
+					//String nombre, boolean estado, int creditos
+				}
+				ListaAsignaturas.put(NombreDestino.get(i), asignaturas);
+				
+			}
+			
+			cargarLista();
 
 		}
 

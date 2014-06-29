@@ -54,13 +54,17 @@ public class AdaptadorDestinosAsignaturas extends BaseExpandableListAdapter {
 			convertView = infalInflater.inflate(R.layout.asignaturas, null);
 		}
 		
-		TextView txtListChild = (TextView) convertView.findViewById(R.id.asig_nombre);
+		TextView nombre = (TextView) convertView.findViewById(R.id.asig_nombre);
 		
-		txtListChild.setText(a.getasignatura());
+		nombre.setText(a.getasignatura());
 		
 		CheckBox cb = (CheckBox) convertView.findViewById(R.id.asig_check);
 		
 		cb.setChecked(a.isChekeado());
+		
+		TextView creditos = (TextView) convertView.findViewById(R.id.asig_creditos);
+		String valor = String.valueOf(a.getCreditos());
+		creditos.setText(valor);
 		
 		return convertView;
 	}
