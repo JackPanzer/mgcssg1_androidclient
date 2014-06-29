@@ -209,8 +209,8 @@ public class DestinoAsignaturaActivity extends Activity {
 		@Override
 		protected void onPostExecute(Void result) {
 			// TODO Auto-generated method stub
-			Intent act = new Intent(context, DestinoAsignaturaActivity.class);
-			startActivity(act);
+			//Intent act = new Intent(context, DestinoAsignaturaActivity.class);
+			//startActivity(act);
 
 			NombreDestino = new ArrayList<String>();
 			

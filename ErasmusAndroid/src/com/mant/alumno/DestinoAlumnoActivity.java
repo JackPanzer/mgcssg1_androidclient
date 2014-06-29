@@ -84,10 +84,9 @@ public class DestinoAlumnoActivity extends Activity {
 	}
 
 	public void clickAceptar(View v) {
-		for (int i = 0; i < todos_destinos.size(); i++) {
-			aTaskEnviarDestinos atl = new aTaskEnviarDestinos(this, session,todos_destinos.get(i));
-			atl.execute();
-		}
+		
+		aTaskEnviarDestinos atl = new aTaskEnviarDestinos(this, session);
+		atl.execute();
 
 	}
 	
@@ -227,25 +226,23 @@ public class DestinoAlumnoActivity extends Activity {
 		private SessionManager session; // SESSION OBJECT
 		private ArrayDestinos respuesta;
 		private Activity context;
-		private Destinos destino;
 
 		final String NAMESPACE = "urn:Erasmus";
 		final String URL = "http://10.0.2.2/services.php";
 		final String METHOD_NAME = "crearSolicitud";
 		final String SOAP_ACTION = "urn:Erasmus";
 
-		public aTaskEnviarDestinos(Activity _ctxt, SessionManager _session, Destinos destino) {
+		public aTaskEnviarDestinos(Activity _ctxt, SessionManager _session) {
 
 			this.context = _ctxt;
 			this.session = _session;
-			this.destino=destino;
 			
 		}
 
 		@Override
 		protected Void doInBackground(Void... params) {
 			try {
-
+				for(int i=0; i<todos_destinos.size();i++){
 				/* Conectando ... */
 				SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
 
@@ -254,7 +251,7 @@ public class DestinoAlumnoActivity extends Activity {
 						Integer.parseInt
 							(session.getUserDetails().get(SessionManager.KEY_ID)));
 				
-				request.addProperty("idDestino",destino.getId());
+				request.addProperty("idDestino",todos_destinos.get(i).getId());
 
 				/* Creamos un envelop <Sobre> */
 				SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
@@ -312,7 +309,7 @@ public class DestinoAlumnoActivity extends Activity {
 					}
 
 				}
-
+			}
 			} catch (Exception e) {
 
 				String text = e.getMessage();
