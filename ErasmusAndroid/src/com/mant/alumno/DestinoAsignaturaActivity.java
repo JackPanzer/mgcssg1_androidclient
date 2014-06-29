@@ -62,6 +62,9 @@ public class DestinoAsignaturaActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_destino_asignatura);
 
+		session = new SessionManager(getApplicationContext());
+		session.checkLogin();
+		
 		aTaskConsultarSolicitudes atl = new aTaskConsultarSolicitudes(this, session);
 		atl.execute();
 
