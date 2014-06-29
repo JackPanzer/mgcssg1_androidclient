@@ -6,16 +6,26 @@ package com.mant.auxiliares_alumno;
 // AdaptadorDestinoAsignatura del paquete adaptadores_alumno
 
 public class Asignatura {
+	private int creditos;
 	private String nombre;
 	private boolean estado;
 	
 	//CONSTRUCTOR DE LA CLASE//
-	public Asignatura(String nombre, boolean estado) {
+	public Asignatura(String nombre, boolean estado, int creditos) {
 		this.nombre = nombre;
 		this.estado = estado;
+		this.creditos = creditos;
+	}
+	
+	//GETTERS Y SETTERS DE LA CLASE//
+	
+	public int getCreditos() {
+		return creditos;
 	}
 
-	//GETTERS Y SETTERS DE LA CLASE//
+	public void setCreditos(int creditos) {
+		this.creditos = creditos;
+	}
 	
 	public String getasignatura() {
 		return nombre;
