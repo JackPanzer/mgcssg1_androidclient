@@ -56,7 +56,7 @@ public class DestinoAsignaturaActivity extends Activity {
 	ExpandableListView expListView;
 	List<String> NombreDestino;
 	HashMap<String, List<Asignatura>> ListaAsignaturas;
-	
+
 	public SessionManager session;
 
 	@Override
@@ -66,8 +66,9 @@ public class DestinoAsignaturaActivity extends Activity {
 
 		session = new SessionManager(getApplicationContext());
 		session.checkLogin();
-		
-		aTaskConsultarSolicitudes atl = new aTaskConsultarSolicitudes(this, session);
+
+		aTaskConsultarSolicitudes atl = new aTaskConsultarSolicitudes(this,
+				session);
 		atl.execute();
 
 	}
@@ -105,11 +106,13 @@ public class DestinoAsignaturaActivity extends Activity {
 
 		private SessionManager session; // SESSION OBJECT
 		private ArraySolicitudes respuesta;
+		private List<ArrayAsignaturasExt> respuesta2;
 		private Activity context;
 
 		final String NAMESPACE = "urn:Erasmus";
 		final String URL = "http://10.0.2.2/services.php";
 		final String METHOD_NAME = "consultarSolicitudes";
+		final String METHOD_NAME2 = "obtenerAsignaturasSolicitables";
 		final String SOAP_ACTION = "urn:Erasmus";
 
 		public aTaskConsultarSolicitudes(Activity _ctxt, SessionManager _session) {
@@ -193,144 +196,94 @@ public class DestinoAsignaturaActivity extends Activity {
 
 				}
 
-			} catch (Exception e) {
+				NombreDestino = new ArrayList<String>();
 
-				String text = e.getMessage();
-				int duration = Toast.LENGTH_SHORT;
-
-				System.out.println(text);
-				Toast t = Toast.makeText(context, text, duration);
-				t.show();
-			}
-
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void result) {
-			// TODO Auto-generated method stub
-			//Intent act = new Intent(context, DestinoAsignaturaActivity.class);
-			//startActivity(act);
-
-			NombreDestino = new ArrayList<String>();
-			
-			for (int i = 0; i < respuesta.getSolicitudes().size(); i++) {
-				NombreDestino.add("Destino " + i + " : "
-						+ respuesta.getSolicitudes().get(i).getNomDestino());
-			}
-			
-			
-			aTaskobtenerAsignaturasSolicitables atl = new aTaskobtenerAsignaturasSolicitables(context, session,respuesta);
-			atl.execute();
-
-		}
-
-		/*
-		 * this.idDestino = idDestino; this.idPais = idPais; this.idIdioma =
-		 * idIdioma; this.idNivel = idNivel;
-		 */
-
-	}
-
-	private class aTaskobtenerAsignaturasSolicitables extends
-			AsyncTask<Void, Void, Void> {
-
-		private SessionManager session; // SESSION OBJECT
-		private ArraySolicitudes arraysolicitudes;
-		private List<ArrayAsignaturasExt> respuesta;
-		private Activity context;
-
-		final String NAMESPACE = "urn:Erasmus";
-		final String URL = "http://10.0.2.2/services.php";
-		final String METHOD_NAME = "obtenerAsignaturasSolicitables";
-		final String SOAP_ACTION = "urn:Erasmus";
-
-		public aTaskobtenerAsignaturasSolicitables(Activity _ctxt,
-				SessionManager _session,ArraySolicitudes arraysolicitudes) {
-
-			this.context = _ctxt;
-			this.session = _session;
-			this.arraysolicitudes=arraysolicitudes;
-			respuesta = new ArrayList<ArrayAsignaturasExt>();
-
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			try {
-				
-				for(int i=0; i<NombreDestino.size();i++){
-				
-				/* Conectando ... */
-				SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
-
-				
-				/* Indicamos parametros */
-				request.addProperty(
-						"idAlumno",
-						Integer.parseInt(session.getUserDetails().get(
-								SessionManager.KEY_ID)));
-
-				request.addProperty("idDestino",NombreDestino.get(i));
-
-				/* Creamos un envelop <Sobre> */
-				SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
-						SoapEnvelope.VER11);
-				envelope.dotNet = true;
-				envelope.setOutputSoapObject(request); // Aquí metemos la
-														// peticion
-														// en el "Sobre"
-
-				/* Definimos un objeto transporte para dirigir el Sobre */
-				HttpTransportSE transporte = new HttpTransportSE(URL);
-				transporte.debug = true;
-				transporte.call(SOAP_ACTION, envelope); // Lanzamos la llamada
-
-				// Con call se produce la llamada, y se espera (bloquea) hasta
-				// que
-				// se obtiene la respuesta
-				// SoapPrimitive response =
-				// (SoapPrimitive)envelope.getResponse();
-				if (envelope.getResponse() != null) {
-
-					respuesta.add(new ArrayAsignaturasExt((SoapObject) envelope.getResponse()));
-
-					// Si hasta aquí todo ha ido bien, lo siguiente será abrir
-					// la
-					// nueva interfaz
-					if (respuesta.get(i).getErrno() == 0) {
-						// Todo ha ido bien, mostramos un Toast
-						System.out.println("Hola");
-						// Toast t = Toast.makeText(context, "Destino Creado",
-						// Toast.LENGTH_SHORT);
-						// t.show();
-
-						// en base al rol
-
-					} else if (respuesta.get(i).getErrno() == -2) {
-						// Todo ha ido bien, mostramos un Toast
-						System.out.println("Hola");
-						// Toast t = Toast.makeText(context,
-						// "Sentencia Incorrecta", Toast.LENGTH_SHORT);
-						// t.show();
-
-						// en base al rol
-
-					}
-
-					else {
-						// Todo ha ido bien, mostramos un Toast
-						System.out.println("Hola");
-						// Toast t = Toast.makeText(context,
-						// "Fallo en Conexion", Toast.LENGTH_SHORT);
-						// t.show();
-
-						// en base al rol
-
-					}
-
+				for (int i = 0; i < respuesta.getSolicitudes().size(); i++) {
+					NombreDestino
+							.add("Destino "
+									+ i
+									+ " : "
+									+ respuesta.getSolicitudes().get(i)
+											.getNomDestino());
 				}
-			}
+
+				// Segunda Consulta a la base de datos
+				for (int i = 0; i < NombreDestino.size(); i++) {
+
+					/* Conectando ... */
+					SoapObject request2 = new SoapObject(NAMESPACE, METHOD_NAME2);
+
+					/* Indicamos parametros */
+					request2.addProperty(
+							"idAlumno",
+							Integer.parseInt(session.getUserDetails().get(
+									SessionManager.KEY_ID)));
+
+					request2.addProperty("idDestino", NombreDestino.get(i));
+
+					/* Creamos un envelop <Sobre> */
+					SoapSerializationEnvelope envelope2 = new SoapSerializationEnvelope(
+							SoapEnvelope.VER11);
+					envelope2.dotNet = true;
+					envelope2.setOutputSoapObject(request); // Aquí metemos la
+															// peticion
+															// en el "Sobre"
+
+					/* Definimos un objeto transporte para dirigir el Sobre */
+					HttpTransportSE transporte2 = new HttpTransportSE(URL);
+					transporte2.debug = true;
+					transporte2.call(SOAP_ACTION, envelope); // Lanzamos la
+																// llamada
+
+					// Con call se produce la llamada, y se espera (bloquea)
+					// hasta
+					// que
+					// se obtiene la respuesta
+					// SoapPrimitive response =
+					// (SoapPrimitive)envelope.getResponse();
+					if (envelope2.getResponse() != null) {
+
+						respuesta2.add(new ArrayAsignaturasExt(
+								(SoapObject) envelope.getResponse()));
+
+						// Si hasta aquí todo ha ido bien, lo siguiente será
+						// abrir
+						// la
+						// nueva interfaz
+						if (respuesta2.get(i).getErrno() == 0) {
+							// Todo ha ido bien, mostramos un Toast
+							System.out.println("Hola");
+							// Toast t = Toast.makeText(context,
+							// "Destino Creado",
+							// Toast.LENGTH_SHORT);
+							// t.show();
+
+							// en base al rol
+
+						} else if (respuesta2.get(i).getErrno() == -2) {
+							// Todo ha ido bien, mostramos un Toast
+							System.out.println("Hola");
+							// Toast t = Toast.makeText(context,
+							// "Sentencia Incorrecta", Toast.LENGTH_SHORT);
+							// t.show();
+
+							// en base al rol
+
+						}
+
+						else {
+							// Todo ha ido bien, mostramos un Toast
+							System.out.println("Hola");
+							// Toast t = Toast.makeText(context,
+							// "Fallo en Conexion", Toast.LENGTH_SHORT);
+							// t.show();
+
+							// en base al rol
+
+						}
+
+					}
+				}
 
 			} catch (Exception e) {
 
@@ -341,25 +294,30 @@ public class DestinoAsignaturaActivity extends Activity {
 				Toast t = Toast.makeText(context, text, duration);
 				t.show();
 			}
-			
-		
+
 			return null;
 		}
 
 		@Override
 		protected void onPostExecute(Void result) {
 			// TODO Auto-generated method stub
+			// Intent act = new Intent(context,
+			// DestinoAsignaturaActivity.class);
+			// startActivity(act);
 			ListaAsignaturas = new HashMap<String, List<Asignatura>>();
-			for(int i =0;i<arraysolicitudes.getSolicitudes().size();i++ ){
+			for (int i = 0; i < respuesta.getSolicitudes().size(); i++) {
 				List<Asignatura> asignaturas = new ArrayList<Asignatura>();
-				for(int j=0; i<respuesta.get(i).getAsignaturas().size();j++){
-					asignaturas.add(new Asignatura(respuesta.get(i).getAsignaturas().get(j).getNombre(),false,respuesta.get(i).getAsignaturas().get(j).getCreditos()));
-					//String nombre, boolean estado, int creditos
+				for (int j = 0; i < respuesta2.get(i).getAsignaturas().size(); j++) {
+					asignaturas.add(new Asignatura(respuesta2.get(i)
+							.getAsignaturas().get(j).getNombre(), false,
+							respuesta2.get(i).getAsignaturas().get(j)
+									.getCreditos()));
+					// String nombre, boolean estado, int creditos
 				}
 				ListaAsignaturas.put(NombreDestino.get(i), asignaturas);
-				
+
 			}
-			
+
 			cargarLista();
 
 		}
