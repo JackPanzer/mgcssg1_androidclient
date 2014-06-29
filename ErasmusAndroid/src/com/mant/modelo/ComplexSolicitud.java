@@ -17,7 +17,7 @@ public class ComplexSolicitud {
 			//Obteniendo los datos del usuario a través del obj. soap
 			
 			String _errno = obj.getPrimitivePropertyAsString("errno");
-			String _nomAlumno = obj.getPrimitivePropertyAsString("nombre");
+			String _nomAlumno = obj.getPrimitivePropertyAsString("nomAlumno");
 			String _idAl = obj.getPrimitivePropertyAsString("idAl");
 			String _nomDestino = obj.getPrimitivePropertyAsString("nomDestino");
 			String _idDest = obj.getPrimitivePropertyAsString("idDest");
