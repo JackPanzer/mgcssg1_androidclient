@@ -39,6 +39,7 @@ import com.mant.auxiliares_alumno.Asignatura;
 import com.mant.auxiliares_alumno.Destinos;
 import com.mant.modelo.ArrayDestinos;
 import com.mant.modelo.ArraySolicitudes;
+import com.mant.modelo.ComplexAsignaturaExt;
 
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ExpandableListView.OnChildClickListener;
@@ -50,17 +51,20 @@ import android.widget.Toast;
 public class DestinoAsignaturaActivity extends Activity {
 
 	AdaptadorDestinosAsignaturas listAdapter;
-    ExpandableListView expListView;
-    List<String> NombreDestino;
-    HashMap<String, List<Asignatura>> ListaAsignaturas;
+	ExpandableListView expListView;
+	List<String> NombreDestino;
+	HashMap<String, List<Asignatura>> ListaAsignaturas;
 	
+	public SessionManager session;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_destino_asignatura);
-		
-		// get the listview
-        
+
+		aTaskConsultarSolicitudes atl = new aTaskConsultarSolicitudes(this, session);
+		atl.execute();
+
 	}
 
 	@Override
@@ -69,29 +73,29 @@ public class DestinoAsignaturaActivity extends Activity {
 		getMenuInflater().inflate(R.menu.destino_asignatura, menu);
 		return true;
 	}
-	
 
 	public void clickVolver(View v) {
 		finish();
-		}
-	
+	}
+
 	public void clickAceptar(View v) {
 		Intent act = new Intent(this, AceptarPrecontratoActivity.class);
 		startActivity(act);
 
 	}
-	
+
 	public void cargarLista() {
-		
+
 		expListView = (ExpandableListView) findViewById(R.id.expandableListView1);
-		 
-        listAdapter = new AdaptadorDestinosAsignaturas(this, NombreDestino, ListaAsignaturas);
- 
-        // setting list adapter
-        expListView.setAdapter(listAdapter);
+
+		listAdapter = new AdaptadorDestinosAsignaturas(this, NombreDestino,
+				ListaAsignaturas);
+
+		// setting list adapter
+		expListView.setAdapter(listAdapter);
 
 	}
-	
+
 	private class aTaskConsultarSolicitudes extends AsyncTask<Void, Void, Void> {
 
 		private SessionManager session; // SESSION OBJECT
@@ -107,7 +111,7 @@ public class DestinoAsignaturaActivity extends Activity {
 
 			this.context = _ctxt;
 			this.session = _session;
-			
+
 		}
 
 		@Override
@@ -118,11 +122,12 @@ public class DestinoAsignaturaActivity extends Activity {
 				SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
 
 				/* Indicamos parametros */
-				request.addProperty("idAlumno",
-						Integer.parseInt
-							(session.getUserDetails().get(SessionManager.KEY_ID)));
-				
-				request.addProperty("idDestino",-1);
+				request.addProperty(
+						"idAlumno",
+						Integer.parseInt(session.getUserDetails().get(
+								SessionManager.KEY_ID)));
+
+				request.addProperty("idDestino", -1);
 
 				/* Creamos un envelop <Sobre> */
 				SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
@@ -146,37 +151,39 @@ public class DestinoAsignaturaActivity extends Activity {
 
 					respuesta = new ArraySolicitudes(
 							(SoapObject) envelope.getResponse());
-					
-					// Si hasta aquí todo ha ido bien, lo siguiente será abrir la
+
+					// Si hasta aquí todo ha ido bien, lo siguiente será abrir
+					// la
 					// nueva interfaz
 					if (respuesta.getErrno() == 0) {
 						// Todo ha ido bien, mostramos un Toast
 						System.out.println("Hola");
-						//Toast t = Toast.makeText(context, "Destino Creado", Toast.LENGTH_SHORT);
-						//t.show();
+						// Toast t = Toast.makeText(context, "Destino Creado",
+						// Toast.LENGTH_SHORT);
+						// t.show();
 
 						// en base al rol
-						
-					}
-					else if (respuesta.getErrno() == -2) {
+
+					} else if (respuesta.getErrno() == -2) {
 						// Todo ha ido bien, mostramos un Toast
 						System.out.println("Hola");
-						//Toast t = Toast.makeText(context, "Sentencia Incorrecta", Toast.LENGTH_SHORT);
-						//t.show();
+						// Toast t = Toast.makeText(context,
+						// "Sentencia Incorrecta", Toast.LENGTH_SHORT);
+						// t.show();
 
 						// en base al rol
-						
+
 					}
-					
-					else{
+
+					else {
 						// Todo ha ido bien, mostramos un Toast
 						System.out.println("Hola");
-						//Toast t = Toast.makeText(context, "Fallo en Conexion", Toast.LENGTH_SHORT);
-						//t.show();
-						
+						// Toast t = Toast.makeText(context,
+						// "Fallo en Conexion", Toast.LENGTH_SHORT);
+						// t.show();
 
 						// en base al rol
-						
+
 					}
 
 				}
@@ -199,58 +206,65 @@ public class DestinoAsignaturaActivity extends Activity {
 			// TODO Auto-generated method stub
 			Intent act = new Intent(context, DestinoAsignaturaActivity.class);
 			startActivity(act);
-			
-			for (int i = 0; i < respuesta.getSolicitudes().size(); i++) {
-				NombreDestino.add("Destino "+i+" : " +respuesta.getSolicitudes().get(i).getNomDestino());
-			}
-			
-			
-			}
-			
-			
-		
-			/*
-			 * this.idDestino = idDestino; this.idPais = idPais; this.idIdioma =
-			 * idIdioma; this.idNivel = idNivel;
-			 */
 
+			for (int i = 0; i < respuesta.getSolicitudes().size(); i++) {
+				NombreDestino.add("Destino " + i + " : "
+						+ respuesta.getSolicitudes().get(i).getNomDestino());
+			}
 			
+			
+			aTaskobtenerAsignaturasSolicitables atl = new aTaskobtenerAsignaturasSolicitables(context, session,respuesta);
+			atl.execute();
+
+		}
+
+		/*
+		 * this.idDestino = idDestino; this.idPais = idPais; this.idIdioma =
+		 * idIdioma; this.idNivel = idNivel;
+		 */
 
 	}
-	
-	private class aTaskobtenerAsignaturasSolicitables extends AsyncTask<Void, Void, Void> {
+
+	private class aTaskobtenerAsignaturasSolicitables extends
+			AsyncTask<Void, Void, Void> {
 
 		private SessionManager session; // SESSION OBJECT
-		private ArraySolicitudes respuesta;
+		private ArraySolicitudes arraysolicitudes;
+		private List<ComplexAsignaturaExt> respuesta;
 		private Activity context;
-		private int idDestinos;
 
 		final String NAMESPACE = "urn:Erasmus";
 		final String URL = "http://10.0.2.2/services.php";
 		final String METHOD_NAME = "obtenerAsignaturasSolicitables";
 		final String SOAP_ACTION = "urn:Erasmus";
 
-		public aTaskobtenerAsignaturasSolicitables(Activity _ctxt, SessionManager _session, int idDestino) {
+		public aTaskobtenerAsignaturasSolicitables(Activity _ctxt,
+				SessionManager _session,ArraySolicitudes arraysolicitudes) {
 
 			this.context = _ctxt;
 			this.session = _session;
-			this.idDestinos=idDestino;
-			
+			this.arraysolicitudes=arraysolicitudes;
+			respuesta = new ArrayList<ComplexAsignaturaExt>();
+
 		}
 
 		@Override
 		protected Void doInBackground(Void... params) {
 			try {
-
+				
+				for(int i=0; i<NombreDestino.size();i++){
+				
 				/* Conectando ... */
 				SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
 
-				/* Indicamos parametros */
-				request.addProperty("idAlumno",
-						Integer.parseInt
-							(session.getUserDetails().get(SessionManager.KEY_ID)));
 				
-				request.addProperty("idDestino",idDestinos);
+				/* Indicamos parametros */
+				request.addProperty(
+						"idAlumno",
+						Integer.parseInt(session.getUserDetails().get(
+								SessionManager.KEY_ID)));
+
+				request.addProperty("idDestino",NombreDestino.get(i));
 
 				/* Creamos un envelop <Sobre> */
 				SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
@@ -272,42 +286,44 @@ public class DestinoAsignaturaActivity extends Activity {
 				// (SoapPrimitive)envelope.getResponse();
 				if (envelope.getResponse() != null) {
 
-					respuesta = new ArraySolicitudes(
-							(SoapObject) envelope.getResponse());
-					
-					// Si hasta aquí todo ha ido bien, lo siguiente será abrir la
+					respuesta.add(new ComplexAsignaturaExt((SoapObject) envelope.getResponse()));
+
+					// Si hasta aquí todo ha ido bien, lo siguiente será abrir
+					// la
 					// nueva interfaz
-					if (respuesta.getErrno() == 0) {
+					if (respuesta.get(i).getErrno() == 0) {
 						// Todo ha ido bien, mostramos un Toast
 						System.out.println("Hola");
-						//Toast t = Toast.makeText(context, "Destino Creado", Toast.LENGTH_SHORT);
-						//t.show();
+						// Toast t = Toast.makeText(context, "Destino Creado",
+						// Toast.LENGTH_SHORT);
+						// t.show();
 
 						// en base al rol
-						
+
+					} else if (respuesta.get(i).getErrno() == -2) {
+						// Todo ha ido bien, mostramos un Toast
+						System.out.println("Hola");
+						// Toast t = Toast.makeText(context,
+						// "Sentencia Incorrecta", Toast.LENGTH_SHORT);
+						// t.show();
+
+						// en base al rol
+
 					}
-					else if (respuesta.getErrno() == -2) {
+
+					else {
 						// Todo ha ido bien, mostramos un Toast
 						System.out.println("Hola");
-						//Toast t = Toast.makeText(context, "Sentencia Incorrecta", Toast.LENGTH_SHORT);
-						//t.show();
+						// Toast t = Toast.makeText(context,
+						// "Fallo en Conexion", Toast.LENGTH_SHORT);
+						// t.show();
 
 						// en base al rol
-						
-					}
-					
-					else{
-						// Todo ha ido bien, mostramos un Toast
-						System.out.println("Hola");
-						//Toast t = Toast.makeText(context, "Fallo en Conexion", Toast.LENGTH_SHORT);
-						//t.show();
-						
 
-						// en base al rol
-						
 					}
 
 				}
+			}
 
 			} catch (Exception e) {
 
@@ -318,7 +334,8 @@ public class DestinoAsignaturaActivity extends Activity {
 				Toast t = Toast.makeText(context, text, duration);
 				t.show();
 			}
-
+			
+		
 			return null;
 		}
 
@@ -327,22 +344,14 @@ public class DestinoAsignaturaActivity extends Activity {
 			// TODO Auto-generated method stub
 			Intent act = new Intent(context, DestinoAsignaturaActivity.class);
 			startActivity(act);
-			
-			for (int i = 0; i < respuesta.getSolicitudes().size(); i++) {
-				NombreDestino.add("Destino "+i+" : " +respuesta.getSolicitudes().get(i).getNomDestino());
-			}
-			
-			
-			}
-			
-			
-		
-			/*
-			 * this.idDestino = idDestino; this.idPais = idPais; this.idIdioma =
-			 * idIdioma; this.idNivel = idNivel;
-			 */
 
-			
+
+		}
+
+		/*
+		 * this.idDestino = idDestino; this.idPais = idPais; this.idIdioma =
+		 * idIdioma; this.idNivel = idNivel;
+		 */
 
 	}
 
