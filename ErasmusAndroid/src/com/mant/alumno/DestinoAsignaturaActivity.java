@@ -46,6 +46,7 @@ import com.mant.modelo.ArrayAsignaturasExt;
 import com.mant.modelo.ArrayDestinos;
 import com.mant.modelo.ArraySolicitudes;
 import com.mant.modelo.ComplexAsignaturaExt;
+import com.mant.modelo.ComplexSolicitud;
 
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ExpandableListView.OnChildClickListener;
@@ -251,21 +252,16 @@ public class DestinoAsignaturaActivity extends Activity {
 				
 				temp = new ArrayAsignaturasExt(
 						(SoapObject) envelope.getResponse());
-				/*
-				if (arrayAsigs.get(i).getErrno() == 0) {
-					// Todo ha ido bien, mostramos un Toast
-					System.out.println("Hola");
-					// Toast t = Toast.makeText(context,
-					// "Destino Creado",
-					// Toast.LENGTH_SHORT);
-					// t.show();
-
-					// en base al rol
-
-				} else { //Errno distinto de 0, error o no se ha devuelto nada
-					temp = null;
+				
+				/**
+				 * Una consulta que no devuelve ningún dato por no existir
+				 * no es necesario almacenar el errno.
+				 * 
+				 * Se descarta esta consulta.
+				 */
+				if(temp.getErrno() == 1){
+					return null;
 				}
-				*/
 				
 			}
 			
@@ -292,10 +288,15 @@ public class DestinoAsignaturaActivity extends Activity {
 				}
 
 				// Segunda Consulta a la base de datos
+				arrayAsigs = new ArrayList<ArrayAsignaturasExt>();
 				for (int i = 0; i < NombreDestino.size(); i++) {
 
-					obtenerArrayAsigs(Integer.parseInt(session.getUserDetails().get(
+					ArrayAsignaturasExt temp = obtenerArrayAsigs(Integer.parseInt(session.getUserDetails().get(
 							SessionManager.KEY_ID)), IdsDestinos.get(i));
+					
+					if(temp != null){ //¿Ha devuelto el servicio SOAP un dato útil?
+						arrayAsigs.add(temp);
+					}
 				}
 
 			} catch (Exception e) {
@@ -313,27 +314,51 @@ public class DestinoAsignaturaActivity extends Activity {
 
 		@Override
 		protected void onPostExecute(Void result) {
-			// TODO Auto-generated method stub
-			// Intent act = new Intent(context,
-			// DestinoAsignaturaActivity.class);
-			// startActivity(act);
-			/*
-			ListaAsignaturas = new HashMap<String, List<Asignatura>>();
-			for (int i = 0; i < arraySols.getSolicitudes().size(); i++) {
-				List<Asignatura> asignaturas = new ArrayList<Asignatura>();
-				for (int j = 0; i < arrayAsigs.get(i).getAsignaturas().size(); j++) {
-					asignaturas.add(new Asignatura(arrayAsigs.get(i)
-							.getAsignaturas().get(j).getNombre(), false,
-							arrayAsigs.get(i).getAsignaturas().get(j)
-									.getCreditos()));
-					// String nombre, boolean estado, int creditos
+			
+			try{
+				/*
+				ListaAsignaturas = new HashMap<String, List<Asignatura>>();
+				for (int i = 0; i < arraySols.getSolicitudes().size(); i++) {
+					List<Asignatura> asignaturas = new ArrayList<Asignatura>();
+					for (int j = 0; i < arrayAsigs.get(i).getAsignaturas()
+							.size(); j++) {
+						asignaturas.add(new Asignatura(arrayAsigs.get(i)
+								.getAsignaturas().get(j).getNombre(), false,
+								arrayAsigs.get(i).getAsignaturas().get(j)
+										.getCreditos()));
+						// String nombre, boolean estado, int creditos
+					}
+					ListaAsignaturas.put(NombreDestino.get(i), asignaturas);
+
 				}
-				ListaAsignaturas.put(NombreDestino.get(i), asignaturas);
-
+				*/
+				
+				ListaAsignaturas = new HashMap<String, List<Asignatura>>();
+				for(ComplexSolicitud sol : arraySols.getSolicitudes()){
+					//Establecemos los principios de clave - valor para introducir
+					//los datos en el diccionario
+					String clave = sol.getNomDestino();
+					List<Asignatura> valores = new ArrayList<Asignatura>();
+					
+					for(ArrayAsignaturasExt ext : arrayAsigs){
+						for(ComplexAsignaturaExt asg : ext.getAsignaturas()){
+							Asignatura temp = null;
+							if(asg.getCentro().equalsIgnoreCase(clave)){ 
+								//¿Esta asignatura se cursa en el destino actual?
+								temp = new Asignatura(asg.getNombre(), false, asg.getCreditos());
+								valores.add(temp);
+							}
+						}
+					}
+					ListaAsignaturas.put(clave, valores);
+					
+				}
+				
+				cargarLista();
+			} catch(Exception e){
+				e.getMessage();
 			}
-
-			cargarLista();
-			*/
+			
 		}
 
 		/*
