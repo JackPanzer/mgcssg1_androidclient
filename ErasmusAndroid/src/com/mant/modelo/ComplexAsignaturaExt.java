@@ -5,22 +5,40 @@ import org.ksoap2.serialization.SoapObject;
 public class ComplexAsignaturaExt {
 	
 	private int errno;
+	
+	private int id;
 	private String nombre;
 	private int creditos;
-	private String centro;		//Nombre del centro (Destino) donde se imparte
+	private String centro; //Nombre del centro (Destino) donde se imparte
+	private int idcentro; //Id del centro donde se imparte
 	
 	public ComplexAsignaturaExt(SoapObject obj){
 		if(obj != null){
 			String _errno = obj.getPrimitivePropertyAsString("errno");
+			String _id = obj.getPrimitivePropertyAsString("id");
 			String _nombre = obj.getPrimitivePropertyAsString("nombre");
 			String _creditos = obj.getPrimitivePropertyAsString("creditos");
 			String _centro = obj.getPrimitivePropertyAsString("centro");
+			String _idcentro = obj.getPrimitivePropertyAsString("idcentro");
 			
 			if(_errno.equals("")){
-				setErrno(0);
+				errno = 0;
 			} else {
-				setErrno(Integer.parseInt(_errno));
+				errno = Integer.parseInt(_errno);
 			}
+			
+			if(_id.equals("")){
+				id = 0;
+			} else {
+				id = Integer.parseInt(_id);
+			}
+			
+			if(_idcentro.equals("")){
+				idcentro = 0;
+			} else {
+				idcentro = Integer.parseInt(_id);
+			}
+			
 			nombre = _nombre;
 			centro = _centro;
 			
