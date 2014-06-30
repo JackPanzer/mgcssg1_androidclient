@@ -333,25 +333,28 @@ public class DestinoAsignaturaActivity extends Activity {
 				}
 				*/
 				
+				int iteracion = 0;
 				ListaAsignaturas = new HashMap<String, List<Asignatura>>();
 				for(ComplexSolicitud sol : arraySols.getSolicitudes()){
 					//Establecemos los principios de clave - valor para introducir
 					//los datos en el diccionario
-					String clave = sol.getNomDestino();
+					String clave = "Destino "+ iteracion +" : "+sol.getNomDestino();
 					List<Asignatura> valores = new ArrayList<Asignatura>();
 					
 					for(ArrayAsignaturasExt ext : arrayAsigs){
 						for(ComplexAsignaturaExt asg : ext.getAsignaturas()){
 							Asignatura temp = null;
-							if(asg.getCentro().equalsIgnoreCase(clave)){ 
+							if(asg.getCentro().equalsIgnoreCase(sol.getNomDestino())){ 
 								//¿Esta asignatura se cursa en el destino actual?
 								temp = new Asignatura(asg.getNombre(), false, asg.getCreditos());
 								valores.add(temp);
 							}
 						}
 					}
+					
 					ListaAsignaturas.put(clave, valores);
 					
+					iteracion++;
 				}
 				
 				cargarLista();
