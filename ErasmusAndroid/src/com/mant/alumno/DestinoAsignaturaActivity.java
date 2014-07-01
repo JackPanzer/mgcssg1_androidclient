@@ -91,8 +91,8 @@ public class DestinoAsignaturaActivity extends Activity {
 	}
 
 	public void clickAceptar(View v) {
-		Intent act = new Intent(this, AceptarPrecontratoActivity.class);
-		startActivity(act);
+		//Intent act = new Intent(this, AceptarPrecontratoActivity.class);
+		//startActivity(act);
 
 	}
 
@@ -108,6 +108,10 @@ public class DestinoAsignaturaActivity extends Activity {
 
 	}
 
+	/**
+	 * Permite la consulta de solicitudes que el alumno ha hecho entre sesiones
+	 * 
+	 */
 	private class aTaskConsultarSolicitudes extends AsyncTask<Void, Void, Void> {
 
 		private SessionManager session; // SESSION OBJECT
@@ -278,9 +282,7 @@ public class DestinoAsignaturaActivity extends Activity {
 				IdsDestinos = new ArrayList<Integer>();
 
 				for (int i = 0; i < arraySols.getSolicitudes().size(); i++) {
-					NombreDestino.add("Destino "+ 
-										i + " : " + 
-										arraySols.getSolicitudes().get(i)
+					NombreDestino.add(arraySols.getSolicitudes().get(i)
 											.getNomDestino());
 					
 					IdsDestinos.add(arraySols.getSolicitudes().get(i)
@@ -316,29 +318,12 @@ public class DestinoAsignaturaActivity extends Activity {
 		protected void onPostExecute(Void result) {
 			
 			try{
-				/*
-				ListaAsignaturas = new HashMap<String, List<Asignatura>>();
-				for (int i = 0; i < arraySols.getSolicitudes().size(); i++) {
-					List<Asignatura> asignaturas = new ArrayList<Asignatura>();
-					for (int j = 0; i < arrayAsigs.get(i).getAsignaturas()
-							.size(); j++) {
-						asignaturas.add(new Asignatura(arrayAsigs.get(i)
-								.getAsignaturas().get(j).getNombre(), false,
-								arrayAsigs.get(i).getAsignaturas().get(j)
-										.getCreditos()));
-						// String nombre, boolean estado, int creditos
-					}
-					ListaAsignaturas.put(NombreDestino.get(i), asignaturas);
-
-				}
-				*/
 				
-				int iteracion = 0;
 				ListaAsignaturas = new HashMap<String, List<Asignatura>>();
 				for(ComplexSolicitud sol : arraySols.getSolicitudes()){
 					//Establecemos los principios de clave - valor para introducir
 					//los datos en el diccionario
-					String clave = "Destino "+ iteracion +" : "+sol.getNomDestino();
+					String clave = sol.getNomDestino();
 					List<Asignatura> valores = new ArrayList<Asignatura>();
 					
 					for(ArrayAsignaturasExt ext : arrayAsigs){
@@ -354,7 +339,6 @@ public class DestinoAsignaturaActivity extends Activity {
 					
 					ListaAsignaturas.put(clave, valores);
 					
-					iteracion++;
 				}
 				
 				cargarLista();
@@ -371,4 +355,62 @@ public class DestinoAsignaturaActivity extends Activity {
 
 	}
 
+	/**
+	 * Envía las asignaturas que se han elegido a la BBDD para el precontrato.
+	 * Llegados a este punto, el coordinador puede aceptar un precontrato.
+	 * 
+	 *
+	 */
+	private class aTaskEnviarAsignaturasPrecontrato extends AsyncTask<Void, Void, Void> {
+
+		final String NAMESPACE = "urn:Erasmus";
+		final String URL = "http://10.0.2.2/services.php";
+		final String METHOD_NAME = "agregarAsignaturaSolicitud";
+		final String SOAP_ACTION = "urn:Erasmus";
+		
+		private void enviarAsignatura(int idAlumno, int idDestino, int idAsignatura) 
+				throws IOException, XmlPullParserException{
+			SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
+
+			/* Indicamos parametros */
+			request.addProperty(
+					"idAlumno",
+					Integer.parseInt(session.getUserDetails().get(
+							SessionManager.KEY_ID)));
+
+			request.addProperty("idDestino", -1);
+
+			/* Creamos un envelop <Sobre> */
+			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+					SoapEnvelope.VER11);
+			envelope.dotNet = true;
+			envelope.setOutputSoapObject(request); // Aquí metemos la
+													// peticion
+													// en el "Sobre"
+
+			/* Definimos un objeto transporte para dirigir el Sobre */
+			HttpTransportSE transporte = new HttpTransportSE(URL);
+			transporte.debug = true;
+			transporte.call(SOAP_ACTION, envelope); // Lanzamos la llamada
+
+			// Con call se produce la llamada, y se espera (bloquea) hasta
+			// que
+			// se obtiene la respuesta
+			// SoapPrimitive response =
+			// (SoapPrimitive)envelope.getResponse();
+		}
+		
+		@Override
+		protected Void doInBackground(Void... params) {
+			
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+		}
+		
+	}
 }
