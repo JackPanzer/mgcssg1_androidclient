@@ -9,18 +9,28 @@ public class Asignatura {
 	private int creditos;
 	private String nombre;
 	private boolean estado;
+	private int id;
 	
 	//CONSTRUCTOR DE LA CLASE//
-	public Asignatura(String nombre, boolean estado, int creditos) {
+	public Asignatura(String nombre, boolean estado, int creditos, int id) {
 		this.nombre = nombre;
 		this.estado = estado;
 		this.creditos = creditos;
+		this.id=id;
 	}
 	
 	//GETTERS Y SETTERS DE LA CLASE//
 	
 	public int getCreditos() {
 		return creditos;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public void setCreditos(int creditos) {

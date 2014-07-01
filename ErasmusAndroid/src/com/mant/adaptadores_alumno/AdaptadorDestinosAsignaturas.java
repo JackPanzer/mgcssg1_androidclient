@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 public class AdaptadorDestinosAsignaturas extends BaseExpandableListAdapter {
@@ -46,7 +47,7 @@ public class AdaptadorDestinosAsignaturas extends BaseExpandableListAdapter {
 	public View getChildView(int groupPosition, final int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
 
-		Asignatura a = (Asignatura) getChild(groupPosition, childPosition);
+		final Asignatura a = (Asignatura) getChild(groupPosition, childPosition);
 		
 		if (convertView == null) {
 			LayoutInflater infalInflater = (LayoutInflater) this._context
@@ -65,6 +66,15 @@ public class AdaptadorDestinosAsignaturas extends BaseExpandableListAdapter {
 		TextView creditos = (TextView) convertView.findViewById(R.id.asig_creditos);
 		String valor = String.valueOf(a.getCreditos());
 		creditos.setText(valor);
+		
+		cb.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				// TODO Auto-generated method stub
+				a.setChekeado(isChecked);
+			}
+		});
 		
 		return convertView;
 	}

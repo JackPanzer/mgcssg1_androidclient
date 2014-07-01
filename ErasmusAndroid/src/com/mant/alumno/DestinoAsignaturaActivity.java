@@ -91,6 +91,10 @@ public class DestinoAsignaturaActivity extends Activity {
 	}
 
 	public void clickAceptar(View v) {
+		
+		aTaskEnviarAsignaturasPrecontrato atl = new aTaskEnviarAsignaturasPrecontrato(this,
+				session);
+		atl.execute();
 		//Intent act = new Intent(this, AceptarPrecontratoActivity.class);
 		//startActivity(act);
 
@@ -331,7 +335,7 @@ public class DestinoAsignaturaActivity extends Activity {
 							Asignatura temp = null;
 							if(asg.getCentro().equalsIgnoreCase(sol.getNomDestino())){ 
 								//¿Esta asignatura se cursa en el destino actual?
-								temp = new Asignatura(asg.getNombre(), false, asg.getCreditos());
+								temp = new Asignatura(asg.getNombre(), false, asg.getCreditos(),asg.getId());
 								valores.add(temp);
 							}
 						}
@@ -367,8 +371,17 @@ public class DestinoAsignaturaActivity extends Activity {
 		final String URL = "http://10.0.2.2/services.php";
 		final String METHOD_NAME = "agregarAsignaturaSolicitud";
 		final String SOAP_ACTION = "urn:Erasmus";
+		private Activity context;
+		private SessionManager session;
 		
-		private void enviarAsignatura(int idAlumno, int idDestino, int idAsignatura) 
+		public aTaskEnviarAsignaturasPrecontrato(Activity _ctxt, SessionManager _session) {
+
+			this.context = _ctxt;
+			this.session = _session;
+
+		}
+		
+		private void enviarAsignatura(int idDestino, int idAsignatura) 
 				throws IOException, XmlPullParserException{
 			SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
 
@@ -378,7 +391,8 @@ public class DestinoAsignaturaActivity extends Activity {
 					Integer.parseInt(session.getUserDetails().get(
 							SessionManager.KEY_ID)));
 
-			request.addProperty("idDestino", -1);
+			request.addProperty("idDestino", idDestino);
+			request.addProperty("idAsignaturaExt", idAsignatura);
 
 			/* Creamos un envelop <Sobre> */
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
@@ -403,6 +417,25 @@ public class DestinoAsignaturaActivity extends Activity {
 		@Override
 		protected Void doInBackground(Void... params) {
 			
+			int var = ListaAsignaturas.get(NombreDestino.get(0)).size();
+			
+			for(int i=0; i<IdsDestinos.size();i++){
+				for(int j=0; j<ListaAsignaturas.get(NombreDestino.get(i)).size();j++){
+					if(ListaAsignaturas.get(NombreDestino.get(i)).get(j).isChekeado()){
+						try {
+							enviarAsignatura(IdsDestinos.get(i), ListaAsignaturas.get(NombreDestino.get(i)).get(j).getId());
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (XmlPullParserException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} 
+					}
+					
+				}
+				
+			}
 			return null;
 		}
 
@@ -410,6 +443,8 @@ public class DestinoAsignaturaActivity extends Activity {
 		protected void onPostExecute(Void result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
+			Intent act = new Intent(context, AceptarPrecontratoActivity.class);
+			startActivity(act);
 		}
 		
 	}
