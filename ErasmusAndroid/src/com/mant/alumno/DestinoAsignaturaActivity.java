@@ -47,6 +47,7 @@ import com.mant.modelo.ArrayDestinos;
 import com.mant.modelo.ArraySolicitudes;
 import com.mant.modelo.ComplexAsignaturaExt;
 import com.mant.modelo.ComplexSolicitud;
+import com.mant.modelo.GenericResult;
 
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ExpandableListView.OnChildClickListener;
@@ -372,6 +373,7 @@ public class DestinoAsignaturaActivity extends Activity {
 		final String METHOD_NAME = "agregarAsignaturaSolicitud";
 		final String SOAP_ACTION = "urn:Erasmus";
 		private Activity context;
+		private GenericResult resultado;
 		private SessionManager session;
 		
 		public aTaskEnviarAsignaturasPrecontrato(Activity _ctxt, SessionManager _session) {
@@ -386,11 +388,7 @@ public class DestinoAsignaturaActivity extends Activity {
 			SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
 
 			/* Indicamos parametros */
-			request.addProperty(
-					"idAlumno",
-					Integer.parseInt(session.getUserDetails().get(
-							SessionManager.KEY_ID)));
-
+			request.addProperty("idAlumno",Integer.parseInt(session.getUserDetails().get(SessionManager.KEY_ID)));
 			request.addProperty("idDestino", idDestino);
 			request.addProperty("idAsignaturaExt", idAsignatura);
 
@@ -407,6 +405,52 @@ public class DestinoAsignaturaActivity extends Activity {
 			transporte.debug = true;
 			transporte.call(SOAP_ACTION, envelope); // Lanzamos la llamada
 
+			// Con call se produce la llamada, y se espera (bloquea) hasta
+						// que
+						// se obtiene la respuesta
+						// SoapPrimitive response =
+						// (SoapPrimitive)envelope.getResponse();
+						if (envelope.getResponse() != null) {
+
+							resultado = new GenericResult(
+									(SoapObject) envelope.getResponse());
+
+							// Si hasta aquí todo ha ido bien, lo siguiente será abrir
+							// la
+							// nueva interfaz
+							if (resultado.getErrno() == 0) {
+								// Todo ha ido bien, mostramos un Toast
+								System.out.println("Hola");
+								// Toast t = Toast.makeText(context, "Destino Creado",
+								// Toast.LENGTH_SHORT);
+								// t.show();
+
+								// en base al rol
+
+							} else if (resultado.getErrno() == -2) {
+								// Todo ha ido bien, mostramos un Toast
+								System.out.println("Hola");
+								// Toast t = Toast.makeText(context,
+								// "Sentencia Incorrecta", Toast.LENGTH_SHORT);
+								// t.show();
+
+								// en base al rol
+
+							}
+
+							else {
+								// Todo ha ido bien, mostramos un Toast
+								System.out.println("Hola");
+								// Toast t = Toast.makeText(context,
+								// "Fallo en Conexion", Toast.LENGTH_SHORT);
+								// t.show();
+
+								// en base al rol
+
+							}
+
+						}
+			
 			// Con call se produce la llamada, y se espera (bloquea) hasta
 			// que
 			// se obtiene la respuesta
