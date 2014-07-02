@@ -198,10 +198,7 @@ public class AceptarPropuestaActivity extends Activity {
 
 		@Override
 		protected void onPostExecute(Void result) {
-
-			if (respuesta.getPrecontrato().get(0).isAceptado()) {
-				System.out.println("Hola");
-			}
+			if(respuesta!=null){
 			cabecera_propuesta = new ArrayList<String>();
 			contenido_propuesta = new HashMap<String, List<Propuesta>>();
 			for (int i = 0; i < respuesta.getPrecontrato().size(); i++) {
@@ -216,8 +213,9 @@ public class AceptarPropuestaActivity extends Activity {
 						.isAceptado()));
 				contenido_propuesta.put(cabecera_propuesta.get(i), p1);
 			}
-
 			cargarLista();
+		}
+			
 		}
 	}
 	private class aTaskAceptarSolicitud extends AsyncTask<Void, Void, Void> {
