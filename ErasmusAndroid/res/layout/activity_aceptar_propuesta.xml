@@ -36,4 +36,13 @@
         android:text="ERASMUS"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/expandableListView5"
+        android:layout_below="@+id/expandableListView5"
+        android:onClick="clickAceptar"
+        android:text="Aceptar" />
+
 </RelativeLayout>

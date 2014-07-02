@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -47,7 +49,7 @@ public class AdaptadorPropuesta extends BaseExpandableListAdapter{
 
 		
 		
-		Propuesta p = (Propuesta) getChild(groupPosition, childPosition);
+		final Propuesta p = (Propuesta) getChild(groupPosition, childPosition);
 		
 		if (convertView == null) {
 			LayoutInflater infalInflater = (LayoutInflater) this._context
@@ -59,25 +61,32 @@ public class AdaptadorPropuesta extends BaseExpandableListAdapter{
 		}
 		
 		TextView nombre = (TextView) convertView.findViewById(R.id.cp_nombre);
-		TextView telefono = (TextView) convertView.findViewById(R.id.cp_telefono);
-		TextView titulacion = (TextView) convertView.findViewById(R.id.cp_titulacion);
-		TextView poblacion = (TextView) convertView.findViewById(R.id.cp_poblacion);
-		TextView idioma = (TextView) convertView.findViewById(R.id.cp_idioma);
+		TextView destino = (TextView) convertView.findViewById(R.id.cp_destino);
+		TextView fecha = (TextView) convertView.findViewById(R.id.cp_fecha);
+		CheckBox aceptado = (CheckBox)convertView.findViewById(R.id.cp_check);
 		
 		
-		ListView lstLista=(ListView) convertView.findViewById(R.id.cp_lista_asig);
+		//ListView lstLista=(ListView) convertView.findViewById(R.id.cp_lista_asig);
 				
-		AdaptadorPropuestaAsignaturas adaptador;
+		/*AdaptadorPropuestaAsignaturas adaptador;
 		
-		adaptador = new AdaptadorPropuestaAsignaturas(_context, p.getAsignaturas());
+		adaptador = new AdaptadorPropuestaAsignaturas(_context, p.getAsignaturas());*/
 		
 		nombre.setText(p.getNombre());
-		telefono.setText(p.getTelefono());
-		titulacion.setText(p.getTitulacion());
-		poblacion.setText(p.getPoblacion());
-		idioma.setText(p.getIdioma());
+		destino.setText(p.getDestino());
+		fecha.setText(p.getFecha());
+		aceptado.setChecked(p.getAceptado());
 		
-		lstLista.setAdapter(adaptador);
+		//lstLista.setAdapter(adaptador);
+		
+		aceptado.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				// TODO Auto-generated method stub
+				p.setAceptado(isChecked);
+			}
+		});
 		
 		return convertView;
 	}

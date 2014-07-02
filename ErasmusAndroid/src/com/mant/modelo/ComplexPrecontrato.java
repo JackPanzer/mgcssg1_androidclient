@@ -15,7 +15,7 @@ public class ComplexPrecontrato {
 	private String destino;
 	private String fecha;
 	private boolean aceptado;
-	private ArrayList<ComplexAsignaturaExt> lAsigEx;
+	//private ArrayList<ComplexAsignaturaExt> lAsigEx;
 
 	
 	
@@ -53,11 +53,7 @@ public class ComplexPrecontrato {
 			
 			fecha = _fecha;
 			
-			if(_aceptado.equals("")){
-				aceptado = false;
-			} else if(_aceptado.equals("0")){
-				aceptado = false;
-			} else aceptado = true;
+			aceptado =false;
 			
 		}
 		
@@ -130,11 +126,11 @@ public class ComplexPrecontrato {
 	public void setDestino(String destino) {
 		this.destino = destino;
 	}
-	public ArrayList<ComplexAsignaturaExt> getlAsigEx() {
+	/*public ArrayList<ComplexAsignaturaExt> getlAsigEx() {
 		return lAsigEx;
 	}
 	public void setlAsigEx(ArrayList<ComplexAsignaturaExt> lAsigEx) {
 		this.lAsigEx = lAsigEx;
-	}
+	}*/
 
 }

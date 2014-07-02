@@ -461,7 +461,7 @@ public class DestinoAsignaturaActivity extends Activity {
 		@Override
 		protected Void doInBackground(Void... params) {
 			
-			int var = ListaAsignaturas.get(NombreDestino.get(0)).size();
+			//int var = ListaAsignaturas.get(NombreDestino.get(0)).size();
 			
 			for(int i=0; i<IdsDestinos.size();i++){
 				for(int j=0; j<ListaAsignaturas.get(NombreDestino.get(i)).size();j++){
