@@ -62,7 +62,6 @@ public class AdaptadorPropuesta extends BaseExpandableListAdapter{
 		
 		TextView nombre = (TextView) convertView.findViewById(R.id.cp_nombre);
 		TextView destino = (TextView) convertView.findViewById(R.id.cp_destino);
-		TextView fecha = (TextView) convertView.findViewById(R.id.cp_fecha);
 		CheckBox aceptado = (CheckBox)convertView.findViewById(R.id.cp_check);
 		
 		
@@ -74,7 +73,6 @@ public class AdaptadorPropuesta extends BaseExpandableListAdapter{
 		
 		nombre.setText(p.getNombre());
 		destino.setText(p.getDestino());
-		fecha.setText(p.getFecha());
 		aceptado.setChecked(p.getAceptado());
 		
 		//lstLista.setAdapter(adaptador);

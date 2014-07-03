@@ -209,7 +209,6 @@ public class AceptarPropuestaActivity extends Activity {
 						.getAlumno(), respuesta.getPrecontrato().get(i)
 						.getIdDest(), respuesta.getPrecontrato().get(i)
 						.getDestino(), respuesta.getPrecontrato().get(i)
-						.getFecha(), respuesta.getPrecontrato().get(i)
 						.isAceptado()));
 				contenido_propuesta.put(cabecera_propuesta.get(i), p1);
 			}

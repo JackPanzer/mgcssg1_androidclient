@@ -476,7 +476,6 @@ public class DestinoAsignaturaActivity extends Activity {
 							e.printStackTrace();
 						} 
 					}
-					
 				}
 				
 			}

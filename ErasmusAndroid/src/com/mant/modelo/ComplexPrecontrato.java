@@ -13,7 +13,6 @@ public class ComplexPrecontrato {
 	private String Alumno;
 	private int idDest;
 	private String destino;
-	private String fecha;
 	private boolean aceptado;
 	//private ArrayList<ComplexAsignaturaExt> lAsigEx;
 
@@ -22,12 +21,10 @@ public class ComplexPrecontrato {
 	public ComplexPrecontrato(SoapObject obj){
 		if(obj != null){
 			String _errno = obj.getPrimitivePropertyAsString("errno");
-			String _idAl = obj.getPrimitivePropertyAsString("idAl");
+			String _idAl = obj.getPrimitivePropertyAsString("idAlumno");
 			String _Alumno = obj.getPrimitivePropertyAsString("nomAlumno");
-			String _idDest = obj.getPrimitivePropertyAsString("idDest");
+			String _idDest = obj.getPrimitivePropertyAsString("idDestino");
 			String _destino = obj.getPrimitivePropertyAsString("nomDestino");
-			String _fecha = obj.getPrimitivePropertyAsString("fecha");
-			String _aceptado = obj.getPrimitivePropertyAsString("aceptado");
 
 			
 			if(_errno.equals("")){
@@ -50,8 +47,6 @@ public class ComplexPrecontrato {
 				idDest = Integer.parseInt(_idDest);
 			}
 			destino = _destino;
-			
-			fecha = _fecha;
 			
 			aceptado =false;
 			
@@ -100,16 +95,6 @@ public class ComplexPrecontrato {
 	}
 
 
-	public String getFecha() {
-		return fecha;
-	}
-
-
-	public void setFecha(String fecha) {
-		this.fecha = fecha;
-	}
-
-
 	public boolean isAceptado() {
 		return aceptado;
 	}
@@ -119,18 +104,11 @@ public class ComplexPrecontrato {
 		this.aceptado = aceptado;
 	}
 
-
 	public String getDestino() {
 		return destino;
 	}
 	public void setDestino(String destino) {
 		this.destino = destino;
 	}
-	/*public ArrayList<ComplexAsignaturaExt> getlAsigEx() {
-		return lAsigEx;
-	}
-	public void setlAsigEx(ArrayList<ComplexAsignaturaExt> lAsigEx) {
-		this.lAsigEx = lAsigEx;
-	}*/
 
 }

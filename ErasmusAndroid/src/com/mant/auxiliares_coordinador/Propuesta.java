@@ -7,24 +7,18 @@ import java.util.ArrayList;
 public class Propuesta {
 	private int idAl;
 	private String nombre;
-	//private String telefono;
-	//private String titulacion;
-	//private String poblacion;
-	//private String idioma;
 	private int IdDestino;
 	private String Destino;
 	private String fecha;
 	private boolean aceptado;
 	//private ArrayList<String> asignaturas;
 	
-	public Propuesta(int idAl, String nombre, int idDestino, String destino,
-			String fecha, boolean aceptado) {
+	public Propuesta(int idAl, String nombre, int idDestino, String destino,boolean aceptado) {
 		super();
 		this.idAl = idAl;
 		this.nombre = nombre;
 		IdDestino = idDestino;
 		Destino = destino;
-		this.fecha = fecha;
 		this.aceptado = aceptado;
 	}
 
@@ -56,17 +50,6 @@ public class Propuesta {
 	public void setDestino(String destino) {
 		Destino = destino;
 	}
-
-
-	public String getFecha() {
-		return fecha;
-	}
-
-
-	public void setFecha(String fecha) {
-		this.fecha = fecha;
-	}
-
 
 	public boolean getAceptado() {
 		return aceptado;
