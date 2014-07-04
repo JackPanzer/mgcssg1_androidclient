@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="titulaciones">
+        <item>Informática</item>
+        <item>Agrícola</item>
+        <item>Eléctrica</item>
+        <item>Mecánica</item>
+        <item>Eléctrónica</item>
+    </string-array>
+</resources>
