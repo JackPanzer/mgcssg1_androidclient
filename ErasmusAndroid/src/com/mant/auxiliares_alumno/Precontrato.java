@@ -11,23 +11,15 @@ public class Precontrato {
 	private String titulacion;
 	private String poblacion;
 	private String idioma;
-	private ArrayList<Asignatura2> asignaturas;
 	
 	public Precontrato(String nombre, String telefono, String titulacion,
-			String poblacion, String idioma, ArrayList<Asignatura2> asignaturas) {
+			String poblacion, String idioma) {
 		super();
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.titulacion = titulacion;
 		this.poblacion = poblacion;
 		this.idioma = idioma;
-		this.asignaturas = asignaturas;
-	}
-	public ArrayList<Asignatura2> getAsignaturas() {
-		return asignaturas;
-	}
-	public void setAsignaturas(ArrayList<Asignatura2> asignaturas) {
-		this.asignaturas = asignaturas;
 	}
 	public String getNombre() {
 		return nombre;

@@ -18,7 +18,6 @@ import com.mant.TareasAsincronas.SessionManager;
 import com.mant.adaptadores_alumno.AdaptadorPrecontrado;
 import com.mant.adaptadores_coordinador.AdaptadorDestinosCoordinador2;
 import com.mant.adaptadores_coordinador.AdaptadorPropuesta;
-import com.mant.auxiliares_alumno.Asignatura2;
 import com.mant.auxiliares_alumno.Precontrato;
 import com.mant.auxiliares_coordinador.Nombre_Destino2;
 import com.mant.auxiliares_coordinador.Propuesta;

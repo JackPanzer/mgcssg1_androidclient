@@ -231,7 +231,7 @@ public class DestinoAlumnoActivity extends Activity {
 
 		/**
 		 *En el onPostExecute la respuesta la cargamos en una clase auxiliar
-		 *que luego usaremos para mostrarlo en nuestro .layout
+		 *que luego usaremos para mostrarlo en nuestro layout.
 		 */
 		
 		@Override

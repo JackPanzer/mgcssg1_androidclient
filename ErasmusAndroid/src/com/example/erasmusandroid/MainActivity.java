@@ -2,7 +2,6 @@ package com.example.erasmusandroid;
 
 import com.mant.TareasAsincronas.SessionManager;
 import com.mant.TareasAsincronas.aTaskLogin;
-import com.mant.administrador.BaseDeDatosActivity;
 import com.mant.alumno.Principal_Alumno;
 import com.mant.coordinador.CrearAlumnoActivity;
 import com.mant.coordinador.PricipalCoordinadorActivity;

@@ -15,7 +15,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.erasmusandroid.R;
-import com.mant.adaptadores_alumno.AdaptadorAsignatura;
 import com.mant.auxiliares_alumno.Precontrato;
 import com.mant.auxiliares_coordinador.Propuesta;
 

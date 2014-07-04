@@ -9,7 +9,6 @@ import com.example.erasmusandroid.R.id;
 import com.example.erasmusandroid.R.layout;
 import com.example.erasmusandroid.R.menu;
 import com.mant.adaptadores_alumno.AdaptadorPrecontrado;
-import com.mant.auxiliares_alumno.Asignatura2;
 import com.mant.auxiliares_alumno.Precontrato;
 
 import android.os.Bundle;
@@ -53,16 +52,9 @@ public class AceptarPrecontratoActivity extends Activity {
 		lista_Destinos.add("Destino 2");
 		lista_Destinos.add("Destino 3");
 		lista_Destinos.add("Destino 4");
- 
-        
-        ArrayList<Asignatura2> d1 = new ArrayList<Asignatura2>();
-        d1.add(new Asignatura2("Asignatura 1"));
-        d1.add(new Asignatura2("Asignatura 2"));
-        d1.add(new Asignatura2("Asignatura 3"));
-        d1.add(new Asignatura2("Asignatura 4"));
         
         List<Precontrato> p1 = new ArrayList<Precontrato>();
-        p1.add(new Precontrato("Jacinto Mata", "677234568", "Aeronautica", "Huelva", "B1", d1));
+        p1.add(new Precontrato("Jacinto Mata", "677234568", "Aeronautica", "Huelva", "B1"));
         
  
         contenido_destino.put(lista_Destinos.get(0), p1); 

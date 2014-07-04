@@ -66,20 +66,12 @@ public class AdaptadorPrecontrado extends BaseExpandableListAdapter{
 		TextView poblacion = (TextView) convertView.findViewById(R.id.poblacion);
 		TextView idioma = (TextView) convertView.findViewById(R.id.idioma);
 		
-		
-		ListView lstLista=(ListView) convertView.findViewById(R.id.listViewAsignatura);
-				
-		AdaptadorAsignatura adaptador;
-		
-		adaptador = new AdaptadorAsignatura(_context, p.getAsignaturas());
-		
 		nombre.setText(p.getNombre());
 		telefono.setText(p.getTelefono());
 		titulacion.setText(p.getTitulacion());
 		poblacion.setText(p.getPoblacion());
 		idioma.setText(p.getIdioma());
 		
-		lstLista.setAdapter(adaptador);
 		
 		return convertView;
 	}
