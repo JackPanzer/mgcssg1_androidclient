@@ -24,5 +24,6 @@
     <string name="title_activity_destinos3">MainActivity</string>
     <string name="title_activity_precontrato">MainActivity</string>
     <string name="title_activity_asignaturas2">MainActivity</string>
+    <string name="title_activity_crear_alumno">CrearAlumnoActivity</string>
 
 </resources>

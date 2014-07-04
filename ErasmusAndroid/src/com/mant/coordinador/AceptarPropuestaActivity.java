@@ -143,9 +143,9 @@ public class AceptarPropuestaActivity extends Activity {
 				// SoapPrimitive response =
 				// (SoapPrimitive)envelope.getResponse();
 				if (envelope.getResponse() != null) {
-
-					respuesta = new ArrayPrecontrato(
-							(SoapObject) envelope.getResponse());
+					SoapObject aux = (SoapObject) envelope.getResponse();
+					
+					respuesta = new ArrayPrecontrato(aux);
 
 					// Si hasta aquí todo ha ido bien, lo siguiente será abrir
 					// la

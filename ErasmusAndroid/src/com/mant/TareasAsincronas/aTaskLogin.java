@@ -15,6 +15,11 @@ import com.mant.alumno.Principal_Alumno;
 import com.mant.coordinador.PricipalCoordinadorActivity;
 import com.mant.modelo.ComplexUsuario;
 
+/**
+ * Tarea Asincrona que se encarga de loguear a los usuarios.
+ * @author Betanzos
+ *
+ */
 public class aTaskLogin extends AsyncTask <Void, Void, Void>{
 
 	private String nick;
@@ -37,6 +42,12 @@ public class aTaskLogin extends AsyncTask <Void, Void, Void>{
 		session = _session;
 	}
 	
+	/**
+	 * Llamada a la función remota que se encargará de devolver
+	 * nuestro rol. Dependiendo el rol que devuelva se lanzará una
+	 * actividad u otra, o en caso de corresponder a ningún rol y no
+	 * lanzará nada.
+	 */
 	@Override
 	protected Void doInBackground(Void... arg0) {
 		try{

@@ -21,20 +21,30 @@ import android.widget.TextView;
 public class AdaptadorDestinosAsignaturas extends BaseExpandableListAdapter {
 
 	private Context _context;
-	private List<String> _listDataHeader; // header titles
-	// child data in format of header title, child title
-	private HashMap<String, List<Asignatura>> _listDataChild;
+	private List<String> Destinos; // Cabecera
+	// Tabla hash que asocia cada nombre del destino con las asignaturas
+	// que contiene
+	private HashMap<String, List<Asignatura>> Contenido_Asignaturas;
 
-	public AdaptadorDestinosAsignaturas(Context context, List<String> listDataHeader,
-			HashMap<String, List<Asignatura>> listDataChild) {
+	/**
+	 * Esta clase extiende de AdaptadorDestinosAsignaturas la usaremos para
+	 * añadir los elementos necesarios para que nos aparezaca en nuestro layout
+	 * la cabecera de nuestro despegable y el contenido de los mismos.
+	 * 
+	 * @author Betanzos
+	 * 
+	 */
+
+	public AdaptadorDestinosAsignaturas(Context context, List<String> Destinos,
+			HashMap<String, List<Asignatura>> Contenido_Asignaturas) {
 		this._context = context;
-		this._listDataHeader = listDataHeader;
-		this._listDataChild = listDataChild;
+		this.Destinos = Destinos;
+		this.Contenido_Asignaturas = Contenido_Asignaturas;
 	}
 
 	@Override
 	public Object getChild(int groupPosition, int childPosititon) {
-		return this._listDataChild.get(this._listDataHeader.get(groupPosition))
+		return this.Contenido_Asignaturas.get(this.Destinos.get(groupPosition))
 				.get(childPosititon);
 	}
 
@@ -48,51 +58,52 @@ public class AdaptadorDestinosAsignaturas extends BaseExpandableListAdapter {
 			boolean isLastChild, View convertView, ViewGroup parent) {
 
 		final Asignatura a = (Asignatura) getChild(groupPosition, childPosition);
-		
+
 		if (convertView == null) {
 			LayoutInflater infalInflater = (LayoutInflater) this._context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = infalInflater.inflate(R.layout.asignaturas, null);
 		}
-		
+
 		TextView nombre = (TextView) convertView.findViewById(R.id.asig_nombre);
-		
+
 		nombre.setText(a.getasignatura());
-		
+
 		CheckBox cb = (CheckBox) convertView.findViewById(R.id.asig_check);
-		
+
 		cb.setChecked(a.isChekeado());
-		
-		TextView creditos = (TextView) convertView.findViewById(R.id.asig_creditos);
+
+		TextView creditos = (TextView) convertView
+				.findViewById(R.id.asig_creditos);
 		String valor = String.valueOf(a.getCreditos());
 		creditos.setText(valor);
-		
+
 		cb.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
-			
+
 			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				// TODO Auto-generated method stub
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
 				a.setChekeado(isChecked);
 			}
 		});
-		
+
 		return convertView;
 	}
 
 	@Override
 	public int getChildrenCount(int groupPosition) {
-		return this._listDataChild.get(this._listDataHeader.get(groupPosition))
+		return this.Contenido_Asignaturas.get(this.Destinos.get(groupPosition))
 				.size();
 	}
 
 	@Override
 	public Object getGroup(int groupPosition) {
-		return this._listDataHeader.get(groupPosition);
+		return this.Destinos.get(groupPosition);
 	}
 
 	@Override
 	public int getGroupCount() {
-		return this._listDataHeader.size();
+		return this.Destinos.size();
 	}
 
 	@Override
@@ -100,6 +111,10 @@ public class AdaptadorDestinosAsignaturas extends BaseExpandableListAdapter {
 		return groupPosition;
 	}
 
+	/**
+	 * Esta función añade un nombre a la cabecera la cual tomará del ArrayList
+	 * 
+	 */
 	@Override
 	public View getGroupView(int groupPosition, boolean isExpanded,
 			View convertView, ViewGroup parent) {

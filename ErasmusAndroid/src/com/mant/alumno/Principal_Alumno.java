@@ -14,10 +14,17 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 
+/**
+ * Actividad principal del Alumno solo contiene el botón de volver
+ * y el de acceder a sus destinos disponibles de la beca Erasmus.
+ * @author Betanzos
+ *
+ */
+
 public class Principal_Alumno extends Activity {
 	
-	// Session Manager Class
-    public SessionManager session;
+	
+    public SessionManager session; // Session Manager Class
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +41,25 @@ public class Principal_Alumno extends Activity {
 		return true;
 	}
 	
+	/**
+	 * Una vez que se pulsa el botón volver se vuelve a la actividad
+	 * principal
+	 * @param v
+	 */
+	
 	public void clickVolver(View v){
 		finish();
 	}
-
+	
+	/**
+	 * Se accede a la actividad DestinoAlumnoActivity en la cual
+	 * se listan los destinos disponibles para un alumno.
+	 * @param v
+	 */
 	
 	public void clickDestinos (View v){
 		/**
-		 * Comprueba que el usuario este logeado
+		 * Comprueba que el usuario este logueado
 		 * Redirecciona a la pantalla de Login si no es así
 		 * */
 		
