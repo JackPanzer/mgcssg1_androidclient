@@ -13,7 +13,7 @@ import com.example.erasmusandroid.R;
 import com.mant.TareasAsincronas.SessionManager;
 import com.mant.TareasAsincronas.aTaskCrearDestinos;
 import com.mant.adaptadores_alumno.AdaptadorDestinosAsignaturas;
-import com.mant.adaptadores_coordinador.AdaptadorDestinosCoordinador;
+import com.mant.adaptadores_coordinador.AdaptadorModificarDestinosCoordinador;
 import com.mant.auxiliares_coordinador.Nombre_Destino;
 import com.mant.modelo.ArrayDestinos;
 
@@ -28,7 +28,7 @@ import android.widget.Toast;
 //Se debe añadir una función que almacene los cambios 
 public class ModificarDestinosActivity extends Activity {
 
-	AdaptadorDestinosCoordinador adaptador_destinos;
+	AdaptadorModificarDestinosCoordinador adaptador_destinos;
 	ExpandableListView lista_expandible;
 	protected List<String> cabecera_lista;
 	protected HashMap<String, List<Nombre_Destino>> contenido_lista;
@@ -69,7 +69,7 @@ public class ModificarDestinosActivity extends Activity {
 	public void cargarLista() {
 		lista_expandible = (ExpandableListView) findViewById(R.id.expandableListView3);
 
-		adaptador_destinos = new AdaptadorDestinosCoordinador(this,
+		adaptador_destinos = new AdaptadorModificarDestinosCoordinador(this,
 				cabecera_lista, contenido_lista);
 
 		lista_expandible.setAdapter(adaptador_destinos);

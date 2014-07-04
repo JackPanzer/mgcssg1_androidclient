@@ -9,7 +9,7 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 import com.mant.TareasAsincronas.SessionManager;
-import com.mant.adaptadores_coordinador.AdaptadorDestinosCoordinador.aTaskModificarTodosDestinos;
+import com.mant.adaptadores_coordinador.AdaptadorModificarDestinosCoordinador.aTaskModificarTodosDestinos;
 import com.mant.auxiliares_coordinador.Nombre_Destino;
 import com.mant.auxiliares_coordinador.Nombre_Destino2;
 import com.mant.modelo.GenericResult;
@@ -31,14 +31,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class AdaptadorDestinosCoordinador2 extends BaseExpandableListAdapter {
+public class AdaptadorEliminaDestinosCoordinador extends BaseExpandableListAdapter {
 
 	private Context _context;
 	private List<String> cabecera_lista;
 	private HashMap<String, List<Nombre_Destino2>> contenido_lista;
 	public SessionManager session;
 
-	public AdaptadorDestinosCoordinador2(Context context, List<String> cabecera_lista,
+	public AdaptadorEliminaDestinosCoordinador(Context context, List<String> cabecera_lista,
 			HashMap<String, List<Nombre_Destino2>> contenido_lista) {
 		this._context = context;
 		this.cabecera_lista = cabecera_lista;

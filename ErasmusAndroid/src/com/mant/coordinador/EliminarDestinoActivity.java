@@ -13,8 +13,8 @@ import com.example.erasmusandroid.R;
 import com.example.erasmusandroid.R.layout;
 import com.example.erasmusandroid.R.menu;
 import com.mant.TareasAsincronas.SessionManager;
-import com.mant.adaptadores_coordinador.AdaptadorDestinosCoordinador;
-import com.mant.adaptadores_coordinador.AdaptadorDestinosCoordinador2;
+import com.mant.adaptadores_coordinador.AdaptadorModificarDestinosCoordinador;
+import com.mant.adaptadores_coordinador.AdaptadorEliminaDestinosCoordinador;
 import com.mant.auxiliares_coordinador.Nombre_Destino;
 import com.mant.auxiliares_coordinador.Nombre_Destino2;
 import com.mant.modelo.ArrayDestinos;
@@ -31,7 +31,7 @@ import android.widget.Toast;
 //los destinos que se hayan elegido tras pulsar el check
 public class EliminarDestinoActivity extends Activity {
 
-	AdaptadorDestinosCoordinador2 adaptador_destinos;
+	AdaptadorEliminaDestinosCoordinador adaptador_destinos;
 	ExpandableListView lista_expandible;
 	List<String> cabecera_lista;// contenido de la cabecera, puede ser una
 								// numeracion
@@ -82,7 +82,7 @@ public class EliminarDestinoActivity extends Activity {
 
 		// carga los datos de la base de datos
 
-		adaptador_destinos = new AdaptadorDestinosCoordinador2(this,cabecera_lista, contenido_lista);
+		adaptador_destinos = new AdaptadorEliminaDestinosCoordinador(this,cabecera_lista, contenido_lista);
 
 		lista_expandible.setAdapter(adaptador_destinos);
 

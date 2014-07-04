@@ -9,7 +9,7 @@
     tools:context=".Destinos2Activity" >
     
     <TextView
-        android:id="@+id/lblListHeader"
+        android:id="@+id/cd_nombre_destino"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"

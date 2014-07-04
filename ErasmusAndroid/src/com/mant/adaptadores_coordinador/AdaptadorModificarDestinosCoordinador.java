@@ -31,14 +31,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class AdaptadorDestinosCoordinador extends BaseExpandableListAdapter {
+public class AdaptadorModificarDestinosCoordinador extends BaseExpandableListAdapter {
 
 	private Context _context;
 	private List<String> cabecera_lista;
 	private HashMap<String, List<Nombre_Destino>> contenido_lista;
 	public SessionManager session;
 
-	public AdaptadorDestinosCoordinador(Context context,
+	public AdaptadorModificarDestinosCoordinador(Context context,
 			List<String> cabecera_lista,
 			HashMap<String, List<Nombre_Destino>> contenido_lista) {
 		this._context = context;

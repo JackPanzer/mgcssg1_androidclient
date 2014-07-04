@@ -29,7 +29,7 @@ public class Adaptadordestinos extends ArrayAdapter<Destinos> {
 	private int check = 0;
 
 	/**
-	 * Constructor del Adaptadordestinos donde se le pasaran por parametro el
+	 * Constructor del Adaptadordestinos donde recibirá por parametro el
 	 * contexto de la aplicacion y el ArrayList de los destinos.
 	 * @param context
 	 * @param mis_destinos

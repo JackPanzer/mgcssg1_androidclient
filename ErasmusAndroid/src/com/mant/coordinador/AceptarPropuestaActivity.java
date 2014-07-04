@@ -16,7 +16,7 @@ import com.example.erasmusandroid.R.layout;
 import com.example.erasmusandroid.R.menu;
 import com.mant.TareasAsincronas.SessionManager;
 import com.mant.adaptadores_alumno.AdaptadorPrecontrado;
-import com.mant.adaptadores_coordinador.AdaptadorDestinosCoordinador2;
+import com.mant.adaptadores_coordinador.AdaptadorEliminaDestinosCoordinador;
 import com.mant.adaptadores_coordinador.AdaptadorPropuesta;
 import com.mant.auxiliares_alumno.Precontrato;
 import com.mant.auxiliares_coordinador.Nombre_Destino2;

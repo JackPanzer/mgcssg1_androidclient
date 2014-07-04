@@ -18,6 +18,14 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+/**
+ * Esta clase extiende de BaseExpandableListAdapter la usaremos para crear 
+ * los distintos expandible que contendrán en su cabecera el nombre del
+ * destino y tras expandirlo las distintas asignaturas para cada destino.
+ * @author Betanzos
+ *
+ */
+
 public class AdaptadorDestinosAsignaturas extends BaseExpandableListAdapter {
 
 	private Context _context;
@@ -27,14 +35,16 @@ public class AdaptadorDestinosAsignaturas extends BaseExpandableListAdapter {
 	private HashMap<String, List<Asignatura>> Contenido_Asignaturas;
 
 	/**
-	 * Esta clase extiende de AdaptadorDestinosAsignaturas la usaremos para
-	 * añadir los elementos necesarios para que nos aparezaca en nuestro layout
-	 * la cabecera de nuestro despegable y el contenido de los mismos.
-	 * 
-	 * @author Betanzos
-	 * 
+	 * Constructor del AdaptadorDestinosAsignaturas donde recibirá por parametro el
+	 * contexto de la aplicacion,un ArrayList con los destinos, una tabla hash donde 
+	 * se relacionan los nombres de los distintos destinos con las asignturas
+	 * que se imparten.
+	 * @param context
+	 * @param Destinos
+	 * @param Contenido_Asignaturas
 	 */
-
+	
+	
 	public AdaptadorDestinosAsignaturas(Context context, List<String> Destinos,
 			HashMap<String, List<Asignatura>> Contenido_Asignaturas) {
 		this._context = context;
@@ -53,20 +63,28 @@ public class AdaptadorDestinosAsignaturas extends BaseExpandableListAdapter {
 		return childPosition;
 	}
 
+	/**
+	 * Esta función añade las asignaturas que tiene cada destino, almacenadas en la
+	 * tabla hash y que listarán según el groupPosition o en este caso destino, y 
+	 * childPosition o en este caso posición de la asigntura dentro la tabla hash
+	 */
+	
 	@Override
 	public View getChildView(int groupPosition, final int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
 
+		//En este caso no hemos usado una vista y lo hemos hecho directamente
 		final Asignatura a = (Asignatura) getChild(groupPosition, childPosition);
 
+		//Inflamos el diseño
 		if (convertView == null) {
 			LayoutInflater infalInflater = (LayoutInflater) this._context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			convertView = infalInflater.inflate(R.layout.asignaturas, null);
+			convertView = infalInflater.inflate(R.layout.contenido_asignaturas, null);
 		}
-
+		
+		//Creamos y cargamos en nuestro layout los datos que hemos recogido
 		TextView nombre = (TextView) convertView.findViewById(R.id.asig_nombre);
-
 		nombre.setText(a.getasignatura());
 
 		CheckBox cb = (CheckBox) convertView.findViewById(R.id.asig_check);
@@ -78,6 +96,9 @@ public class AdaptadorDestinosAsignaturas extends BaseExpandableListAdapter {
 		String valor = String.valueOf(a.getCreditos());
 		creditos.setText(valor);
 
+		
+		//Cada vez que se cambia un check se actualiza también el objeto
+		//que pasa los datos
 		cb.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
 
 			@Override
@@ -87,6 +108,7 @@ public class AdaptadorDestinosAsignaturas extends BaseExpandableListAdapter {
 			}
 		});
 
+		//Devolvemos la vista
 		return convertView;
 	}
 
@@ -113,23 +135,25 @@ public class AdaptadorDestinosAsignaturas extends BaseExpandableListAdapter {
 
 	/**
 	 * Esta función añade un nombre a la cabecera la cual tomará del ArrayList
-	 * 
+	 * Destinos y que se listrán por orden según aparecen en la lista através de
+	 * la variable groupPositon.
 	 */
 	@Override
 	public View getGroupView(int groupPosition, boolean isExpanded,
 			View convertView, ViewGroup parent) {
 		String headerTitle = (String) getGroup(groupPosition);
+		//Inflamos el diseño
 		if (convertView == null) {
 			LayoutInflater infalInflater = (LayoutInflater) this._context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			convertView = infalInflater.inflate(R.layout.destinos2, null);
+			convertView = infalInflater.inflate(R.layout.cabecera_destinos, null);
 		}
-
+		//Creamos y cargamos en nuestro layout los datos que hemos recogido
 		TextView lblListHeader = (TextView) convertView
-				.findViewById(R.id.lblListHeader);
+				.findViewById(R.id.cd_nombre_destino);
 		lblListHeader.setTypeface(null, Typeface.BOLD);
 		lblListHeader.setText(headerTitle);
-
+		//Devolvemos la vista
 		return convertView;
 	}
 
