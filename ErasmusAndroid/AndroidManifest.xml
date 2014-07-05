@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.erasmusandroid.MainActivity"
+            android:name="pract.mant.erasmusandroid.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,43 +25,43 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.mant.alumno.Principal_Alumno"
+            android:name="pract.mant.alumno.Principal_Alumno"
             android:label="@string/title_activity_principal__alumno" >
         </activity>
         <activity
-            android:name="com.mant.alumno.DestinoAlumnoActivity"
+            android:name="pract.mant.alumno.DestinoAlumnoActivity"
             android:label="@string/title_activity_destino_alumno" >
         </activity>
         <activity
-            android:name="com.mant.alumno.DestinoAsignaturaActivity"
+            android:name="pract.mant.alumno.DestinoAsignaturaActivity"
             android:label="@string/title_activity_destino_asignatura" >
         </activity>
         <activity
-            android:name="com.mant.alumno.AceptarPrecontratoActivity"
+            android:name="pract.mant.alumno.AceptarPrecontratoActivity"
             android:label="@string/title_activity_aceptar_precontrato" >
         </activity>
         <activity
-            android:name="com.mant.coordinador.PricipalCoordinadorActivity"
+            android:name="pract.mant.coordinador.PricipalCoordinadorActivity"
             android:label="@string/title_activity_pricipal_coordinador" >
         </activity>
         <activity
-            android:name="com.mant.coordinador.CrearDestinoActivity"
+            android:name="pract.mant.coordinador.CrearDestinoActivity"
             android:label="@string/title_activity_crear_destino" >
         </activity>
         <activity
-            android:name="com.mant.coordinador.ModificarDestinosActivity"
+            android:name="pract.mant.coordinador.ModificarDestinosActivity"
             android:label="@string/title_activity_modificar_destinos" >
         </activity>
         <activity
-            android:name="com.mant.coordinador.EliminarDestinoActivity"
+            android:name="pract.mant.coordinador.EliminarDestinoActivity"
             android:label="@string/title_activity_eliminar_destino" >
         </activity>
         <activity
-            android:name="com.mant.coordinador.GestionarDestinosActivity"
+            android:name="pract.mant.coordinador.GestionarDestinosActivity"
             android:label="@string/title_activity_gestionar_destinos" >
         </activity>
         <activity
-            android:name="com.mant.coordinador.AceptarPropuestaActivity"
+            android:name="pract.mant.coordinador.AceptarPropuestaActivity"
             android:label="@string/title_activity_aceptar_propuesta" >
         </activity>
         <activity
@@ -77,35 +77,35 @@
             android:label="@string/title_activity_sentencia" >
         </activity>
         <activity
-            android:name="com.example.erasmusandroid.AlumnoDestinosActivity"
+            android:name="pract.mant.erasmusandroid.AlumnoDestinosActivity"
             android:label="@string/title_activity_alumno_destinos" >
         </activity>
         <activity
-            android:name="com.example.erasmusandroid.DestinosActivity"
+            android:name="pract.mant.erasmusandroid.DestinosActivity"
             android:label="@string/title_activity_destinos" >
         </activity>
         <activity
-            android:name="com.example.erasmusandroid.Destinos2Activity"
+            android:name="pract.mant.erasmusandroid.Destinos2Activity"
             android:label="@string/title_activity_destinos2" >
         </activity>
         <activity
-            android:name="com.example.erasmusandroid.AsignaturasActivity"
+            android:name="pract.mant.erasmusandroid.AsignaturasActivity"
             android:label="@string/title_activity_asignaturas" >
         </activity>
         <activity
-            android:name="com.example.erasmusandroid.Destinos3Activity"
+            android:name="pract.mant.erasmusandroid.Destinos3Activity"
             android:label="@string/title_activity_destinos3" >
         </activity>
         <activity
-            android:name="com.example.erasmusandroid.PrecontratoActivity"
+            android:name="pract.mant.erasmusandroid.PrecontratoActivity"
             android:label="@string/title_activity_precontrato" >
         </activity>
         <activity
-            android:name="com.example.erasmusandroid.Asignaturas2Activity"
+            android:name="pract.mant.erasmusandroid.Asignaturas2Activity"
             android:label="@string/title_activity_asignaturas2" >
         </activity>
         <activity
-            android:name="com.mant.coordinador.CrearAlumnoActivity"
+            android:name="pract.mant.coordinador.CrearAlumnoActivity"
             android:label="@string/title_activity_crear_alumno" >
         </activity>
     </application>
