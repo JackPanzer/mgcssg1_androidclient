@@ -2,6 +2,13 @@ package pract.mant.modelo;
 
 import org.ksoap2.serialization.SoapObject;
 
+/**
+ * Clase que recibe el resultado de un Objeto soap que contiene
+ * una solicitud.
+ * @author Betanzos
+ *
+ */
+
 public class ComplexSolicitud {
 
 	private int errno;
@@ -14,7 +21,8 @@ public class ComplexSolicitud {
 	
 	public ComplexSolicitud(SoapObject obj) {
 		if(obj != null){
-			//Obteniendo los datos del usuario a través del obj. soap
+			//Obtenemos los datos del objeto soap y lo guardamos en variables
+			//auxialiares
 			
 			String _errno = obj.getPrimitivePropertyAsString("errno");
 			String _nomAlumno = obj.getPrimitivePropertyAsString("nomAlumno");
@@ -24,6 +32,8 @@ public class ComplexSolicitud {
 			String _fecha = obj.getPrimitivePropertyAsString("fecha");
 			String _aceptado = obj.getPrimitivePropertyAsString("aceptado");
 			
+			//Tratamos los datos para convertirlos en el formato
+			//que deseemos
 			if(_errno.equals("")){
 				setErrno(0);
 			} else {

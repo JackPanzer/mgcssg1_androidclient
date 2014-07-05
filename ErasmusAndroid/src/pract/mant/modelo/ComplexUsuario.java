@@ -2,6 +2,13 @@ package pract.mant.modelo;
 
 import org.ksoap2.serialization.SoapObject;
 
+/**
+ * Clase que recibe el resultado de un Objeto soap que contiene
+ * un usuario.
+ * @author Betanzos
+ *
+ */
+
 public class ComplexUsuario {
 
 	private int errno;
@@ -18,7 +25,8 @@ public class ComplexUsuario {
 	
 	public ComplexUsuario(SoapObject obj){
 		if(obj != null){
-			//Obteniendo los datos del usuario a través del obj. soap
+			//Obtenemos los datos del objeto soap y lo guardamos en variables
+			//auxialiares
 			
 			String _errno = obj.getPrimitivePropertyAsString("errno");
 			String _id = obj.getPrimitivePropertyAsString("id");
@@ -32,6 +40,9 @@ public class ComplexUsuario {
 			String _passwd = obj.getPrimitivePropertyAsString("passwd");
 			String _titulacion = obj.getPrimitivePropertyAsString("titulacion");
 			
+			
+			//Tratamos los datos para convertirlos en el formato
+			//que deseemos
 			if(_errno.equals("")){
 				errno = -2;
 			} else {

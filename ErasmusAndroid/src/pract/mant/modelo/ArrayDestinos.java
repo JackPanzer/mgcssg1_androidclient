@@ -4,6 +4,13 @@ import java.util.Vector;
 
 import org.ksoap2.serialization.SoapObject;
 
+/**
+ * Clase que recibe el resultado de un Objeto soap que contiene
+ * un array de destinos
+ * @author Betanzos
+ *
+ */
+
 public class ArrayDestinos {
 	
 	private int errno;
@@ -32,7 +39,7 @@ public class ArrayDestinos {
 				SoapObject f = (SoapObject) obj.getProperty(i);
 							
 				/**
-				 * Creamos un nuevo destino y lo añadimos a la lista
+				 * Guardamos el destino en la lista
 				 * */
 				ComplexDestino auxDestino = new ComplexDestino(f);
 				destinos.add(auxDestino);

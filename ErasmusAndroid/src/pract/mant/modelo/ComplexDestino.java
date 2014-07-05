@@ -1,24 +1,31 @@
 package pract.mant.modelo;
 
 import org.ksoap2.serialization.SoapObject;
-
+/**
+ * Clase que recibe el resultado de un Objeto soap que contiene
+ * un destino.
+ * @author Betanzos
+ *
+ */
 public class ComplexDestino {
 	
 	private int errno;
 	private int id;
 	private String nombre;
 	private String pais;
-	private int idpais;//nuevo
+	private int idpais;
 	private String idioma;
-	private int id_idioma;//nuevo
+	private int id_idioma;
 	private boolean disponible;
 	private int numplazas;
 	private String nvlrequerido;
-	private int idnvlrequerido;//nuevo
+	private int idnvlrequerido;
 	
 	public ComplexDestino(SoapObject obj){
 		if(obj != null){
-			//Obteniendo los datos del usuario a través del obj. soap
+			
+			//Obtenemos los datos del objeto soap y lo guardamos en variables
+			//auxialiares
 			
 			String _errno = obj.getPrimitivePropertyAsString("errno");
 			String _id = obj.getPrimitivePropertyAsString("id");
@@ -32,6 +39,9 @@ public class ComplexDestino {
 			String _nvlrequerido = obj.getPrimitivePropertyAsString("nvlrequerido");
 			String _idnvlrequerido = obj.getPrimitivePropertyAsString("idnvlrequerido");
 			
+			
+			//Tratamos los datos para convertirlos en el formato
+			//que deseemos
 			if(_errno.equals("")){
 				setErrno(0);
 			} else {

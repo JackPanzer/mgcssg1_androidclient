@@ -4,6 +4,13 @@ import java.util.Vector;
 
 import org.ksoap2.serialization.SoapObject;
 
+/**
+ * Clase que recibe el resultado de un Objeto soap que contiene
+ * un array de solicitudes
+ * @author Betanzos
+ *
+ */
+
 public class ArraySolicitudes {
 	private int errno;
 	private Vector<ComplexSolicitud> solicitud;
@@ -31,7 +38,7 @@ public class ArraySolicitudes {
 				SoapObject f = (SoapObject) obj.getProperty(i);
 							
 				/**
-				 * Creamos un nuevo destino y lo añadimos a la lista
+				 * Guardamos las solicitudes en la lista
 				 * */
 				ComplexSolicitud auxDestino = new ComplexSolicitud(f);
 				solicitud.add(auxDestino);

@@ -4,6 +4,13 @@ import java.util.Vector;
 
 import org.ksoap2.serialization.SoapObject;
 
+/**
+ * Clase que recibe el resultado de un Objeto soap que contiene
+ * un array de precontratos
+ * @author Betanzos
+ *
+ */
+
 public class ArrayPrecontrato {
 	private int errno;
 	private Vector<ComplexPrecontrato> precontratos;
@@ -31,7 +38,7 @@ public class ArrayPrecontrato {
 				SoapObject f = (SoapObject) obj.getProperty(i);
 
 				/**
-				 * Creamos un nuevo destino y lo añadimos a la lista
+				 * Guardamos el precontrato en la lista
 				 * */
 				ComplexPrecontrato auxPrecontrato = new ComplexPrecontrato(f);
 				precontratos.add(auxPrecontrato);

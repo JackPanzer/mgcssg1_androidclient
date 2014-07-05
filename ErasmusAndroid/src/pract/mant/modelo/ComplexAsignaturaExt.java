@@ -2,6 +2,13 @@ package pract.mant.modelo;
 
 import org.ksoap2.serialization.SoapObject;
 
+/**
+ * Clase que recibe el resultado de un Objeto soap que contiene
+ * una asignatura extrangera.
+ * @author Betanzos
+ *
+ */
+
 public class ComplexAsignaturaExt {
 	
 	private int errno;
@@ -14,6 +21,9 @@ public class ComplexAsignaturaExt {
 	
 	public ComplexAsignaturaExt(SoapObject obj){
 		if(obj != null){
+			
+			//Obtenemos los datos del objeto soap y lo guardamos en variables
+			//auxialiares
 			String _errno = obj.getPrimitivePropertyAsString("errno");
 			String _id = obj.getPrimitivePropertyAsString("id");
 			String _nombre = obj.getPrimitivePropertyAsString("nombre");
@@ -21,6 +31,9 @@ public class ComplexAsignaturaExt {
 			String _centro = obj.getPrimitivePropertyAsString("centro");
 			String _idcentro = obj.getPrimitivePropertyAsString("idcentro");
 			
+			
+			//Tratamos los datos para convertirlos en el formato
+			//que deseemos
 			if(_errno.equals("")){
 				errno = 0;
 			} else {
@@ -81,6 +94,14 @@ public class ComplexAsignaturaExt {
 	}
 	public void setCentro(String centro) {
 		this.centro = centro;
+	}
+
+	public int getIdcentro() {
+		return idcentro;
+	}
+
+	public void setIdcentro(int idcentro) {
+		this.idcentro = idcentro;
 	}
 
 }

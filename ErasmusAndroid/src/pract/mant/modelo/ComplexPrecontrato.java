@@ -5,7 +5,12 @@ import org.ksoap2.serialization.SoapObject;
 
 import android.R.bool;
 
-
+/**
+ * Clase que recibe el resultado de un Objeto soap que contiene
+ * un precontrato.
+ * @author Betanzos
+ *
+ */
 public class ComplexPrecontrato {
 	
 	private int errno;
@@ -20,13 +25,17 @@ public class ComplexPrecontrato {
 	
 	public ComplexPrecontrato(SoapObject obj){
 		if(obj != null){
+			
+			//Obtenemos los datos del objeto soap y lo guardamos en variables
+			//auxialiares
 			String _errno = obj.getPrimitivePropertyAsString("errno");
 			String _idAl = obj.getPrimitivePropertyAsString("idAlumno");
 			String _Alumno = obj.getPrimitivePropertyAsString("nomAlumno");
 			String _idDest = obj.getPrimitivePropertyAsString("idDestino");
 			String _destino = obj.getPrimitivePropertyAsString("nomDestino");
 
-			
+			//Tratamos los datos para convertirlos en el formato
+			//que deseemos
 			if(_errno.equals("")){
 				errno = 0;
 			} else {

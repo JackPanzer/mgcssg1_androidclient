@@ -4,9 +4,16 @@ import java.util.Vector;
 
 import org.ksoap2.serialization.SoapObject;
 
+
+/**
+ * Clase que recibe el resultado de un Objeto soap que contiene
+ * un array de asignaturas
+ * @author Betanzos
+ *
+ */
 public class ArrayAsignaturasExt {
 	private int errno;
-	private Vector<ComplexAsignaturaExt> asignaturas;
+	private Vector<ComplexAsignaturaExt> asignaturas;// Cada asignatura se guarda en la clase ComplexAsignaturaExt
 	
 	
 	public ArrayAsignaturasExt(SoapObject obj){
@@ -32,7 +39,7 @@ public class ArrayAsignaturasExt {
 				SoapObject f = (SoapObject) obj.getProperty(i);
 							
 				/**
-				 * Creamos un nuevo destino y lo añadimos a la lista
+				 * Guardamos la asignatura añadiendola a la lista
 				 * */
 				ComplexAsignaturaExt auxAsignatura = new ComplexAsignaturaExt(f);
 				asignaturas.add(auxAsignatura);
