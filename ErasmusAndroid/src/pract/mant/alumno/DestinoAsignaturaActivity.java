@@ -32,12 +32,12 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
-import pract.mant.TareasAsincronas.SessionManager;
 import pract.mant.adaptadores_alumno.AdaptadorDestinosAsignaturas;
-import pract.mant.adaptadores_alumno.Adaptadordestinos;
+import pract.mant.adaptadores_alumno.AdaptadorDestinos;
 import pract.mant.auxiliares_alumno.Asignatura;
 import pract.mant.auxiliares_alumno.Destinos;
 import pract.mant.auxiliares_coordinador.Propuesta;
+import pract.mant.erasmusandroid.SessionManager;
 import pract.mant.modelo.ArrayAsignaturasExt;
 import pract.mant.modelo.ArrayDestinos;
 import pract.mant.modelo.ArraySolicitudes;

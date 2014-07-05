@@ -9,11 +9,11 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
-import pract.mant.TareasAsincronas.SessionManager;
 import pract.mant.adaptadores_coordinador.AdaptadorEliminaDestinosCoordinador;
 import pract.mant.adaptadores_coordinador.AdaptadorModificarDestinosCoordinador;
-import pract.mant.auxiliares_coordinador.Nombre_Destino;
-import pract.mant.auxiliares_coordinador.Nombre_Destino2;
+import pract.mant.auxiliares_coordinador.ModificarDestinos;
+import pract.mant.auxiliares_coordinador.EliminarDestino;
+import pract.mant.erasmusandroid.SessionManager;
 import pract.mant.modelo.ArrayDestinos;
 
 import com.example.erasmusandroid.R;
@@ -36,7 +36,7 @@ public class EliminarDestinoActivity extends Activity {
 	ExpandableListView lista_expandible;
 	List<String> cabecera_lista;// contenido de la cabecera, puede ser una
 								// numeracion
-	HashMap<String, List<Nombre_Destino2>> contenido_lista;// contiene los
+	HashMap<String, List<EliminarDestino>> contenido_lista;// contiene los
 															// nombre de los
 															// destinos
 	public SessionManager session;
@@ -158,12 +158,12 @@ public class EliminarDestinoActivity extends Activity {
 			// TODO Auto-generated method stub
 
 			cabecera_lista = new ArrayList<String>();
-			contenido_lista = new HashMap<String, List<Nombre_Destino2>>();
+			contenido_lista = new HashMap<String, List<EliminarDestino>>();
 
 			for (int i = 0; i < respuesta.getDestinos().size(); i++) {
 				cabecera_lista.add("Destino " + (i + 1));
-				List<Nombre_Destino2> d = new ArrayList<Nombre_Destino2>();
-				d.add(new Nombre_Destino2(respuesta.getDestinos().get(i)
+				List<EliminarDestino> d = new ArrayList<EliminarDestino>();
+				d.add(new EliminarDestino(respuesta.getDestinos().get(i)
 						.getNombre(),respuesta.getDestinos().get(i).getId(),false));
 				contenido_lista.put(cabecera_lista.get(i), d);
 			}

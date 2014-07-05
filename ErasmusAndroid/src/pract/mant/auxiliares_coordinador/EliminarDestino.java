@@ -4,12 +4,12 @@ package pract.mant.auxiliares_coordinador;
 //por la clase AdaptadorDestinosCoordinador2 para cargarlo en el layout
 //coorespondiente, además añade un check que estará a false
 
-public class Nombre_Destino2 {
+public class EliminarDestino {
 	String nombre_destino;
 	int id_destino;
 	boolean check;
 
-	public Nombre_Destino2(String nombre_destino, int id_destino, boolean check) {
+	public EliminarDestino(String nombre_destino, int id_destino, boolean check) {
 		super();
 		this.nombre_destino = nombre_destino;
 		this.id_destino = id_destino;

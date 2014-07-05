@@ -22,7 +22,7 @@ import com.example.erasmusandroid.R;
  * @author Betanzos
  *
  */
-public class Adaptadordestinos extends ArrayAdapter<Destinos> {
+public class AdaptadorDestinos extends ArrayAdapter<Destinos> {
 
 	private Activity contexto;
 	private ArrayList<Destinos> mis_destinos;
@@ -36,7 +36,7 @@ public class Adaptadordestinos extends ArrayAdapter<Destinos> {
 	 * @param mis_destinos
 	 */
 	
-	public Adaptadordestinos(Activity context, ArrayList<Destinos> mis_destinos) {
+	public AdaptadorDestinos(Activity context, ArrayList<Destinos> mis_destinos) {
 		// Llamada al constructor de la clase superior donde requiere el
 		// contexto, el layout y el arraylist
 		super(context, R.layout.destinos, mis_destinos);

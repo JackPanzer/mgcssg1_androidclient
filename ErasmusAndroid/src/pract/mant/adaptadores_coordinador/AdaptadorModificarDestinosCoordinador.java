@@ -9,9 +9,8 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
-import pract.mant.TareasAsincronas.SessionManager;
-import pract.mant.TareasAsincronas.aTaskCrearDestinos;
-import pract.mant.auxiliares_coordinador.Nombre_Destino;
+import pract.mant.auxiliares_coordinador.ModificarDestinos;
+import pract.mant.erasmusandroid.SessionManager;
 import pract.mant.modelo.ArrayDestinos;
 import pract.mant.modelo.GenericResult;
 
@@ -36,12 +35,12 @@ public class AdaptadorModificarDestinosCoordinador extends BaseExpandableListAda
 
 	private Context _context;
 	private List<String> cabecera_lista;
-	private HashMap<String, List<Nombre_Destino>> contenido_lista;
+	private HashMap<String, List<ModificarDestinos>> contenido_lista;
 	public SessionManager session;
 
 	public AdaptadorModificarDestinosCoordinador(Context context,
 			List<String> cabecera_lista,
-			HashMap<String, List<Nombre_Destino>> contenido_lista) {
+			HashMap<String, List<ModificarDestinos>> contenido_lista) {
 		this._context = context;
 		this.cabecera_lista = cabecera_lista;
 		this.contenido_lista = contenido_lista;
@@ -62,7 +61,7 @@ public class AdaptadorModificarDestinosCoordinador extends BaseExpandableListAda
 	public View getChildView(int groupPosition, final int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
 
-		final Nombre_Destino nombre_destino = (Nombre_Destino) getChild(
+		final ModificarDestinos nombre_destino = (ModificarDestinos) getChild(
 				groupPosition, childPosition);
 
 		if (convertView == null) {

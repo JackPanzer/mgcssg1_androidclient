@@ -9,11 +9,11 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
-import pract.mant.TareasAsincronas.SessionManager;
-import pract.mant.adaptadores_alumno.Adaptadordestinos;
+import pract.mant.adaptadores_alumno.AdaptadorDestinos;
 import pract.mant.adaptadores_coordinador.AdaptadorEliminaDestinosCoordinador;
 import pract.mant.auxiliares_alumno.Destinos;
-import pract.mant.auxiliares_coordinador.Nombre_Destino2;
+import pract.mant.auxiliares_coordinador.EliminarDestino;
+import pract.mant.erasmusandroid.SessionManager;
 import pract.mant.modelo.ArrayDestinos;
 
 import com.example.erasmusandroid.R;
@@ -52,7 +52,7 @@ public class DestinoAlumnoActivity extends Activity {
 
 	private ListView lstLista;
 
-	private Adaptadordestinos adaptador; // Adaptador que extiende de ArrayAdapter y que
+	private AdaptadorDestinos adaptador; // Adaptador que extiende de ArrayAdapter y que
 									// lista los destinos
 	private SessionManager session;
 
@@ -117,7 +117,7 @@ public class DestinoAlumnoActivity extends Activity {
 	// Esta función debe cargar los datos del servidor
 	public void cargarLista() {
 
-		adaptador = new Adaptadordestinos(this, todos_destinos); // Llamada al adaptador que listará
+		adaptador = new AdaptadorDestinos(this, todos_destinos); // Llamada al adaptador que listará
 																	// los destinos dentro del listview
 
 		lstLista.setAdapter(adaptador);

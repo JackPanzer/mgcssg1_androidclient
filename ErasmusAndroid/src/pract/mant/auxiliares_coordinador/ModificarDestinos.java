@@ -4,7 +4,7 @@ package pract.mant.auxiliares_coordinador;
 //por la clase AdaptadorDestinosCoordinador para cargarlo en el layout
 //coorespondiente
 
-public class Nombre_Destino {
+public class ModificarDestinos {
 	private String nombre_destino;
 	private String pais;
 	private String idioma;
@@ -16,8 +16,7 @@ public class Nombre_Destino {
 	private int idIdioma;
 	private int idNivel;
 	
-	
-	public Nombre_Destino(String nombre_destino, String pais, String idioma,
+	public ModificarDestinos(String nombre_destino, String pais, String idioma,
 			boolean disponible, int plazas, String nivel, int idDestino,
 			int idPais, int idIdioma, int idNivel) {
 		super();
@@ -123,6 +122,7 @@ public class Nombre_Destino {
 	public void setNombre_destino(String nombre_destino) {
 		this.nombre_destino = nombre_destino;
 	}
+
 	
 	
 

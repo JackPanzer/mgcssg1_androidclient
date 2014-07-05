@@ -1,8 +1,7 @@
-package pract.mant.TareasAsincronas;
+package pract.mant.erasmusandroid;
 import java.util.HashMap;
 
 import pract.mant.alumno.Principal_Alumno;
-import pract.mant.erasmusandroid.MainActivity;
 import pract.mant.modelo.ComplexUsuario;
 
 

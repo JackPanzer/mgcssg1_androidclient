@@ -2,8 +2,7 @@ package pract.mant.alumno;
 
 import java.util.HashMap;
 
-import pract.mant.TareasAsincronas.SessionManager;
-import pract.mant.TareasAsincronas.aTaskConsultarDestinos;
+import pract.mant.erasmusandroid.SessionManager;
 
 import com.example.erasmusandroid.R;
 import com.example.erasmusandroid.R.layout;

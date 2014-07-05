@@ -9,11 +9,10 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
-import pract.mant.TareasAsincronas.SessionManager;
-import pract.mant.TareasAsincronas.aTaskCrearDestinos;
 import pract.mant.adaptadores_alumno.AdaptadorDestinosAsignaturas;
 import pract.mant.adaptadores_coordinador.AdaptadorModificarDestinosCoordinador;
-import pract.mant.auxiliares_coordinador.Nombre_Destino;
+import pract.mant.auxiliares_coordinador.ModificarDestinos;
+import pract.mant.erasmusandroid.SessionManager;
 import pract.mant.modelo.ArrayDestinos;
 
 import com.example.erasmusandroid.R;
@@ -32,7 +31,7 @@ public class ModificarDestinosActivity extends Activity {
 	AdaptadorModificarDestinosCoordinador adaptador_destinos;
 	ExpandableListView lista_expandible;
 	protected List<String> cabecera_lista;
-	protected HashMap<String, List<Nombre_Destino>> contenido_lista;
+	protected HashMap<String, List<ModificarDestinos>> contenido_lista;
 	public SessionManager session;
 
 	@Override
@@ -150,12 +149,12 @@ public class ModificarDestinosActivity extends Activity {
 			// TODO Auto-generated method stub
 
 			cabecera_lista = new ArrayList<String>();
-			contenido_lista = new HashMap<String, List<Nombre_Destino>>();
+			contenido_lista = new HashMap<String, List<ModificarDestinos>>();
 
 			for (int i = 0; i < respuesta.getDestinos().size(); i++) {
 				cabecera_lista.add("Destino " + (i + 1));
-				List<Nombre_Destino> d = new ArrayList<Nombre_Destino>();
-				d.add(new Nombre_Destino(respuesta.getDestinos().get(i)
+				List<ModificarDestinos> d = new ArrayList<ModificarDestinos>();
+				d.add(new ModificarDestinos(respuesta.getDestinos().get(i)
 						.getNombre(), respuesta.getDestinos().get(i).getPais(),
 						respuesta.getDestinos().get(i).getIdioma(), respuesta
 								.getDestinos().get(i).isDisponible(), respuesta

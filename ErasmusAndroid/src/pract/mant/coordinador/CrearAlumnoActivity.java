@@ -5,7 +5,7 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
-import pract.mant.TareasAsincronas.SessionManager;
+import pract.mant.erasmusandroid.SessionManager;
 import pract.mant.modelo.GenericResult;
 
 import com.example.erasmusandroid.R;

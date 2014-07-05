@@ -1,7 +1,5 @@
 package pract.mant.erasmusandroid;
 
-import pract.mant.TareasAsincronas.SessionManager;
-import pract.mant.TareasAsincronas.aTaskLogin;
 import pract.mant.alumno.Principal_Alumno;
 import pract.mant.coordinador.CrearAlumnoActivity;
 import pract.mant.coordinador.PricipalCoordinadorActivity;
