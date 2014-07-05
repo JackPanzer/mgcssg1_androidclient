@@ -44,7 +44,7 @@ public class Principal_Alumno extends Activity {
 	/**
 	 * Una vez que se pulsa el botón volver se vuelve a la actividad
 	 * principal
-	 * @param v
+	 * @param v Botón que lanza el evento
 	 */
 	
 	public void clickVolver(View v){
@@ -54,7 +54,7 @@ public class Principal_Alumno extends Activity {
 	/**
 	 * Se accede a la actividad DestinoAlumnoActivity en la cual
 	 * se listan los destinos disponibles para un alumno.
-	 * @param v
+	 * @param v Botón que lanza el evento
 	 */
 	
 	public void clickDestinos (View v){
@@ -67,8 +67,22 @@ public class Principal_Alumno extends Activity {
 		Intent act = new Intent(this, DestinoAlumnoActivity.class);
 		startActivity(act);
 		
+	}
+	
+	/**
+	 * Envía al usuario a la pantalla para elegir las asignaturas
+	 * de las que está matriculado
+	 * 
+	 * @param v Botón que lanza el evento
+	 */
+	public void clickAsignaturas (View v){
+		/**
+		 * Comprueba que el usuario este logueado
+		 * Redirecciona a la pantalla de Login si no es así
+		 * */
 		
-		
-		
+		session.checkLogin(); 
+		Intent act = new Intent(this, OrigenAsignaturaAlumno.class);
+		startActivity(act);
 	}
 }
