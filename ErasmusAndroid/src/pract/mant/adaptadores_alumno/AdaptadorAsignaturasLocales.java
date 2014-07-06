@@ -93,51 +93,56 @@ public class AdaptadorAsignaturasLocales extends ArrayAdapter<AsignaturaLocal> {
 			// tambien almacenamos en el objeto la referencia del CheckBox
 			// buscandolo por ID
 			vistaitem.chkEstado = (CheckBox) item.findViewById(R.id.asiglocal_check);
+			vistaitem.chkEstado
+			.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView,
+						boolean isChecked) {
+					AsignaturaLocal modelo = (AsignaturaLocal) vistaitem.chkEstado.getTag();
+					
+					modelo.setChekeado(isChecked);
+				}
+
+			});
 			
 			vistaitem.convalidar = (CheckBox) item.findViewById(R.id.asiglocal_convalidar);
+			vistaitem.convalidar
+			.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView,
+						boolean isChecked) {
+					AsignaturaLocal modelo = (AsignaturaLocal) vistaitem.convalidar.getTag();
+					
+					modelo.setConvalidar(isChecked);
+				}
+
+			});
 
 			//Guardamos en el tag de la vista el objeto vistaitem
 			item.setTag(vistaitem);
-
+			vistaitem.chkEstado.setTag(mis_asignaturas.get(position));
+			vistaitem.convalidar.setTag(mis_asignaturas.get(position));
+			
+			
 		} else {
 			// En caso de que la vista sea ya reutilizable se recupera el objeto
 			// VistaItem almacenada en su tag
-			vistaitem = (VistaItem) item.getTag();
+			item = convertView;
+		      ((VistaItem) item.getTag()).chkEstado.setTag(mis_asignaturas.get(position));
+		      ((VistaItem) item.getTag()).convalidar.setTag(mis_asignaturas.get(position));
 		}
 
-		// Se cargan los datos desde el ArrayList
-		vistaitem.nombre.setText(mis_asignaturas.get(position).getasignatura());
-		vistaitem.coordinador.setText(mis_asignaturas.get(position).getCoordinador());
-		vistaitem.creditos.setText(String.valueOf( mis_asignaturas.get(position).getCreditos() + " créditos" ));
-		vistaitem.chkEstado.setChecked(mis_asignaturas.get(position).isChekeado());
-		vistaitem.convalidar.setChecked(false);
-
-		//Comprobamos si se hacen mas de 3 check
-		//Si se hacen mas de 3 se intenta impedir
-		
-		vistaitem.chkEstado
-				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-					@Override
-					public void onCheckedChanged(CompoundButton buttonView,
-							boolean isChecked) {
-						mis_asignaturas.get(position).setChekeado(
-								vistaitem.chkEstado.isChecked());
-					}
-
-				});
-		
-		vistaitem.convalidar
-		.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView,
-					boolean isChecked) {
-				mis_asignaturas.get(position).setConvalidar(
-						vistaitem.convalidar.isChecked());
-			}
-
-		});
-		
-
+		VistaItem holder = (VistaItem) item.getTag();
+	    //holder.text.setText(list.get(position).getName());
+	    //holder.checkbox.setChecked(list.get(position).isSelected());
+	    
+	    // Se cargan los datos desde el ArrayList
+	 	holder.nombre.setText(mis_asignaturas.get(position).getasignatura());
+	 	holder.coordinador.setText(mis_asignaturas.get(position).getCoordinador());
+	 	holder.creditos.setText(String.valueOf( mis_asignaturas.get(position).getCreditos() + " créditos" ));
+	 	holder.chkEstado.setChecked(mis_asignaturas.get(position).isChekeado());
+	 	holder.convalidar.setChecked(false);
+	    
 		// Se devuelve ya la vista nueva o reutilizada que ha sido dibujada
 		return (item);
 	}
