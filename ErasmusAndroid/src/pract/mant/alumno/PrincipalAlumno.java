@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.TextView;
 
 /**
  * Actividad principal del Alumno solo contiene el botón de volver y el de
@@ -30,8 +31,13 @@ public class PrincipalAlumno extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_principal__alumno);
-
+		
 		session = new SessionManager(getApplicationContext());
+
+		TextView t = (TextView) findViewById(R.id.id_logueado);
+        t.setText(session.getUserDetails().get(SessionManager.KEY_NAME));
+		
+		
 
 	}
 

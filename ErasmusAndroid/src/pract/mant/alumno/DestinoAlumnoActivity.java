@@ -71,6 +71,9 @@ public class DestinoAlumnoActivity extends Activity {
 		 * */
 
 		session.checkLogin();
+		
+		TextView t = (TextView) findViewById(R.id.id_logueado);
+        t.setText(session.getUserDetails().get(SessionManager.KEY_NAME));
 
 		// Llamada a Asintask
 		aTaskVerDestinos atl = new aTaskVerDestinos(this, session);

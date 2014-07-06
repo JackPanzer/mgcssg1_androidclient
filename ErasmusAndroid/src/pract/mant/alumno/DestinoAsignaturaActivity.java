@@ -75,6 +75,9 @@ public class DestinoAsignaturaActivity extends Activity {
 		session = new SessionManager(getApplicationContext());
 		session.checkLogin();
 
+		TextView t = (TextView) findViewById(R.id.id_logueado);
+        t.setText(session.getUserDetails().get(SessionManager.KEY_NAME));
+		
 		aTaskConsultarSolicitudes atl = new aTaskConsultarSolicitudes(this,
 				session);
 		atl.execute();

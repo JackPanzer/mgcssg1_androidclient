@@ -26,6 +26,7 @@ import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 //Hay que crear una funcion que despues de pulsar el boton elimine
@@ -49,6 +50,9 @@ public class EliminarDestinoActivity extends Activity {
 		session = new SessionManager(getApplicationContext());
 
 		session.checkLogin();
+		
+		TextView t = (TextView) findViewById(R.id.id_logueado);
+        t.setText(session.getUserDetails().get(SessionManager.KEY_NAME));
 
 		// Llamada a Asintask
 		aTaskEliminarDestinos atl = new aTaskEliminarDestinos(this,

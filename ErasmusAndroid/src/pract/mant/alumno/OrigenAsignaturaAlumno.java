@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.erasmusandroid.R;
 
@@ -44,6 +45,10 @@ public class OrigenAsignaturaAlumno extends Activity {
 		setContentView(R.layout.activity_origen_asignatura_alumno);
 
 		session = new SessionManager(getApplicationContext());
+		
+		TextView t = (TextView) findViewById(R.id.id_logueado);
+        t.setText(session.getUserDetails().get(SessionManager.KEY_NAME));
+		
 		aTaskObtenerAsignaturas hilo = new aTaskObtenerAsignaturas(session);
 
 		hilo.execute();

@@ -28,6 +28,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 //Esta activity previsualiza los precontratos
@@ -48,6 +49,9 @@ public class AceptarPrecontratoActivity extends Activity {
 		session = new SessionManager(getApplicationContext());
 
 		session.checkLogin();
+		
+		TextView t = (TextView) findViewById(R.id.id_logueado);
+        t.setText(session.getUserDetails().get(SessionManager.KEY_NAME));
 
 		// Creo el objeto que maneja el expandible
 		aTaskObtenerPrecontratos atl = new aTaskObtenerPrecontratos(this,

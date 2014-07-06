@@ -24,28 +24,29 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import android.view.View;
 
-
 public class CrearAlumnoActivity extends Activity {
 
 	// Session Manager Class
-    public SessionManager session;
-    private int titulacion = 0;
-    
+	public SessionManager session;
+	private int titulacion = 0;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_crear_alumno);
 		Spinner sp = (Spinner) findViewById(R.id.spinner_titulacion);
-		ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.titulaciones, android.R.layout.simple_spinner_item);
+		ArrayAdapter adapter = ArrayAdapter.createFromResource(this,
+				R.array.titulaciones, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		sp.setAdapter(adapter);
 		sp.setOnItemSelectedListener(new OnItemSelectedListener() {
-			public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id){
+			public void onItemSelected(AdapterView<?> parentView,
+					View selectedItemView, int position, long id) {
 				titulacion = position + 1;
 			}
-			
-			public void onNothingSelected(AdapterView<?> parentView){
-				
+
+			public void onNothingSelected(AdapterView<?> parentView) {
+
 			}
 		});
 		session = new SessionManager(getApplicationContext());
@@ -57,31 +58,38 @@ public class CrearAlumnoActivity extends Activity {
 		return true;
 	}
 
-	public void clickVolver(View v){
+	public void clickVolver(View v) {
 		finish();
-		
+
 	}
-	
-	public void clickFinalizar(View v){
-		String nombre = ((EditText) findViewById(R.id.alumno_nombre)).getText().toString();
-		String apellidos = ((EditText) findViewById(R.id.alumno_apellidos)).getText().toString();
-		String nif = ((EditText) findViewById(R.id.alumno_nif)).getText().toString();
-		String direccion = ((EditText) findViewById(R.id.alumno_direccion)).getText().toString();
-		String poblacion = ((EditText) findViewById(R.id.alumno_poblacion)).getText().toString();
-		String nick = ((EditText) findViewById(R.id.alumno_nick)).getText().toString();
-		String password = ((EditText) findViewById(R.id.alumno_password)).getText().toString();
-		
+
+	public void clickFinalizar(View v) {
+		String nombre = ((EditText) findViewById(R.id.alumno_nombre)).getText()
+				.toString();
+		String apellidos = ((EditText) findViewById(R.id.alumno_apellidos))
+				.getText().toString();
+		String nif = ((EditText) findViewById(R.id.alumno_nif)).getText()
+				.toString();
+		String direccion = ((EditText) findViewById(R.id.alumno_direccion))
+				.getText().toString();
+		String poblacion = ((EditText) findViewById(R.id.alumno_poblacion))
+				.getText().toString();
+		String nick = ((EditText) findViewById(R.id.alumno_nick)).getText()
+				.toString();
+		String password = ((EditText) findViewById(R.id.alumno_password))
+				.getText().toString();
+
 		session.checkLogin();
-		if (!nombre.equals("") && !apellidos.equals("") && !nif.equals("") && !nick.equals("") && !password.equals("")){
-			aTaskCrearAlumno atl = new aTaskCrearAlumno(this, session, nombre, apellidos, nif, direccion, poblacion, nick, password, titulacion);
+		if (!nombre.equals("") && !apellidos.equals("") && !nif.equals("")
+				&& !nick.equals("") && !password.equals("")) {
+			aTaskCrearAlumno atl = new aTaskCrearAlumno(this, session, nombre,
+					apellidos, nif, direccion, poblacion, nick, password,
+					titulacion);
 			atl.execute();
 			finish();
 		}
 	}
 
-	
-	
-	
 	private class aTaskCrearAlumno extends AsyncTask<Void, Void, Void> {
 		private GenericResult respuesta;
 		private SessionManager session;
@@ -101,8 +109,8 @@ public class CrearAlumnoActivity extends Activity {
 		final String SOAP_ACTION = "urn:Erasmus";
 
 		public aTaskCrearAlumno(Activity _ctxt, SessionManager _session,
-				String nombre, String apellidos, String nif, String direccion, String poblacion,
-				String nick, String password, int titulacion) {
+				String nombre, String apellidos, String nif, String direccion,
+				String poblacion, String nick, String password, int titulacion) {
 
 			this.context = _ctxt;
 			this.session = _session;
@@ -135,50 +143,57 @@ public class CrearAlumnoActivity extends Activity {
 				request.addProperty("titulacion", titulacion);
 
 				/* Creamos un envelop <Sobre> */
-				SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+				SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+						SoapEnvelope.VER11);
 				envelope.dotNet = true;
-				envelope.setOutputSoapObject(request); // Aquí metemos la peticion en el "Sobre"
+				envelope.setOutputSoapObject(request); // Aquí metemos la
+														// peticion en el
+														// "Sobre"
 
 				/* Definimos un objeto transporte para dirigir el Sobre */
 				HttpTransportSE transporte = new HttpTransportSE(URL);
 				transporte.debug = true;
 				transporte.call(SOAP_ACTION, envelope); // Lanzamos la llamada
 
-				// Con call se produce la llamada, y se espera (bloquea) hasta que
+				// Con call se produce la llamada, y se espera (bloquea) hasta
+				// que
 				// se obtiene la respuesta
-				// SoapPrimitive response = (SoapPrimitive)envelope.getResponse();
+				// SoapPrimitive response =
+				// (SoapPrimitive)envelope.getResponse();
 				if (envelope.getResponse() != null) {
-					respuesta = new GenericResult((SoapObject) envelope.getResponse());
+					respuesta = new GenericResult(
+							(SoapObject) envelope.getResponse());
 
-					// Si hasta aquí todo ha ido bien, lo siguiente será abrir la
+					// Si hasta aquí todo ha ido bien, lo siguiente será abrir
+					// la
 					// nueva interfaz
 					if (respuesta.getErrno() == 0) {
 						// Todo ha ido bien, mostramos un Toast
 
-						//Toast t = Toast.makeText(context, "Destino Creado", Toast.LENGTH_SHORT);
-						//t.show();
+						// Toast t = Toast.makeText(context, "Destino Creado",
+						// Toast.LENGTH_SHORT);
+						// t.show();
 
 						// en base al rol
-						
-					}
-					else if (respuesta.getErrno() == -2) {
+
+					} else if (respuesta.getErrno() == -2) {
 						// Todo ha ido bien, mostramos un Toast
 
-						//Toast t = Toast.makeText(context, "Sentencia Incorrecta", Toast.LENGTH_SHORT);
-						//t.show();
+						// Toast t = Toast.makeText(context,
+						// "Sentencia Incorrecta", Toast.LENGTH_SHORT);
+						// t.show();
 
 						// en base al rol
-						
-					}
-					else{
+
+					} else {
 						// Todo ha ido bien, mostramos un Toast
 
-						//Toast t = Toast.makeText(context, "Fallo en Conexion", Toast.LENGTH_SHORT);
-						//t.show();
-						
+						// Toast t = Toast.makeText(context,
+						// "Fallo en Conexion", Toast.LENGTH_SHORT);
+						// t.show();
 
 						// en base al rol
-						
+
 					}
 
 				}
@@ -197,5 +212,5 @@ public class CrearAlumnoActivity extends Activity {
 		}
 
 	}
-	
+
 }
