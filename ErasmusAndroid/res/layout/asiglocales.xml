@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop = "2dp"
+    android:paddingLeft = "2dp"
+    android:paddingRight ="2dp"
+    android:paddingBottom = "2dp" >
+
+    <CheckBox
+        android:id="@+id/asiglocal_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true" />
+        
+    <TextView
+        android:id="@+id/asiglocal_nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/asiglocal_check"
+        android:text="Nombre Asignatura"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+
+
+    <TextView
+        android:id="@+id/asiglocal_coordiandor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/asiglocal_nombre"
+        android:layout_below="@+id/asiglocal_nombre"
+        android:layout_marginLeft="7dp"
+        android:textColor="#16a5d7"
+        android:text="Nombre coordinador"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    <TextView
+        android:id="@+id/asiglocal_creditos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/asiglocal_nombre"
+        android:layout_below="@+id/asiglocal_coordiandor"
+        android:layout_marginLeft="7dp"
+        android:textColor="#16a5d7"
+        android:text="Número de créditos"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    <LinearLayout 
+        android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/asiglocal_nombre"
+	    android:layout_below="@+id/asiglocal_creditos"
+	    android:layout_marginLeft="7dp">
+        
+	    <TextView
+	        android:id="@+id/asiglocal_pregunta_convalidar"
+	        android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	        android:text="¿Convalidar Asignatura?"
+	        android:textAppearance="?android:attr/textAppearanceSmall" />
+	    
+	     <CheckBox
+	        android:id="@+id/asiglocal_convalidar"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" />
+     
+     </LinearLayout>
+
+</RelativeLayout>
