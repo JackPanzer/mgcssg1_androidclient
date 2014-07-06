@@ -91,8 +91,7 @@ public class AceptarPropuestaActivity extends Activity {
 		expandible_propuesta = (ExpandableListView) findViewById(R.id.expandableListView5);
 		// Añado los datos a los arrays
 		// LLamo al adaptador que cargará los datos en el layout
-		adaptador_propuesta = new AdaptadorPropuesta(this, cabecera_propuesta,
-				contenido_propuesta);
+		adaptador_propuesta = new AdaptadorPropuesta(this, cabecera_propuesta,contenido_propuesta);
 
 		// Se carga en la aplicancion
 		expandible_propuesta.setAdapter(adaptador_propuesta);
