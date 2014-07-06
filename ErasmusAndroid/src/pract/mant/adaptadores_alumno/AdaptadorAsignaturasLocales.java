@@ -141,7 +141,7 @@ public class AdaptadorAsignaturasLocales extends ArrayAdapter<AsignaturaLocal> {
 	 	holder.coordinador.setText(mis_asignaturas.get(position).getCoordinador());
 	 	holder.creditos.setText(String.valueOf( mis_asignaturas.get(position).getCreditos() + " créditos" ));
 	 	holder.chkEstado.setChecked(mis_asignaturas.get(position).isChekeado());
-	 	holder.convalidar.setChecked(false);
+	 	holder.convalidar.setChecked(mis_asignaturas.get(position).isConvalidar());
 	    
 		// Se devuelve ya la vista nueva o reutilizada que ha sido dibujada
 		return (item);
