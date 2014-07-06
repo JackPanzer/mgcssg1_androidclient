@@ -112,6 +112,10 @@
             android:name="pract.mant.alumno.OrigenAsignaturaAlumno"
             android:label="@string/title_activity_origen_asignatura_alumno" >
         </activity>
+        <activity
+            android:name="pract.mant.coordinador.CrearCoordinadorActivity"
+            android:label="@string/title_activity_crear_coordinador" >
+        </activity>
     </application>
 
 </manifest>

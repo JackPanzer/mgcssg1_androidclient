@@ -50,4 +50,9 @@ public class PrincipalCoordinadorActivity extends Activity {
 		
 	}
 	
+	public void clickCrearCoordinador(View v){
+        Intent act = new Intent(this, CrearCoordinadorActivity.class);
+        this.startActivity(act);
+    }
+	
 }

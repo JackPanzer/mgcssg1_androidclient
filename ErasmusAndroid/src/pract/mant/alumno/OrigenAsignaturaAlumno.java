@@ -293,7 +293,11 @@ public class OrigenAsignaturaAlumno extends Activity {
 
 				for (int i = 0; i < asignaturas.size(); i++) {
 					if (asignaturas.get(i).isChekeado()) {
-						respuesta = guardarAsignatura(asignaturas.get(i).getId(), 1);//FORZANDO CONVALIDAR
+						int aux=0;
+						if(asignaturas.get(i).isConvalidar()){
+							aux =1;
+						}
+						respuesta = guardarAsignatura(asignaturas.get(i).getId(), aux);//FORZANDO CONVALIDAR
 
 						// Si hasta aquí todo ha ido bien, lo siguiente será
 						// abrir
