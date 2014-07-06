@@ -8,6 +8,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".DestinoAsignaturaActivity" >
 
+    <TextView
+        android:id="@+id/id_logueado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="id_logueado" />
+    
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
@@ -26,42 +34,45 @@
         android:onClick="clickAceptar"
         android:text="Solicitar" />
 
-    <TextView
-        android:id="@+id/textView1"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
-        android:text="Erasmus"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="22dp"
-        android:layout_toLeftOf="@+id/button3"
-        android:text="Menu Alumno"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button2"
-        android:layout_below="@+id/textView2"
-        android:layout_marginTop="18dp"
-        android:text="Elige las asignaturas:" />
-
-    <ExpandableListView
-        android:id="@+id/expandableListView1"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/button2"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView3" >
+        android:layout_alignLeft="@+id/button2"
+        android:layout_alignRight="@+id/id_logueado"
+        android:layout_below="@+id/id_logueado"
+        android:orientation="vertical"
+        android:gravity="center_horizontal" >
 
-    </ExpandableListView>
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Erasmus"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Menu Alumno"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Elige las asignaturas:" />
+
+        <ExpandableListView
+            android:id="@+id/expandableListView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </ExpandableListView>
+
+    </LinearLayout>
 
 </RelativeLayout>

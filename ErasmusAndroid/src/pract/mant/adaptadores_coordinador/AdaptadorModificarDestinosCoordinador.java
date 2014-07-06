@@ -164,6 +164,7 @@ public class AdaptadorModificarDestinosCoordinador extends BaseExpandableListAda
 
 		TextView lblListHeader = (TextView) convertView
 				.findViewById(R.id.cabecera_destino);
+		lblListHeader.setTypeface(null, Typeface.BOLD);
 		lblListHeader.setText(headerTitle);
 
 		return convertView;

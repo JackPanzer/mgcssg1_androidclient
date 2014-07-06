@@ -8,6 +8,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".GestionarDestinosActivity" >
 
+    <TextView
+        android:id="@+id/id_logueado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="id_logueado" />
+
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
@@ -17,55 +25,61 @@
         android:onClick="clickVolver"
         android:text="Volver" />
 
-    <TextView
-        android:id="@+id/textView2"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="¿Que desea hacer?" />
+        android:layout_alignLeft="@+id/button1"
+        android:layout_alignRight="@+id/id_logueado"
+        android:layout_below="@+id/id_logueado"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button4"
-        android:layout_alignRight="@+id/button4"
-        android:layout_below="@+id/textView2"
-        android:layout_marginTop="26dp"
-        android:onClick="clickCrear"
-        android:text="Crear Destinos" />
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="ERASMUS"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="14dp"
-        android:onClick="clickModificar"
-        android:text="Modificar Destinos" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Menu Coordinador"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button4"
-        android:layout_alignRight="@+id/button4"
-        android:layout_below="@+id/button4"
-        android:layout_marginTop="18dp"
-        android:onClick="clickEliminar"
-        android:text="Eliminar Destinos" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="¿Que desea hacer?" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        android:text="ERASMUS"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="188dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:onClick="clickCrear"
+            android:text="Crear Destinos" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="188dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:onClick="clickModificar"
+            android:text="Modificar Destinos" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="188dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:onClick="clickEliminar"
+            android:text="Eliminar Destinos" />
+    </LinearLayout>
 
 </RelativeLayout>

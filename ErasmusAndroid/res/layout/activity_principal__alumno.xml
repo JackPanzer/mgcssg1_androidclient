@@ -9,24 +9,13 @@
     tools:context=".PrincipalAlumno" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/id_logueado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="106dp"
-        android:text="Menu Alumno"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="26dp"
-        android:onClick="clickDestinos"
-        android:text="Seleccionar Destinos" />
-
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="id_logueado" />
+    
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
@@ -36,25 +25,52 @@
         android:onClick="clickVolver"
         android:text="Volver" />
 
-    <TextView
-        android:id="@+id/textView2"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp"
-        android:text="ERASMUS"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_marginTop="59dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_alignRight="@+id/button1"
-        android:layout_below="@+id/button1"
-        android:layout_marginTop="14dp"
-        android:onClick="clickAsignaturas"
-        android:text="Matricular Asignaturas" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="ERASMUS"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="Menu Alumno"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿Que desea hacer?" />
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:onClick="clickDestinos"
+            android:text="Seleccionar Destinos" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:onClick="clickAsignaturas"
+            android:text="Matricular Asignaturas" />
+    </LinearLayout>
 
 </RelativeLayout>

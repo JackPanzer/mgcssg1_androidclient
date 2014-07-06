@@ -8,6 +8,48 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ModificarDestinosActivity" >
 
+    <TextView
+        android:id="@+id/id_logueado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="id_logueado" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button1"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_alignRight="@+id/id_logueado"
+        android:layout_below="@+id/id_logueado"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="ERASMUS"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Menu Coordinador"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <ExpandableListView
+            android:id="@+id/expandableListView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </ExpandableListView>
+
+    </LinearLayout>
+
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
@@ -25,25 +67,5 @@
         android:layout_alignParentRight="true"
         android:onClick="clickFinalizar"
         android:text="Finalizar" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="34dp"
-        android:text="ERASMUS"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <ExpandableListView
-        android:id="@+id/expandableListView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
-        android:layout_below="@+id/textView1"
-        android:layout_centerHorizontal="true" >
-
-    </ExpandableListView>
 
 </RelativeLayout>

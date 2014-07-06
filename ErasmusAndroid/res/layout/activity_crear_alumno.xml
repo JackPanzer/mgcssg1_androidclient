@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".CrearAlumnoActivity" >
-
+    
   <Button
         android:id="@+id/cd_finalizar"
         android:layout_width="wrap_content"
@@ -31,15 +31,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
         android:orientation="vertical" >
 
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="1dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="1dp"
             android:text="ERASMUS"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -47,7 +45,8 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="1dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
             android:text="Inserte los datos del nuevo usuario" />
 
         <LinearLayout
@@ -168,7 +167,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
         </LinearLayout>
-        
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
@@ -183,8 +182,7 @@
                 android:id="@+id/spinner_titulacion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawSelectorOnTop="true"
-                android:layout_weight="1" />
+                android:drawSelectorOnTop="true" />
         </LinearLayout>
     </LinearLayout>
 

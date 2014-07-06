@@ -18,48 +18,6 @@
         android:text="Accede a Erasmus UHU"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <!--
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button2"
-        android:layout_alignLeft="@+id/button3"
-        android:layout_alignRight="@+id/button2"
-        android:layout_marginBottom="18dp"
-        android:onClick="clickAlumnos"
-        android:text="Acceso Alumnos" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button3"
-        android:layout_alignRight="@+id/button3"
-        android:layout_centerVertical="true"
-        android:onClick="clickCoordinador"
-        android:text="Acceso Coordinador" />
-
-    
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="14dp"
-        android:onClick="clickAdministradores"
-        android:text="Acceso Administradores" /> -->
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:onClick="clickSalir"
-        android:text="Salir" />
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -68,6 +26,7 @@
         android:layout_alignRight="@+id/textView1"
         android:layout_below="@+id/textView2"
         android:layout_marginTop="20dp"
+        
         android:orientation="vertical" >
 
         <TextView
@@ -133,6 +92,16 @@
        android:layout_alignBottom="@+id/button4"
        android:layout_alignRight="@+id/am_login"
        android:onClick="clickCrearAlumno"
-       android:text="Darse de alta" />
+       android:text="Alta" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+        android:onClick="clickSalir"
+        android:text="Salir" />
 
 </RelativeLayout>

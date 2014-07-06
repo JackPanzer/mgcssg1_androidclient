@@ -9,30 +9,59 @@
     tools:context="pract.mant.alumno.OrigenAsignaturaAlumno" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/id_logueado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Elija sus asignaturas"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="id_logueado" />
 
-    <ListView
-        android:id="@+id/activity_origen_asignatura_listview"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/button1"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1" 
-        android:layout_marginBottom="5dp" >
+        android:layout_alignLeft="@+id/button1"
+        android:layout_alignRight="@+id/id_logueado"
+        android:layout_below="@+id/id_logueado"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
 
-    </ListView>
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="ERASMUS"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Menu Alumno"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Elija sus asignaturas" />
+
+        <ListView
+            android:id="@+id/activity_origen_asignatura_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp" >
+        </ListView>
+    </LinearLayout>
 
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/activity_origen_asignatura_listview"
         android:layout_alignParentBottom="true"
         android:onClick="volver"
         android:text="Volver" />
@@ -41,9 +70,8 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button1"
-        android:layout_alignBottom="@+id/button1"
-        android:layout_alignRight="@+id/activity_origen_asignatura_listview"
+        android:layout_alignRight="@+id/linearLayout1"
+        android:layout_below="@+id/linearLayout1"
         android:onClick="finalizar"
         android:text="Finalizar" />
 

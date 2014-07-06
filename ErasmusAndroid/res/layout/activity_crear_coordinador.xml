@@ -8,6 +8,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".CrearCoordinadorActivity" >
 
+     <TextView
+        android:id="@+id/id_logueado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="id_logueado" />
+    
     <Button
         android:id="@+id/cd_finalizar"
         android:layout_width="wrap_content"
@@ -29,18 +37,25 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/id_logueado"
         android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
         android:orientation="vertical" >
 
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="1dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="1dp"
             android:text="ERASMUS"
+            android:layout_marginTop="10dp"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Menu Coordinador"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
@@ -64,7 +79,10 @@
                 android:id="@+id/coordinador_nombre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1" >
+
+                <requestFocus />
+            </EditText>
         </LinearLayout>
 
         <LinearLayout
@@ -168,7 +186,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
         </LinearLayout>
-        
     </LinearLayout>
 
 </RelativeLayout>
