@@ -6,8 +6,8 @@ import org.ksoap2.serialization.SoapObject;
 
 
 /**
- * Clase que recibe el resultado de un Objeto soap que contiene
- * un array de asignaturas
+ * Representa un array de asignaturas que se imparten en el
+ * centro de destino.
  * @author Betanzos
  *
  */
@@ -15,6 +15,13 @@ public class ArrayAsignaturasExt {
 	private int errno;
 	private Vector<ComplexAsignaturaExt> asignaturas;// Cada asignatura se guarda en la clase ComplexAsignaturaExt
 	
+	
+	/**
+	 * Constructor del objeto. Dado un SoapObject con todas las asignaturas extrangeras dentro,
+	 * su cometido es cargar esa información dentro de la lista de asignaturas.
+	 * 
+	 * @param obj SoapObject con la información de las asignaturas extrangeras.
+	 */
 	
 	public ArrayAsignaturasExt(SoapObject obj){
 		

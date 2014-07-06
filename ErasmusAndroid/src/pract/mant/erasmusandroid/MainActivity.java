@@ -5,9 +5,9 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
-import pract.mant.alumno.Principal_Alumno;
+import pract.mant.alumno.PrincipalAlumno;
 import pract.mant.coordinador.CrearAlumnoActivity;
-import pract.mant.coordinador.PricipalCoordinadorActivity;
+import pract.mant.coordinador.PrincipalCoordinadorActivity;
 import pract.mant.modelo.ComplexUsuario;
 
 import com.example.erasmusandroid.R;
@@ -153,11 +153,11 @@ public SessionManager session; //SESSION OBJECT
 						Intent act;
 						switch(respuesta.getRol()){
 						case 1:
-							act = new Intent(this.context, Principal_Alumno.class);
+							act = new Intent(this.context, PrincipalAlumno.class);
 							this.context.startActivity(act);
 							break;
 						case 2:
-							act = new Intent(this.context, PricipalCoordinadorActivity.class);
+							act = new Intent(this.context, PrincipalCoordinadorActivity.class);
 							this.context.startActivity(act);
 							break;
 						default:

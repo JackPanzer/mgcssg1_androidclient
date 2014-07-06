@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="pract.mant.alumno.Principal_Alumno"
+            android:name="pract.mant.alumno.PrincipalAlumno"
             android:label="@string/title_activity_principal__alumno" >
         </activity>
         <activity
@@ -41,7 +41,7 @@
             android:label="@string/title_activity_aceptar_precontrato" >
         </activity>
         <activity
-            android:name="pract.mant.coordinador.PricipalCoordinadorActivity"
+            android:name="pract.mant.coordinador.PrincipalCoordinadorActivity"
             android:label="@string/title_activity_pricipal_coordinador" >
         </activity>
         <activity

@@ -58,11 +58,11 @@ public class CrearDestinoActivity extends Activity {
 		int nivel = Integer.parseInt(((EditText) findViewById(R.id.acd_nivel)).getText().toString());
 	
 		session.checkLogin(); 
-		
-		aTaskCrearDestinos atl = new aTaskCrearDestinos(this, session,nombre,pais,idioma,disponible,plazas,nivel);
-		atl.execute();
-		finish();
-		
+		if (!nombre.equals("")){
+			aTaskCrearDestinos atl = new aTaskCrearDestinos(this, session,nombre,pais,idioma,disponible,plazas,nivel);
+			atl.execute();
+			finish();
+		}
 	}
 	
 	private class aTaskCrearDestinos extends AsyncTask<Void, Void, Void> {

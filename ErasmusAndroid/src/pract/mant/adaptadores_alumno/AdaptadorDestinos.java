@@ -130,7 +130,6 @@ public class AdaptadorDestinos extends ArrayAdapter<Destinos> {
 	}
 
 	// Esta clase se usa para almacenar el TextView y el CheckBox de una vista y
-	// es donde esta el "truco" para que las vistas se guarden
 	static class VistaItem {
 		TextView nombre;
 		CheckBox chkEstado;

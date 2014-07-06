@@ -15,7 +15,7 @@ import android.view.View;
 
 //Esta Activity se mostrará si los datos introducidos por el usuario
 //coonciden con el rol coordinador
-public class PricipalCoordinadorActivity extends Activity {
+public class PrincipalCoordinadorActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

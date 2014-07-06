@@ -147,8 +147,7 @@ public class AdaptadorAsignaturasLocales extends ArrayAdapter<AsignaturaLocal> {
 		return (item);
 	}
 
-	// Esta clase se usa para almacenar los TextView y el CheckBox de una vista y
-	// es donde esta el "truco" para que las vistas se guarden
+	// Esta clase se usa para almacenar los TextView y el CheckBox de una vista 
 	static class VistaItem {
 		TextView nombre;
 		TextView coordinador;

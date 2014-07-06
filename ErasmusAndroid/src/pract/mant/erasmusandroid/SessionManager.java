@@ -1,7 +1,7 @@
 package pract.mant.erasmusandroid;
 import java.util.HashMap;
 
-import pract.mant.alumno.Principal_Alumno;
+import pract.mant.alumno.PrincipalAlumno;
 import pract.mant.modelo.ComplexUsuario;
 
 
