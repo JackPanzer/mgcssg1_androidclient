@@ -26,7 +26,11 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//Se debe añadir una función que almacene los cambios 
+/**
+ * En esta interfaz, se pueden modificar los destinos que se consideren
+ * necesarios del sistema
+ *
+ */
 public class ModificarDestinosActivity extends Activity {
 
 	AdaptadorModificarDestinosCoordinador adaptador_destinos;
@@ -47,7 +51,6 @@ public class ModificarDestinosActivity extends Activity {
 		TextView t = (TextView) findViewById(R.id.id_logueado);
         t.setText(session.getUserDetails().get(SessionManager.KEY_NAME));
 
-		// Llamada a Asintask
 		aTaskConsultarTodosDestinos atl = new aTaskConsultarTodosDestinos(this,
 				session);
 		atl.execute();
@@ -60,16 +63,35 @@ public class ModificarDestinosActivity extends Activity {
 		return true;
 	}
 
+	/**
+	 * Función para el botón Volver, finaliza la actividad actual para volver
+	 * a la anterior
+	 * 
+	 * @param v
+	 *            Botón que envía el evento
+	 */
 	public void clickVolver(View v) {
 		finish();
 
 	}
 
+	/**
+	 * Función para el botón Finalizar, finaliza la actividad actual para volver
+	 * a la anterior cuando se consigue modificar un destino en la base de datos
+	 * 
+	 * @param v
+	 *            Botón que envía el evento
+	 */
 	public void clickFinalizar(View v) {
 		finish();
 
 	}
 
+	/**
+	 * Carga la información contenida en las estructuras de datos de la clase en
+	 * la interfaz para su tratamiento
+	 * 
+	 */
 	public void cargarLista() {
 		lista_expandible = (ExpandableListView) findViewById(R.id.expandableListView3);
 
@@ -81,6 +103,10 @@ public class ModificarDestinosActivity extends Activity {
 
 	}
 
+	/**
+	 * Clase para almacenar los cambios al destino en la base de datos
+	 *
+	 */
 	private class aTaskConsultarTodosDestinos extends
 			AsyncTask<Void, Void, Void> {
 
@@ -93,6 +119,11 @@ public class ModificarDestinosActivity extends Activity {
 		final String METHOD_NAME = "obtenerDestinos";
 		final String SOAP_ACTION = "urn:Erasmus";
 
+		/**
+		 * 
+		 * @param _ctxt Contexto de la actividad
+		 * @param _session Objeto para gestionar la información del alumno
+		 */
 		public aTaskConsultarTodosDestinos(Activity _ctxt,
 				SessionManager _session) {
 
@@ -114,9 +145,7 @@ public class ModificarDestinosActivity extends Activity {
 				SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
 						SoapEnvelope.VER11);
 				envelope.dotNet = true;
-				envelope.setOutputSoapObject(request); // Aquí metemos la
-														// peticion
-														// en el "Sobre"
+				envelope.setOutputSoapObject(request); // Aquí metemos la peticion en el "Sobre"
 
 				/* Definimos un objeto transporte para dirigir el Sobre */
 				HttpTransportSE transporte = new HttpTransportSE(URL);
@@ -124,10 +153,7 @@ public class ModificarDestinosActivity extends Activity {
 				transporte.call(SOAP_ACTION, envelope); // Lanzamos la llamada
 
 				// Con call se produce la llamada, y se espera (bloquea) hasta
-				// que
-				// se obtiene la respuesta
-				// SoapPrimitive response =
-				// (SoapPrimitive)envelope.getResponse();
+				// que se obtiene la respuesta
 				if (envelope.getResponse() != null) {
 
 					respuesta = new ArrayDestinos(
@@ -148,9 +174,14 @@ public class ModificarDestinosActivity extends Activity {
 			return null;
 		}
 
+		/**
+		 * Carga cada destino que puede ser modificado en un array,
+		 * posteriormente se llama a la función cargarLista para
+		 * ajustarlo a cómo se mostrará el listado
+		 * 
+		 */
 		@Override
 		protected void onPostExecute(Void result) {
-			// TODO Auto-generated method stub
 
 			cabecera_lista = new ArrayList<String>();
 			contenido_lista = new HashMap<String, List<ModificarDestinos>>();
@@ -170,12 +201,6 @@ public class ModificarDestinosActivity extends Activity {
 								.getDestinos().get(i).getIdnvlrequerido()));
 				contenido_lista.put(cabecera_lista.get(i), d);
 			}
-
-			/*
-			 * this.idDestino = idDestino; this.idPais = idPais; this.idIdioma =
-			 * idIdioma; this.idNivel = idNivel;
-			 */
-
 			cargarLista();
 		}
 

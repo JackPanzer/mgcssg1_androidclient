@@ -21,12 +21,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-// En esta clase habría que crear una función que guardará los datos
-//que introduce el coordinador en la base de datos
-
+/**
+ * En esta interfaz, un destino que no esté registrado puede crearse en el
+ * sistema proporcionando los datos requeridos
+ *
+ */
 public class CrearDestinoActivity extends Activity {
-	
-	// Session Manager Class
     public SessionManager session;
 
 	@Override
@@ -49,12 +49,27 @@ public class CrearDestinoActivity extends Activity {
 		return true;
 		
 	}
-	
+
+	/**
+	 * Función para el botón Volver, finaliza la actividad actual para volver
+	 * a la anterior
+	 * 
+	 * @param v
+	 *            Botón que envía el evento
+	 */
 	public void clickVolver(View v){
 		finish();
 		
 	}
-	
+
+	/**
+	 * Función para el botón Finalizar, finaliza la actividad actual para volver
+	 * a la anterior cuando se consigue insertar un nuevo destino en la base de
+	 * datos
+	 * 
+	 * @param v
+	 *            Botón que envía el evento
+	 */
 	public void clickFinalizar(View v){
 		String nombre = ((EditText) findViewById(R.id.acd_nombre)).getText().toString();
 		int pais = Integer.parseInt(((EditText) findViewById(R.id.acd_pais)).getText().toString());
@@ -63,19 +78,24 @@ public class CrearDestinoActivity extends Activity {
 		int plazas = Integer.parseInt(((EditText) findViewById(R.id.acd_plazas)).getText().toString());
 		int nivel = Integer.parseInt(((EditText) findViewById(R.id.acd_nivel)).getText().toString());
 	
-		session.checkLogin(); 
+		session.checkLogin();
+		/* No se realiza ninguna acción si no están rellenos los campos
+		 * obligatorios
+		 */
 		if (!nombre.equals("")){
 			aTaskCrearDestinos atl = new aTaskCrearDestinos(this, session,nombre,pais,idioma,disponible,plazas,nivel);
 			atl.execute();
 			finish();
 		}
 	}
-	
+
+	/**
+	 * Clase para almacenar el nuevo destino en la base de datos
+	 *
+	 */
 	private class aTaskCrearDestinos extends AsyncTask<Void, Void, Void> {
-		//Esto es un comentario
-		// private int idUsu;
 		private GenericResult respuesta;
-		private SessionManager session; // SESSION OBJECT
+		private SessionManager session;
 		private Activity context;
 		private String nombre;
 		private int pais;
@@ -89,6 +109,17 @@ public class CrearDestinoActivity extends Activity {
 		final String METHOD_NAME = "crearDestino";
 		final String SOAP_ACTION = "urn:Erasmus";
 
+		/**
+		 * 
+		 * @param _ctxt Contexto de la actividad
+		 * @param _session Objeto para gestionar la información del alumno
+		 * @param nombre Nombre del nuevo destino
+		 * @param pais código del país del nuevo destino
+		 * @param idioma código del idioma del nuevo destino
+		 * @param disponible vale 0 si no está disponible para su selección y 1 si lo está
+		 * @param plazas número de plazas del nuevo destino
+		 * @param nivel código del nivel de idioma mínimo necesario
+		 */
 		public aTaskCrearDestinos(Activity _ctxt, SessionManager _session,
 				String nombre, int pais, int idioma, int disponible, int plazas,
 				int nivel) {
@@ -131,7 +162,6 @@ public class CrearDestinoActivity extends Activity {
 
 				// Con call se produce la llamada, y se espera (bloquea) hasta que
 				// se obtiene la respuesta
-				// SoapPrimitive response = (SoapPrimitive)envelope.getResponse();
 				if (envelope.getResponse() != null) {
 					respuesta = new GenericResult((SoapObject) envelope.getResponse());
 

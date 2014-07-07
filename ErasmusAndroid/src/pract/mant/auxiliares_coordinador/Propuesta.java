@@ -2,8 +2,10 @@ package pract.mant.auxiliares_coordinador;
 
 import java.util.ArrayList;
 
-//Clase auxiliar que cargará los precontratos que han sido enviados 
-//y guardados en la base de datos
+/**
+ * Clase que almacena los datos de un precontrato recibido de la base de datos
+ * 
+ */
 public class Propuesta {
 	private int idAl;
 	private String nombre;
@@ -11,7 +13,6 @@ public class Propuesta {
 	private String Destino;
 	private String fecha;
 	private boolean aceptado;
-	//private ArrayList<String> asignaturas;
 	
 	public Propuesta(int idAl, String nombre, int idDestino, String destino,boolean aceptado) {
 		super();
@@ -22,7 +23,6 @@ public class Propuesta {
 		this.aceptado = aceptado;
 	}
 
-
 	public int getIdAl() {
 		return idAl;
 	}
@@ -31,21 +31,17 @@ public class Propuesta {
 		this.idAl = idAl;
 	}
 
-
 	public int getIdDestino() {
 		return IdDestino;
 	}
-
 
 	public void setIdDestino(int idDestino) {
 		IdDestino = idDestino;
 	}
 
-
 	public String getDestino() {
 		return Destino;
 	}
-
 
 	public void setDestino(String destino) {
 		Destino = destino;
@@ -59,43 +55,12 @@ public class Propuesta {
 	public void setAceptado(boolean aceptado) {
 		this.aceptado = aceptado;
 	}
-
-
-	/*public ArrayList<String> getAsignaturas() {
-		return asignaturas;
-	}
-	public void setAsignaturas(ArrayList<String> asignaturas) {
-		this.asignaturas = asignaturas;
-	}*/
+	
 	public String getNombre() {
 		return nombre;
 	}
+	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
-	/*public String getTelefono() {
-		return telefono;
-	}
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-	public String getTitulacion() {
-		return titulacion;
-	}
-	public void setTitulacion(String titulacion) {
-		this.titulacion = titulacion;
-	}
-	public String getPoblacion() {
-		return poblacion;
-	}
-	public void setPoblacion(String poblacion) {
-		this.poblacion = poblacion;
-	}
-	public String getIdioma() {
-		return idioma;
-	}
-	public void setIdioma(String idioma) {
-		this.idioma = idioma;
-	}*/
 }

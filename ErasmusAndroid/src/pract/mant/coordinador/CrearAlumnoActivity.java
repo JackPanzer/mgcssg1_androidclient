@@ -24,16 +24,23 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import android.view.View;
 
+/**
+ * En esta interfaz, un alumno que no esté registrado puede darse de alta en el
+ * sistema proporcionando los datos requeridos
+ *
+ */
 public class CrearAlumnoActivity extends Activity {
-
-	// Session Manager Class
 	public SessionManager session;
-	private int titulacion = 0;
+	private int titulacion;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_crear_alumno);
+		/* Parte necesaria para el funcionamiento del spinner para elegir la
+		 * titulación, incluye el adaptador y el listener para actualizar el
+		 * valor de la titulación según la posición del item seleccionado
+		 */
 		Spinner sp = (Spinner) findViewById(R.id.spinner_titulacion);
 		ArrayAdapter adapter = ArrayAdapter.createFromResource(this,
 				R.array.titulaciones, android.R.layout.simple_spinner_item);
@@ -58,11 +65,26 @@ public class CrearAlumnoActivity extends Activity {
 		return true;
 	}
 
+	/**
+	 * Función para el botón Volver, finaliza la actividad actual para volver
+	 * a la anterior
+	 * 
+	 * @param v
+	 *            Botón que envía el evento
+	 */
 	public void clickVolver(View v) {
 		finish();
 
 	}
 
+	/**
+	 * Función para el botón Finalizar, finaliza la actividad actual para volver
+	 * a la anterior cuando se consigue insertar un nuevo alumno en la base de
+	 * datos
+	 * 
+	 * @param v
+	 *            Botón que envía el evento
+	 */
 	public void clickFinalizar(View v) {
 		String nombre = ((EditText) findViewById(R.id.alumno_nombre)).getText()
 				.toString();
@@ -80,6 +102,9 @@ public class CrearAlumnoActivity extends Activity {
 				.getText().toString();
 
 		session.checkLogin();
+		/* No se realiza ninguna acción si no están rellenos los campos
+		 * obligatorios
+		 */
 		if (!nombre.equals("") && !apellidos.equals("") && !nif.equals("")
 				&& !nick.equals("") && !password.equals("")) {
 			aTaskCrearAlumno atl = new aTaskCrearAlumno(this, session, nombre,
@@ -90,6 +115,10 @@ public class CrearAlumnoActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Clase para almacenar el nuevo alumno en la base de datos
+	 *
+	 */
 	private class aTaskCrearAlumno extends AsyncTask<Void, Void, Void> {
 		private GenericResult respuesta;
 		private SessionManager session;
@@ -108,6 +137,19 @@ public class CrearAlumnoActivity extends Activity {
 		final String METHOD_NAME = "crearAlumno";
 		final String SOAP_ACTION = "urn:Erasmus";
 
+		/**
+		 * 
+		 * @param _ctxt Contexto de la actividad
+		 * @param _session Objeto para gestionar la información del alumno
+		 * @param nombre Nombre del nuevo alumno
+		 * @param apellidos Apellidos del nuevo alumno
+		 * @param nif número de identificación personal del nuevo alumno
+		 * @param direccion dirección del nuevo alumno (opcional)
+		 * @param poblacion población del nuevo alumno (opcional)
+		 * @param nick nombre de la cuenta del nuevo alumno
+		 * @param password contraseña de la cuenta del nuevo alumno
+		 * @param titulacion código de la titulación del nuevo alumno
+		 */
 		public aTaskCrearAlumno(Activity _ctxt, SessionManager _session,
 				String nombre, String apellidos, String nif, String direccion,
 				String poblacion, String nick, String password, int titulacion) {
@@ -146,9 +188,7 @@ public class CrearAlumnoActivity extends Activity {
 				SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
 						SoapEnvelope.VER11);
 				envelope.dotNet = true;
-				envelope.setOutputSoapObject(request); // Aquí metemos la
-														// peticion en el
-														// "Sobre"
+				envelope.setOutputSoapObject(request); // Aquí metemos la peticion en el "Sobre"
 
 				/* Definimos un objeto transporte para dirigir el Sobre */
 				HttpTransportSE transporte = new HttpTransportSE(URL);
@@ -156,10 +196,7 @@ public class CrearAlumnoActivity extends Activity {
 				transporte.call(SOAP_ACTION, envelope); // Lanzamos la llamada
 
 				// Con call se produce la llamada, y se espera (bloquea) hasta
-				// que
-				// se obtiene la respuesta
-				// SoapPrimitive response =
-				// (SoapPrimitive)envelope.getResponse();
+				// que se obtiene la respuesta
 				if (envelope.getResponse() != null) {
 					respuesta = new GenericResult(
 							(SoapObject) envelope.getResponse());

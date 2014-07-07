@@ -21,6 +21,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * En esta interfaz, un coordinador puede dar de alta a otro que no esté registrado
+ * en el sistema proporcionando los datos requeridos
+ *
+ */
 public class CrearCoordinadorActivity extends Activity {
 	public SessionManager session;
 	
@@ -43,12 +48,27 @@ public class CrearCoordinadorActivity extends Activity {
 		getMenuInflater().inflate(R.menu.crear_coordinador, menu);
 		return true;
 	}
-	
+
+	/**
+	 * Función para el botón Volver, finaliza la actividad actual para volver
+	 * a la anterior
+	 * 
+	 * @param v
+	 *            Botón que envía el evento
+	 */
 	public void clickVolver(View v){
 		finish();
 		
 	}
-	
+
+	/**
+	 * Función para el botón Finalizar, finaliza la actividad actual para volver
+	 * a la anterior cuando se consigue insertar un nuevo coordinador en la base
+	 * de datos
+	 * 
+	 * @param v
+	 *            Botón que envía el evento
+	 */
 	public void clickFinalizar(View v){
 		String nombre = ((EditText) findViewById(R.id.coordinador_nombre)).getText().toString();
 		String apellidos = ((EditText) findViewById(R.id.coordinador_apellidos)).getText().toString();
@@ -59,13 +79,20 @@ public class CrearCoordinadorActivity extends Activity {
 		String password = ((EditText) findViewById(R.id.coordinador_password)).getText().toString();
 		
 		session.checkLogin();
+		/* No se realiza ninguna acción si no están rellenos los campos
+		 * obligatorios
+		 */
 		if (!nombre.equals("") && !apellidos.equals("") && !nif.equals("") && !nick.equals("") && !password.equals("")){
 			aTaskCrearCoordinador atl = new aTaskCrearCoordinador(this, session, nombre, apellidos, nif, direccion, poblacion, nick, password);
 			atl.execute();
 			finish();
 		}
 	}
-	
+
+	/**
+	 * Clase para almacenar el nuevo coordinador en la base de datos
+	 *
+	 */
 	private class aTaskCrearCoordinador extends AsyncTask<Void, Void, Void> {
 		private GenericResult respuesta;
 		private SessionManager session;
@@ -83,6 +110,18 @@ public class CrearCoordinadorActivity extends Activity {
 		final String METHOD_NAME = "crearCoordinador";
 		final String SOAP_ACTION = "urn:Erasmus";
 
+		/**
+		 * 
+		 * @param _ctxt Contexto de la actividad
+		 * @param _session Objeto para gestionar la información del coordinador
+		 * @param nombre Nombre del nuevo coordinador
+		 * @param apellidos Apellidos del nuevo coordinador
+		 * @param nif número de identificación personal del nuevo coordinador
+		 * @param direccion dirección del nuevo coordinador (opcional)
+		 * @param poblacion población del nuevo coordinador (opcional)
+		 * @param nick nombre de la cuenta del nuevo coordinador
+		 * @param password contraseña de la cuenta del nuevo coordinador
+		 */
 		public aTaskCrearCoordinador(Activity _ctxt, SessionManager _session,
 				String nombre, String apellidos, String nif, String direccion, String poblacion,
 				String nick, String password) {
@@ -127,7 +166,6 @@ public class CrearCoordinadorActivity extends Activity {
 
 				// Con call se produce la llamada, y se espera (bloquea) hasta que
 				// se obtiene la respuesta
-				// SoapPrimitive response = (SoapPrimitive)envelope.getResponse();
 				if (envelope.getResponse() != null) {
 					respuesta = new GenericResult((SoapObject) envelope.getResponse());
 

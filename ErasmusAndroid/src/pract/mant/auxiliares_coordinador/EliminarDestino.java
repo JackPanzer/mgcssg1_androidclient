@@ -1,9 +1,11 @@
 package pract.mant.auxiliares_coordinador;
 
-//Esta clase almacenará los datos de la base de datos y luego será usada
-//por la clase AdaptadorDestinosCoordinador2 para cargarlo en el layout
-//coorespondiente, además añade un check que estará a false
-
+/**
+ * Clase que almacena los datos de un destino recibido de la base de datos
+ * para ser usada por la clase AdaptadorEliminaDestinosCoordinador y
+ * cargarlo en el layout correspondiente
+ *
+ */
 public class EliminarDestino {
 	String nombre_destino;
 	int id_destino;

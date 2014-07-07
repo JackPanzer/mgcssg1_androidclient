@@ -35,13 +35,18 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * En esta interfaz, el coordinador puede visualizar los precontratos pendientes
+ * de aceptación, y aceptarlos si así lo cree conveniente.
+ *
+ */
 public class AceptarPropuestaActivity extends Activity {
 
 	AdaptadorPropuesta adaptador_propuesta;
 	ExpandableListView expandible_propuesta;
 	List<String> cabecera_propuesta;// cabecera del expandible
-	HashMap<String, List<Propuesta>> contenido_propuesta;// contenido del
-															// expandible
+	HashMap<String, List<Propuesta>> contenido_propuesta;// contenido del expandible
+
 	public SessionManager session;
 
 	@Override
@@ -68,12 +73,24 @@ public class AceptarPropuestaActivity extends Activity {
 		getMenuInflater().inflate(R.menu.aceptar_propuesta, menu);
 		return true;
 	}
-
+	/**
+	 * Función para el botón Volver, finaliza la actividad actual para volver
+	 * a la anterior
+	 * 
+	 * @param v
+	 *            Botón que envía el evento
+	 */
 	public void clickVolver(View v) {
 		finish();
 
 	}
-
+	/**
+	 * Función para el botón Aceptar, llama a la tarea asíncrona que se encarga de
+	 * aceptar los precontratos
+	 * 
+	 * @param v
+	 *            Botón que envía el evento
+	 */
 	public void clickAceptar(View v) {
 		aTaskAceptarSolicitud atl = new aTaskAceptarSolicitud(this,
 				session);
@@ -82,16 +99,25 @@ public class AceptarPropuestaActivity extends Activity {
 
 	}
 	
+	/**
+	 * Una vez aceptados los precontratos, se recarga la lista de los restantes
+	 * por aceptar
+	 * 
+	 */
 	public void Actualizar() {
 		aTaskObtenerPrecontratos atl = new aTaskObtenerPrecontratos(this,
 				session);
 		atl.execute();
 
 	}
-
+	
+	/**
+	 * Carga la información contenida en las estructuras de datos de la clase en
+	 * la interfaz para su tratamiento
+	 * 
+	 */
 	public void cargarLista() {
 
-		// TODO Auto-generated method stub
 		expandible_propuesta = (ExpandableListView) findViewById(R.id.expandableListView5);
 		// Añado los datos a los arrays
 		// LLamo al adaptador que cargará los datos en el layout
@@ -101,12 +127,13 @@ public class AceptarPropuestaActivity extends Activity {
 		expandible_propuesta.setAdapter(adaptador_propuesta);
 
 	}
-
-	// funcion de prueba que será sustituida por consulta a la base de datos
-
+	/**
+	 * Clase para obtener la lista de los precontratos por aceptar
+	 *
+	 */
 	private class aTaskObtenerPrecontratos extends AsyncTask<Void, Void, Void> {
 
-		private SessionManager session; // SESSION OBJECT
+		private SessionManager session;
 		private ArrayPrecontrato respuesta;
 		private Activity context;
 
@@ -114,7 +141,12 @@ public class AceptarPropuestaActivity extends Activity {
 		final String URL = "http://10.0.2.2/services.php";
 		final String METHOD_NAME = "obtenerPrecontratos";
 		final String SOAP_ACTION = "urn:Erasmus";
-
+		
+		/**
+		 * 
+		 * @param _ctxt Contexto de la actividad
+		 * @param _session Objeto para gestionar la información del alumno
+		 */
 		public aTaskObtenerPrecontratos(Activity _ctxt, SessionManager _session) {
 
 			this.context = _ctxt;
@@ -124,27 +156,22 @@ public class AceptarPropuestaActivity extends Activity {
 		@Override
 		protected Void doInBackground(Void... params) {
 			try {
-
+				//Conectando
 				SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
-
+				//Añadimos los parámetros necesarios para la consulta
 				request.addProperty("idAlumno", 1);
-
+				//Creamos un sobre
 				SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
 						SoapEnvelope.VER11);
 				envelope.dotNet = true;
-				envelope.setOutputSoapObject(request); // Aquí metemos la
-														// peticion
-														// en el "Sobre"
+				envelope.setOutputSoapObject(request);
 
 				HttpTransportSE transporte = new HttpTransportSE(URL);
 				transporte.debug = true;
 				transporte.call(SOAP_ACTION, envelope); // Lanzamos la llamada
 
 				// Con call se produce la llamada, y se espera (bloquea) hasta
-				// que
-				// se obtiene la respuesta
-				// SoapPrimitive response =
-				// (SoapPrimitive)envelope.getResponse();
+				// que se obtiene la respuesta
 				if (envelope.getResponse() != null) {
 					SoapObject aux = (SoapObject) envelope.getResponse();
 					
@@ -199,6 +226,10 @@ public class AceptarPropuestaActivity extends Activity {
 			return null;
 		}
 
+		/**
+		 * Cargamos en nuestra lista para la cabecera y en nuestra tabla hash para
+		 * el contenido, los datos recibidos de la consulta
+		 */
 		@Override
 		protected void onPostExecute(Void result) {
 			if(respuesta!=null){
@@ -220,6 +251,11 @@ public class AceptarPropuestaActivity extends Activity {
 			
 		}
 	}
+	
+	/**
+	 * Clase que se encarga de almacenar los precontratos como aceptados
+	 *
+	 */
 	private class aTaskAceptarSolicitud extends AsyncTask<Void, Void, Void> {
 
 		private SessionManager session; // SESSION OBJECT
@@ -237,6 +273,11 @@ public class AceptarPropuestaActivity extends Activity {
 			this.session = _session;
 		}
 
+		/**
+		 * Se recorren todas las propuestas examinando las que se han marcado para
+		 * aceptar, los datos de éstas se mandarán a la función AceptarSolicitud
+		 * 
+		 */
 		@Override
 		protected Void doInBackground(Void... params) {
 			for (int i = 0; i < cabecera_propuesta.size(); i++) {
@@ -248,7 +289,14 @@ public class AceptarPropuestaActivity extends Activity {
 			}
 			return null;
 		}
-
+		/**
+		 * Función que se encarga de guardar las solicitudes en la base de datos
+		 * 
+		 * @param idAlumno
+		 *            El identificador del alumno que creó la propuesta
+		 * @param idDestino
+		 *            El identificador del destino al que desea marchar
+		 */
 		public Void AceptarSolicitud(int idAlumno,int idDestino) {
 
 			try {
@@ -261,21 +309,14 @@ public class AceptarPropuestaActivity extends Activity {
 
 				SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 				envelope.dotNet = true;
-				envelope.setOutputSoapObject(request); // Aquí metemos la
-														// peticion
-														// en el "Sobre"
+				envelope.setOutputSoapObject(request); // Aquí metemos la peticion en el "Sobre"
 
 				HttpTransportSE transporte = new HttpTransportSE(URL);
 				transporte.debug = true;
-				transporte.call(SOAP_ACTION, envelope); // Lanzamos la
-														// llamada
+				transporte.call(SOAP_ACTION, envelope); // Lanzamos la llamada
 
-				// Con call se produce la llamada, y se espera (bloquea)
-				// hasta
-				// que
+				// Con call se produce la llamada, y se espera (bloquea) hasta que
 				// se obtiene la respuesta
-				// SoapPrimitive response =
-				// (SoapPrimitive)envelope.getResponse();
 				if (envelope.getResponse() != null) {
 
 					respuesta = new GenericResult(
@@ -330,6 +371,10 @@ public class AceptarPropuestaActivity extends Activity {
 			return null;
 		}
 
+		/**
+		 * Al finalizar, actualizamos la lista de precontratos pendientes
+		 * 
+		 */
 		@Override
 		protected void onPostExecute(Void result) {
 			// TODO Auto-generated method stub

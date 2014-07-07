@@ -13,6 +13,11 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
+/**
+ * En esta interfaz, se presentan las opciones disponibles para la
+ * gestión de los destinos: crear, modificar y eliminar
+ *
+ */
 public class GestionarDestinosActivity extends Activity {
 
 	public SessionManager session;
@@ -37,23 +42,49 @@ public class GestionarDestinosActivity extends Activity {
 		return true;
 	}
 
+	/**
+	 * Función para el botón Volver, finaliza la actividad actual para volver
+	 * a la anterior
+	 * 
+	 * @param v
+	 *            Botón que envía el evento
+	 */
 	public void clickVolver(View v){
 		finish();
 	}
 	
+	/**
+	 * Función para el botón Crear Destinos, avanza
+	 * a la actividad siguiente: CrearDestinoActivity
+	 * 
+	 * @param v
+	 *            Botón que envía el evento
+	 */
 	public void clickCrear(View v){
-		//Menu crear
 		Intent act = new Intent(this, CrearDestinoActivity.class);
 		startActivity(act);
 	}
 	
+	/**
+	 * Función para el botón Modificar Destinos, avanza
+	 * a la actividad siguiente: ModificarDestinoActivity
+	 * 
+	 * @param v
+	 *            Botón que envía el evento
+	 */
 	public void clickModificar(View v){
-		//Menu modificar
 		Intent act = new Intent(this, ModificarDestinosActivity.class);
 		startActivity(act);
 	}
+	
+	/**
+	 * Función para el botón Eliminar Destinos, avanza
+	 * a la actividad siguiente: EliminarDestinoActivity
+	 * 
+	 * @param v
+	 *            Botón que envía el evento
+	 */
 	public void clickEliminar(View v){
-		//Menu eliminar
 		Intent act = new Intent(this, EliminarDestinoActivity.class);
 		startActivity(act);
 	}

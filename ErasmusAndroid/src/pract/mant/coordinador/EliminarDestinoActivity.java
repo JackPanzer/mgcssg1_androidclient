@@ -29,17 +29,17 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//Hay que crear una funcion que despues de pulsar el boton elimine
-//los destinos que se hayan elegido tras pulsar el check
+/**
+ * En esta interfaz, se pueden borrar los destinos que se consideren
+ * innecesarios del sistema
+ *
+ */
 public class EliminarDestinoActivity extends Activity {
 
 	AdaptadorEliminaDestinosCoordinador adaptador_destinos;
 	ExpandableListView lista_expandible;
-	List<String> cabecera_lista;// contenido de la cabecera, puede ser una
-								// numeracion
-	HashMap<String, List<EliminarDestino>> contenido_lista;// contiene los
-															// nombre de los
-															// destinos
+	List<String> cabecera_lista;// contenido de la cabecera, puede ser una numeración
+	HashMap<String, List<EliminarDestino>> contenido_lista;// contiene los nombre de los destinos
 	public SessionManager session;
 
 	@Override
@@ -54,7 +54,6 @@ public class EliminarDestinoActivity extends Activity {
 		TextView t = (TextView) findViewById(R.id.id_logueado);
         t.setText(session.getUserDetails().get(SessionManager.KEY_NAME));
 
-		// Llamada a Asintask
 		aTaskEliminarDestinos atl = new aTaskEliminarDestinos(this,
 				session);
 		atl.execute();
@@ -68,11 +67,26 @@ public class EliminarDestinoActivity extends Activity {
 		return true;
 	}
 
+	/**
+	 * Función para el botón Volver, finaliza la actividad actual para volver
+	 * a la anterior
+	 * 
+	 * @param v
+	 *            Botón que envía el evento
+	 */
 	public void clickVolver(View v) {
 		finish();
 
 	}
 
+	/**
+	 * Función para el botón Finalizar, finaliza la actividad actual para volver
+	 * a la anterior cuando se consigue insertar un nuevo destino en la base de
+	 * datos
+	 * 
+	 * @param v
+	 *            Botón que envía el evento
+	 */
 	public void clickActualizar(View v) {
 		aTaskEliminarDestinos atl = new aTaskEliminarDestinos(this,
 				session);
@@ -80,7 +94,11 @@ public class EliminarDestinoActivity extends Activity {
 
 	}
 
-	// Esta función debe cargar los datos del servidor
+	/**
+	 * Carga la información contenida en las estructuras de datos de la clase en
+	 * la interfaz para su tratamiento
+	 * 
+	 */
 	public void cargarLista() {
 		
 		lista_expandible = (ExpandableListView) findViewById(R.id.expandableListView4);
@@ -93,6 +111,10 @@ public class EliminarDestinoActivity extends Activity {
 
 	}
 
+	/**
+	 * Clase para eliminar el destino en la base de datos
+	 *
+	 */
 	private class aTaskEliminarDestinos extends AsyncTask<Void, Void, Void> {
 
 		private SessionManager session; // SESSION OBJECT
@@ -104,6 +126,11 @@ public class EliminarDestinoActivity extends Activity {
 		final String METHOD_NAME = "obtenerDestinos";
 		final String SOAP_ACTION = "urn:Erasmus";
 
+		/**
+		 * 
+		 * @param _ctxt Contexto de la actividad
+		 * @param _session Objeto para gestionar la información del alumno
+		 */
 		public aTaskEliminarDestinos(Activity _ctxt, SessionManager _session) {
 
 			this.context = _ctxt;
@@ -123,9 +150,7 @@ public class EliminarDestinoActivity extends Activity {
 				/* Creamos un envelop <Sobre> */
 				SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 				envelope.dotNet = true;
-				envelope.setOutputSoapObject(request); // Aquí metemos la
-														// peticion
-														// en el "Sobre"
+				envelope.setOutputSoapObject(request); // Aquí metemos la peticion en el "Sobre"
 
 				/* Definimos un objeto transporte para dirigir el Sobre */
 				HttpTransportSE transporte = new HttpTransportSE(URL);
@@ -133,10 +158,7 @@ public class EliminarDestinoActivity extends Activity {
 				transporte.call(SOAP_ACTION, envelope); // Lanzamos la llamada
 
 				// Con call se produce la llamada, y se espera (bloquea) hasta
-				// que
-				// se obtiene la respuesta
-				// SoapPrimitive response =
-				// (SoapPrimitive)envelope.getResponse();
+				// que se obtiene la respuesta
 				if (envelope.getResponse() != null) {
 
 					respuesta = new ArrayDestinos(
@@ -157,9 +179,14 @@ public class EliminarDestinoActivity extends Activity {
 			return null;
 		}
 
+		/**
+		 * Carga cada destino que puede ser eliminado en un array,
+		 * posteriormente se llama a la función cargarLista para
+		 * ajustarlo a cómo se mostrará el listado
+		 * 
+		 */
 		@Override
 		protected void onPostExecute(Void result) {
-			// TODO Auto-generated method stub
 
 			cabecera_lista = new ArrayList<String>();
 			contenido_lista = new HashMap<String, List<EliminarDestino>>();
@@ -171,12 +198,6 @@ public class EliminarDestinoActivity extends Activity {
 						.getNombre(),respuesta.getDestinos().get(i).getId(),false));
 				contenido_lista.put(cabecera_lista.get(i), d);
 			}
-
-			/*
-			 * this.idDestino = idDestino; this.idPais = idPais; this.idIdioma =
-			 * idIdioma; this.idNivel = idNivel;
-			 */
-
 			cargarLista();
 		}
 
