@@ -25,7 +25,7 @@ import android.widget.TextView;
 
 public class PrincipalAlumno extends Activity {
 
-	public SessionManager session; // Session Manager Class
+	private SessionManager session; // Session Manager Class
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

@@ -26,7 +26,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 /**
- * Esta clase extiende de BaseExpandableListAdapter la usaremos para crear 
+ * Esta clase extiende de ArrayAdapter la usaremos para crear 
  * los distintos registros de asignaturas para su posterior envío
  * a la base de datos.
  *

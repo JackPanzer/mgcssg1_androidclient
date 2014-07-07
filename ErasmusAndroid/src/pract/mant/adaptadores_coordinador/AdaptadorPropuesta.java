@@ -22,8 +22,8 @@ import com.example.erasmusandroid.R;
 public class AdaptadorPropuesta extends BaseExpandableListAdapter{
 
 	private Context _context;
-	List<String> cabecera_propuesta;
-    HashMap<String, List<Propuesta>> contenido_propuesta;
+	private List<String> cabecera_propuesta;
+    private HashMap<String, List<Propuesta>> contenido_propuesta;
 
 	public AdaptadorPropuesta(Context context, List<String> cabecera_propuesta,
 			HashMap<String, List<Propuesta>> contenido_propuesta) {

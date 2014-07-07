@@ -48,12 +48,15 @@ import android.widget.Toast;
 
 public class DestinoAlumnoActivity extends Activity {
 
+	//Contiene los nombres de los destinos
 	private ArrayList<Destinos> todos_destinos = new ArrayList<Destinos>();
 
 	private ListView lstLista;
-
-	private AdaptadorDestinos adaptador; // Adaptador que extiende de ArrayAdapter y que
-									// lista los destinos
+	
+	// Adaptador que extiende de ArrayAdapter y que lista los destinos
+	private AdaptadorDestinos adaptador;
+	
+	//contiene nuestra sesion de usuario
 	private SessionManager session;
 
 	@Override
@@ -78,9 +81,6 @@ public class DestinoAlumnoActivity extends Activity {
 		// Llamada a Asintask
 		aTaskVerDestinos atl = new aTaskVerDestinos(this, session);
 		atl.execute();
-
-		// Se le aplica un Listener donde ira lo que tiene que hacer en caso de
-		// que sea pulsado
 
 	}
 
@@ -117,7 +117,11 @@ public class DestinoAlumnoActivity extends Activity {
 
 	}
 
-	// Esta función debe cargar los datos del servidor
+	/**
+	 * Carga la información contenida en las estructuras de datos de la clase en
+	 * la interfaz para su tratamiento
+	 * 
+	 */
 	public void cargarLista() {
 
 		adaptador = new AdaptadorDestinos(this, todos_destinos); // Llamada al adaptador que listará
@@ -139,7 +143,7 @@ public class DestinoAlumnoActivity extends Activity {
 
 	private class aTaskVerDestinos extends AsyncTask<Void, Void, Void> {
 
-		private SessionManager session; // SESSION OBJECT
+		private SessionManager session; // contiene nuestra sesion
 		private ArrayDestinos respuesta;
 		private Activity context;
 
@@ -148,6 +152,12 @@ public class DestinoAlumnoActivity extends Activity {
 		final String METHOD_NAME = "consultarDestinos";
 		final String SOAP_ACTION = "urn:Erasmus";
 
+		/**
+		 * 
+		 * @param _ctxt Contexto de la actividad
+		 * @param _session Objeto para gestionar la información del alumno.
+		 */
+		
 		public aTaskVerDestinos(Activity _ctxt, SessionManager _session) {
 
 			this.context = _ctxt;
@@ -183,8 +193,6 @@ public class DestinoAlumnoActivity extends Activity {
 				// Con call se produce la llamada, y se espera (bloquea) hasta
 				// que
 				// se obtiene la respuesta
-				// SoapPrimitive response =
-				// (SoapPrimitive)envelope.getResponse();
 				if (envelope.getResponse() != null) {
 
 					respuesta = new ArrayDestinos(
@@ -195,7 +203,7 @@ public class DestinoAlumnoActivity extends Activity {
 					// nueva interfaz
 					if (respuesta.getErrno() == 0) {
 						// Todo ha ido bien, mostramos un Toast
-						// Toast t = Toast.makeText(context, "Destino Creado",
+						// Toast t = Toast.makeText(context, "Elija Destinos",
 						// Toast.LENGTH_SHORT);
 						// t.show();
 
@@ -262,7 +270,7 @@ public class DestinoAlumnoActivity extends Activity {
 
 	private class aTaskEnviarDestinos extends AsyncTask<Void, Void, Void> {
 
-		private SessionManager session; // SESSION OBJECT
+		private SessionManager session; // contiene nuestra sesion
 		private ArrayDestinos respuesta;
 		private Activity context;
 
@@ -271,6 +279,12 @@ public class DestinoAlumnoActivity extends Activity {
 		final String METHOD_NAME = "crearSolicitud";
 		final String SOAP_ACTION = "urn:Erasmus";
 
+		/**
+		 * 
+		 * @param _ctxt Contexto de la actividad
+		 * @param _session Objeto para gestionar la información del alumno.
+		 */
+		
 		public aTaskEnviarDestinos(Activity _ctxt, SessionManager _session) {
 
 			this.context = _ctxt;
@@ -312,8 +326,6 @@ public class DestinoAlumnoActivity extends Activity {
 					// hasta
 					// que
 					// se obtiene la respuesta
-					// SoapPrimitive response =
-					// (SoapPrimitive)envelope.getResponse();
 					if (envelope.getResponse() != null) {
 
 						respuesta = new ArrayDestinos(

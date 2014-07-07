@@ -36,7 +36,7 @@ public class AdaptadorModificarDestinosCoordinador extends BaseExpandableListAda
 	private Context _context;
 	private List<String> cabecera_lista;
 	private HashMap<String, List<ModificarDestinos>> contenido_lista;
-	public SessionManager session;
+	private  SessionManager session;
 
 	public AdaptadorModificarDestinosCoordinador(Context context,
 			List<String> cabecera_lista,

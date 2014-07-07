@@ -37,7 +37,7 @@ public class AdaptadorEliminaDestinosCoordinador extends BaseExpandableListAdapt
 	private Context _context;
 	private List<String> cabecera_lista;
 	private HashMap<String, List<EliminarDestino>> contenido_lista;
-	public SessionManager session;
+	private SessionManager session;
 
 	public AdaptadorEliminaDestinosCoordinador(Context context, List<String> cabecera_lista,
 			HashMap<String, List<EliminarDestino>> contenido_lista) {

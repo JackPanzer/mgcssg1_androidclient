@@ -57,15 +57,27 @@ import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.Toast;
 
+/**
+ * La actividad DestinoAsignaturaActivity listará todos las asignaturas para un destino
+ * elegido por un alumno
+ * 
+ * @author Betanzos
+ * 
+ */
 public class DestinoAsignaturaActivity extends Activity {
-
-	AdaptadorDestinosAsignaturas listAdapter;
-	ExpandableListView expListView;
-	List<String> NombreDestino;
-	List<Integer> IdsDestinos;
-	HashMap<String, List<Asignatura>> ListaAsignaturas;
-
-	public SessionManager session;
+	
+	// Adaptador que extiende de BaseExpandableListAdapter y que lista los precontratos
+	private AdaptadorDestinosAsignaturas listAdapter;
+	private ExpandableListView expListView;
+	private List<String> NombreDestino; //Contiene la cabecera del precontrato
+	private List<Integer> IdsDestinos; //Contiene los ids de los destinos
+	
+	//Tabla hash que relaciona el id del destino con las asignaturas para ese destino
+	//que el alumno puede combalidar
+	private HashMap<String, List<Asignatura>> ListaAsignaturas;
+	
+	//contiene nuestra sesion de usuario
+	private SessionManager session;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,11 +85,18 @@ public class DestinoAsignaturaActivity extends Activity {
 		setContentView(R.layout.activity_destino_asignatura);
 
 		session = new SessionManager(getApplicationContext());
+		
+		/**
+		 * Comprueba que el usuario este logueado Redirecciona a la pantalla de
+		 * Login si no es así
+		 * */
+		
 		session.checkLogin();
 
 		TextView t = (TextView) findViewById(R.id.id_logueado);
         t.setText(session.getUserDetails().get(SessionManager.KEY_NAME));
 		
+     // Llamada a Asintask
 		aTaskConsultarSolicitudes atl = new aTaskConsultarSolicitudes(this,
 				session);
 		atl.execute();
@@ -86,15 +105,29 @@ public class DestinoAsignaturaActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.destino_asignatura, menu);
 		return true;
 	}
 
+	
+	/**
+	 * Evento que se lanza cuando el usuario pulsa sobre el botón volver para
+	 * retroceder a la pantalla anterior.
+	 * 
+	 * @param v
+	 *            Botón que envía el evento
+	 */
 	public void clickVolver(View v) {
 		finish();
 	}
 
+	
+	/**
+	 * Se accede a la actividad AceptarPrecontratoActivity en la cual se listan
+	 * los precontratos que el alumno ha rellenado
+	 * 
+	 * @param v
+	 */
 	public void clickAceptar(View v) {
 		
 		aTaskEnviarAsignaturasPrecontrato atl = new aTaskEnviarAsignaturasPrecontrato(this,
@@ -105,6 +138,12 @@ public class DestinoAsignaturaActivity extends Activity {
 
 	}
 
+	/**
+	 * Carga la información contenida en las estructuras de datos de la clase en
+	 * la interfaz para su tratamiento
+	 * 
+	 */
+	
 	public void cargarLista() {
 
 		expListView = (ExpandableListView) findViewById(R.id.expandableListView1);
@@ -118,7 +157,7 @@ public class DestinoAsignaturaActivity extends Activity {
 	}
 
 	/**
-	 * Permite la consulta de solicitudes que el alumno ha hecho entre sesiones
+	 * Lista las asiganturas para el destino que ha elegido el alumno
 	 * 
 	 */
 	private class aTaskConsultarSolicitudes extends AsyncTask<Void, Void, Void> {
@@ -176,20 +215,15 @@ public class DestinoAsignaturaActivity extends Activity {
 			// Con call se produce la llamada, y se espera (bloquea) hasta
 			// que
 			// se obtiene la respuesta
-			// SoapPrimitive response =
-			// (SoapPrimitive)envelope.getResponse();
 			if (envelope.getResponse() != null) {
 
 				arraySols = new ArraySolicitudes(
 						(SoapObject) envelope.getResponse());
 
-				// Si hasta aquí todo ha ido bien, lo siguiente será abrir
-				// la
-				// nueva interfaz
 				if (arraySols.getErrno() == 0) {
 					// Todo ha ido bien, mostramos un Toast
 					System.out.println("Hola");
-					// Toast t = Toast.makeText(context, "Destino Creado",
+					// Toast t = Toast.makeText(context, "Destino Encontrado",
 					// Toast.LENGTH_SHORT);
 					// t.show();
 
@@ -197,7 +231,6 @@ public class DestinoAsignaturaActivity extends Activity {
 
 				} else if (arraySols.getErrno() == -2) {
 					// Todo ha ido bien, mostramos un Toast
-					System.out.println("Hola");
 					// Toast t = Toast.makeText(context,
 					// "Sentencia Incorrecta", Toast.LENGTH_SHORT);
 					// t.show();
@@ -208,7 +241,6 @@ public class DestinoAsignaturaActivity extends Activity {
 
 				else {
 					// Todo ha ido bien, mostramos un Toast
-					System.out.println("Hola");
 					// Toast t = Toast.makeText(context,
 					// "Fallo en Conexion", Toast.LENGTH_SHORT);
 					// t.show();
@@ -258,8 +290,6 @@ public class DestinoAsignaturaActivity extends Activity {
 			// hasta
 			// que
 			// se obtiene la respuesta
-			// SoapPrimitive response =
-			// (SoapPrimitive)envelope.getResponse();
 			ArrayAsignaturasExt temp = null;
 			if (envelope.getResponse() != null) {
 				
@@ -289,7 +319,10 @@ public class DestinoAsignaturaActivity extends Activity {
 
 				NombreDestino = new ArrayList<String>();
 				IdsDestinos = new ArrayList<Integer>();
-
+				
+				
+				//Guardamos el nombre y el id de los destinos de las solicitudes de 
+				//destino para este usuario
 				for (int i = 0; i < arraySols.getSolicitudes().size(); i++) {
 					NombreDestino.add(arraySols.getSolicitudes().get(i)
 											.getNomDestino());
@@ -298,7 +331,8 @@ public class DestinoAsignaturaActivity extends Activity {
 											.getIdDest());
 				}
 
-				// Segunda Consulta a la base de datos
+				// Segunda Consulta a la base de datos que recibe las asignaturas para
+				//ese destino en concreto
 				arrayAsigs = new ArrayList<ArrayAsignaturasExt>();
 				for (int i = 0; i < NombreDestino.size(); i++) {
 
@@ -412,8 +446,6 @@ public class DestinoAsignaturaActivity extends Activity {
 			// Con call se produce la llamada, y se espera (bloquea) hasta
 						// que
 						// se obtiene la respuesta
-						// SoapPrimitive response =
-						// (SoapPrimitive)envelope.getResponse();
 						if (envelope.getResponse() != null) {
 
 							resultado = new GenericResult(
@@ -424,8 +456,7 @@ public class DestinoAsignaturaActivity extends Activity {
 							// nueva interfaz
 							if (resultado.getErrno() == 0) {
 								// Todo ha ido bien, mostramos un Toast
-								System.out.println("Hola");
-								// Toast t = Toast.makeText(context, "Destino Creado",
+								// Toast t = Toast.makeText(context, "Asignatura Guardada",
 								// Toast.LENGTH_SHORT);
 								// t.show();
 
@@ -433,7 +464,6 @@ public class DestinoAsignaturaActivity extends Activity {
 
 							} else if (resultado.getErrno() == -2) {
 								// Todo ha ido bien, mostramos un Toast
-								System.out.println("Hola");
 								// Toast t = Toast.makeText(context,
 								// "Sentencia Incorrecta", Toast.LENGTH_SHORT);
 								// t.show();
@@ -444,7 +474,6 @@ public class DestinoAsignaturaActivity extends Activity {
 
 							else {
 								// Todo ha ido bien, mostramos un Toast
-								System.out.println("Hola");
 								// Toast t = Toast.makeText(context,
 								// "Fallo en Conexion", Toast.LENGTH_SHORT);
 								// t.show();
@@ -464,9 +493,7 @@ public class DestinoAsignaturaActivity extends Activity {
 		
 		@Override
 		protected Void doInBackground(Void... params) {
-			
-			//int var = ListaAsignaturas.get(NombreDestino.get(0)).size();
-			
+			//Enviamos para cada destino las asignaturas que ha elegido el alumno
 			for(int i=0; i<IdsDestinos.size();i++){
 				for(int j=0; j<ListaAsignaturas.get(NombreDestino.get(i)).size();j++){
 					if(ListaAsignaturas.get(NombreDestino.get(i)).get(j).isChekeado()){

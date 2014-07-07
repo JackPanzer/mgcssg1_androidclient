@@ -9,7 +9,7 @@
     tools:context=".Destinos2Activity" >
     
     <TextView
-        android:id="@+id/destinos3"
+        android:id="@+id/cprecontrato_cabecera"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"

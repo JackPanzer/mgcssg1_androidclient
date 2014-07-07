@@ -56,7 +56,6 @@ public class OrigenAsignaturaAlumno extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.origen_asignatura_alumno, menu);
 		return true;
 	}
@@ -160,8 +159,6 @@ public class OrigenAsignaturaAlumno extends Activity {
 			// Con call se produce la llamada, y se espera (bloquea) hasta
 			// que
 			// se obtiene la respuesta
-			// SoapPrimitive response =
-			// (SoapPrimitive)envelope.getResponse();
 			if (envelope.getResponse() != null) {
 
 				SoapObject arrayAsigs = (SoapObject) envelope.getResponse();
@@ -273,8 +270,6 @@ public class OrigenAsignaturaAlumno extends Activity {
 			// Con call se produce la llamada, y se espera (bloquea) hasta
 			// que
 			// se obtiene la respuesta
-			// SoapPrimitive response =
-			// (SoapPrimitive)envelope.getResponse();
 			if (envelope.getResponse() != null) {
 
 				SoapObject resultado = (SoapObject) envelope.getResponse();
@@ -302,12 +297,8 @@ public class OrigenAsignaturaAlumno extends Activity {
 						if(asignaturas.get(i).isConvalidar()){
 							aux =1;
 						}
-						respuesta = guardarAsignatura(asignaturas.get(i).getId(), aux);//FORZANDO CONVALIDAR
+						respuesta = guardarAsignatura(asignaturas.get(i).getId(), aux);
 
-						// Si hasta aquí todo ha ido bien, lo siguiente será
-						// abrir
-						// la
-						// nueva interfaz
 						if (respuesta.getErrno() == 0) {
 							// Todo ha ido bien, mostramos un Toast
 							// Toast t = Toast.makeText(context,

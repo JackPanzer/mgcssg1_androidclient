@@ -2,18 +2,21 @@ package pract.mant.auxiliares_alumno;
 
 import java.util.ArrayList;
 
-//Clase auxiliar que guardará los precontratos y dará la posibilidad de enviarlos al
-//coordinador académico, esta clase será usada por AdaptadorPrecontratos, se le deben
-//de añadir mas atributos
+/**
+ * Clase auxiliar que guardará los precontratos y dará la posibilidad de enviarlos al
+ * coordinador académico, esta clase será usada por AdaptadorPrecontratos.
+ * @author Betanzos
+ *
+ */
+
+
 public class Precontrato {
 	private int idAl;
 	private String nombre;
 	private int IdDestino;
 	private String Destino;
-	private String fecha;
 	private boolean aceptado;
 
-	// private ArrayList<String> asignaturas;
 
 	public Precontrato(int idAl, String nombre, int idDestino, String destino,
 			boolean aceptado) {
@@ -56,11 +59,6 @@ public class Precontrato {
 		this.aceptado = aceptado;
 	}
 
-	/*
-	 * public ArrayList<String> getAsignaturas() { return asignaturas; } public
-	 * void setAsignaturas(ArrayList<String> asignaturas) { this.asignaturas =
-	 * asignaturas; }
-	 */
 	public String getNombre() {
 		return nombre;
 	}
@@ -68,15 +66,4 @@ public class Precontrato {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-	/*
-	 * public String getTelefono() { return telefono; } public void
-	 * setTelefono(String telefono) { this.telefono = telefono; } public String
-	 * getTitulacion() { return titulacion; } public void setTitulacion(String
-	 * titulacion) { this.titulacion = titulacion; } public String
-	 * getPoblacion() { return poblacion; } public void setPoblacion(String
-	 * poblacion) { this.poblacion = poblacion; } public String getIdioma() {
-	 * return idioma; } public void setIdioma(String idioma) { this.idioma =
-	 * idioma; }
-	 */
 }
