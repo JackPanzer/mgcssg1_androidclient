@@ -40,9 +40,9 @@ public class AdaptadorDestinosAsignaturas extends BaseExpandableListAdapter {
 	 * contexto de la aplicacion,un ArrayList con los destinos, una tabla hash donde 
 	 * se relacionan los nombres de los distintos destinos con las asignturas
 	 * que se imparten.
-	 * @param context
-	 * @param Destinos
-	 * @param Contenido_Asignaturas
+	 * @param context contexto actual
+	 * @param Destinos array con el nombre de los destinos
+	 * @param Contenido_Asignaturas tabla hash que relaciona destino con array de asignaturas
 	 */
 	
 	

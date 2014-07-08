@@ -41,16 +41,16 @@ public class AdaptadorPrecontrado extends BaseExpandableListAdapter{
 	 * contexto de la aplicacion,un ArrayList con "Precontrato" seguido de un id, 
 	 * una tabla hash donde se relacionan los Precontratos con el nombre del alumno
 	 * y el destino que ha elegido.
-	 * @param context
-	 * @param Destinos
-	 * @param Contenido_Asignaturas
+	 * @param context contexto actual
+	 * @param Cabecera_Precontrato array que contiene los destinos
+	 * @param Contenido_Precontrato tabla hash que relaciona los destinos con los distintos campos de precontrato
 	 */
 	
-	public AdaptadorPrecontrado(Context context, List<String> listDataHeader,
-			HashMap<String, List<Precontrato>> listDataChild) {
+	public AdaptadorPrecontrado(Context context, List<String> Cabecera_Precontrato,
+			HashMap<String, List<Precontrato>> Contenido_Precontrato) {
 		this._context = context;
-		this.Cabecera_Precontrato = listDataHeader;
-		this.Contenido_Precontrato = listDataChild;
+		this.Cabecera_Precontrato = Cabecera_Precontrato;
+		this.Contenido_Precontrato = Contenido_Precontrato;
 	}
 
 	@Override

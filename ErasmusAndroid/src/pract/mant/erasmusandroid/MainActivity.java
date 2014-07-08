@@ -54,7 +54,7 @@ public SessionManager session; //SESSION OBJECT
 	/**
 	 * Después de hacer click en el botón salir
 	 * saldremos de la aplicación.
-	 * @param v
+	 * @param v contiene la vista actual
 	 */
 	public void clickSalir(View v){
 		finish();

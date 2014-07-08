@@ -10,6 +10,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+/**
+ * Clase usada para registrar la sesion del usuario que esta registrado en la aplicación
+ * @author Betanzos
+ *
+ */
 
 public class SessionManager {
 	 
@@ -45,8 +50,9 @@ public class SessionManager {
     }
     
     /**
-     * Create login session
-     * */
+     * Crea una sesion de usuario
+     * @param _miUsuario contiene los datos del usuario actual
+     */
     public void createLoginSession(ComplexUsuario _miUsuario){
        
     	// Storing login value as TRUE
@@ -61,9 +67,8 @@ public class SessionManager {
     }
     
     /**
-     * Check login method wil check user login status
-     * If false it will redirect user to login page
-     * Else won't do anything
+     * Este metodo comprueba que verdaderamente el usuario está logueado,
+     * si no se sale de la aplicación
      * */
     public void checkLogin(){
         // Check login status
@@ -82,9 +87,11 @@ public class SessionManager {
          
     }
     
+    
     /**
-     * Get stored session data
-     * */
+     * Devuelve los datos almacenados de la sesion
+     * @return tabla hash con los datos de la sesion
+     */
     public HashMap<String, String> getUserDetails(){
         HashMap<String, String> user = new HashMap<String, String>();
         
@@ -103,8 +110,8 @@ public class SessionManager {
     }
     
     /**
-     * Clear session details
-     * */
+     * Borra los datos de la sesion actual y sale de la sesion
+     */
     public void logoutUser(){
         // Clearing all data from Shared Preferences
         editor.clear();
@@ -123,7 +130,7 @@ public class SessionManager {
     }
     
     /**
-     * Quick check for login
+     * Comprueba si está en la aplicación
      * **/
     // Get Login State
     public boolean isLoggedIn(){

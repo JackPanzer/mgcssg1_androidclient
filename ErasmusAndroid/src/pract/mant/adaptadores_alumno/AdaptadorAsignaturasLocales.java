@@ -38,10 +38,11 @@ public class AdaptadorAsignaturasLocales extends ArrayAdapter<AsignaturaLocal> {
 	private List<AsignaturaLocal> mis_asignaturas;
 
 	/**
+	 * /**
 	 * Constructor del Adaptadordestinos donde recibirá por parametro el
 	 * contexto de la aplicacion y el ArrayList de los destinos.
-	 * @param context
-	 * @param mis_destinos
+	 * @param context contexto actual
+	 * @param mis_asignaturas array de asignaturas locales
 	 */
 	
 	public AdaptadorAsignaturasLocales(Activity context, List<AsignaturaLocal> mis_asignaturas) {

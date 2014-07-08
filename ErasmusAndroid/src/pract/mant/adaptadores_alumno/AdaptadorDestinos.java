@@ -32,8 +32,8 @@ public class AdaptadorDestinos extends ArrayAdapter<Destinos> {
 	/**
 	 * Constructor del Adaptadordestinos donde recibirá por parametro el
 	 * contexto de la aplicacion y el ArrayList de los destinos.
-	 * @param context
-	 * @param mis_destinos
+	 * @param context contexto actual
+	 * @param mis_destinos array de destinos
 	 */
 	
 	public AdaptadorDestinos(Activity context, ArrayList<Destinos> mis_destinos) {
