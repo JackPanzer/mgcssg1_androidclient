@@ -19,12 +19,29 @@ import android.widget.TextView;
 
 import com.example.erasmusandroid.R;
 
+/**
+ * Esta clase extiende de BaseExpandableListAdapter la usaremos para mostrar
+ * los precontratos almacenados, para luego dar la posibilidad de aceptarlos 
+ * por parte del coordinador
+ * @author Betanzos
+ *
+ */
+
 public class AdaptadorPropuesta extends BaseExpandableListAdapter{
 
 	private Context _context;
 	private List<String> cabecera_propuesta;
     private HashMap<String, List<Propuesta>> contenido_propuesta;
 
+    /**
+     * Constructor del AdaptadorPropuesta donde recibirá por parametro el
+	 * contexto de la aplicacion, una lista los precontratos y una tabla hash que relaciona
+	 * cada precontrato con sus caracteristicas
+     * @param context
+     * @param cabecera_propuesta
+     * @param contenido_propuesta
+     */
+    
 	public AdaptadorPropuesta(Context context, List<String> cabecera_propuesta,
 			HashMap<String, List<Propuesta>> contenido_propuesta) {
 		this._context = context;
@@ -43,6 +60,12 @@ public class AdaptadorPropuesta extends BaseExpandableListAdapter{
 		return childPosition;
 	}
 
+	/**
+	 * Esta función añade los datos del precontrato a cada precontrato, almacenadas en la
+	 * tabla hash y que listarán según el groupPosition o en este caso el precontrato del alumno, y 
+	 * childPosition o en este caso posición de los parametros de un precontrato dentro la tabla hash
+	 */
+	
 	@Override
 	public View getChildView(int groupPosition, final int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
@@ -110,6 +133,12 @@ public class AdaptadorPropuesta extends BaseExpandableListAdapter{
 		return groupPosition;
 	}
 
+	/**
+	 * Esta función añade un nombre a la cabecera la cual tomará del ArrayList
+	 * Precontratos y que se listrán por orden según aparecen en la lista através de
+	 * la variable groupPositon.
+	 */
+	
 	@Override
 	public View getGroupView(int groupPosition, boolean isExpanded,
 			View convertView, ViewGroup parent) {

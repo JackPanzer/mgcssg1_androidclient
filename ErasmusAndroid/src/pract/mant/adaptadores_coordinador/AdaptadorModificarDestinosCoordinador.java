@@ -31,6 +31,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Esta clase extiende de BaseExpandableListAdapter la usaremos para mostrar
+ * los distintos destinos almacenados, para luego dar la posibilidad de modificar
+ * alguno de ellos de la base de datos.
+ * @author Betanzos
+ *
+ */
 public class AdaptadorModificarDestinosCoordinador extends BaseExpandableListAdapter {
 
 	private Context _context;
@@ -38,6 +45,15 @@ public class AdaptadorModificarDestinosCoordinador extends BaseExpandableListAda
 	private HashMap<String, List<ModificarDestinos>> contenido_lista;
 	private  SessionManager session;
 
+	/**
+	 * Constructor del AdaptadorModificarDestinosCoordinador donde recibirá por parametro el
+	 * contexto de la aplicacion, una lista con los destinos y una tabla hash que relaciona
+	 * cada destino con sus caracteristicas
+	 * @param context contiene el contexto de la aplicación
+	 * @param cabecera_lista contiene la lista de destinos
+	 * @param contenido_lista contiene la tabla hash
+	 */
+	
 	public AdaptadorModificarDestinosCoordinador(Context context,
 			List<String> cabecera_lista,
 			HashMap<String, List<ModificarDestinos>> contenido_lista) {
@@ -46,6 +62,12 @@ public class AdaptadorModificarDestinosCoordinador extends BaseExpandableListAda
 		this.contenido_lista = contenido_lista;
 	}
 
+	/**
+	 * Esta función añade los datos del destinos al destinos, almacenadas en la
+	 * tabla hash y que listarán según el groupPosition o en este caso destino, y 
+	 * childPosition o en este caso posición de los parametros de un destino  dentro la tabla hash
+	 */
+	
 	@Override
 	public Object getChild(int groupPosition, int childPosititon) {
 		return this.contenido_lista.get(this.cabecera_lista.get(groupPosition))
@@ -151,6 +173,12 @@ public class AdaptadorModificarDestinosCoordinador extends BaseExpandableListAda
 		return groupPosition;
 	}
 
+	/**
+	 * Esta función añade un nombre a la cabecera la cual tomará del ArrayList
+	 * Destinos y que se listrán por orden según aparecen en la lista através de
+	 * la variable groupPositon.
+	 */
+	
 	@Override
 	public View getGroupView(int groupPosition, boolean isExpanded,
 			View convertView, ViewGroup parent) {
@@ -180,6 +208,13 @@ public class AdaptadorModificarDestinosCoordinador extends BaseExpandableListAda
 		return true;
 	}
 
+	/**
+	 * Clase que contiene una tarea asincrona que realizará una llamada al servidor 
+	 * para actualizar aquellos destinos que haya marcado el usuario.
+	 * @author Betanzos
+	 *
+	 */
+	
 	public class aTaskModificarTodosDestinos extends AsyncTask<Void, Void, Void> {
 		//Esto es un comentario
 		// private int idUsu;
@@ -252,7 +287,6 @@ public class AdaptadorModificarDestinosCoordinador extends BaseExpandableListAda
 					// nueva interfaz
 					if (respuesta.getErrno() == 0) {
 						// Todo ha ido bien, mostramos un Toast
-						System.out.println("Hola");
 						//Toast t = Toast.makeText(context, "Destino Creado", Toast.LENGTH_SHORT);
 						//t.show();
 
@@ -261,7 +295,6 @@ public class AdaptadorModificarDestinosCoordinador extends BaseExpandableListAda
 					}
 					else if (respuesta.getErrno() == -2) {
 						// Todo ha ido bien, mostramos un Toast
-						System.out.println("Hola");
 						//Toast t = Toast.makeText(context, "Sentencia Incorrecta", Toast.LENGTH_SHORT);
 						//t.show();
 
@@ -271,11 +304,9 @@ public class AdaptadorModificarDestinosCoordinador extends BaseExpandableListAda
 					
 					else if(respuesta.getErrno()==-3){
 						
-						System.out.println("Hola");
 					}
 					else{
 						// Todo ha ido bien, mostramos un Toast
-						System.out.println("Hola");
 						//Toast t = Toast.makeText(context, "Fallo en Conexion", Toast.LENGTH_SHORT);
 						//t.show();
 						

@@ -31,7 +31,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
+/**
+ * Esta clase extiende de BaseExpandableListAdapter la usaremos para mostrar
+ * los distintos destinos almacenados, para luego dar la posibilidad de borrar
+ * alguno de ellos de la base de datos.
+ * @author Betanzos
+ *
+ */
 public class AdaptadorEliminaDestinosCoordinador extends BaseExpandableListAdapter {
 
 	private Context _context;
@@ -39,6 +45,14 @@ public class AdaptadorEliminaDestinosCoordinador extends BaseExpandableListAdapt
 	private HashMap<String, List<EliminarDestino>> contenido_lista;
 	private SessionManager session;
 
+	/**
+	 * Constructor del AdaptadorEliminaDestinosCoordinador donde recibirá por parametro el
+	 * contexto de la aplicacion, una lista con los destinos y una tabla hash que relaciona
+	 * cada destino con sus caracteristicas
+	 * @param context contiene el contexto de la aplicación
+	 * @param cabecera_lista contiene la lista de destinos
+	 * @param contenido_lista contiene la tabla hash
+	 */
 	public AdaptadorEliminaDestinosCoordinador(Context context, List<String> cabecera_lista,
 			HashMap<String, List<EliminarDestino>> contenido_lista) {
 		this._context = context;
@@ -57,6 +71,12 @@ public class AdaptadorEliminaDestinosCoordinador extends BaseExpandableListAdapt
 		return childPosition;
 	}
 
+	/**
+	 * Esta función añade los datos del destinos al destinos, almacenadas en la
+	 * tabla hash y que listarán según el groupPosition o en este caso destino, y 
+	 * childPosition o en este caso posición de los parametros de un destino  dentro la tabla hash
+	 */
+	
 	@Override
 	public View getChildView(int groupPosition, final int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
@@ -120,6 +140,14 @@ public class AdaptadorEliminaDestinosCoordinador extends BaseExpandableListAdapt
 		return groupPosition;
 	}
 
+	/**
+	 * Esta función añade un nombre a la cabecera la cual tomará del ArrayList
+	 * Destinos y que se listrán por orden según aparecen en la lista através de
+	 * la variable groupPositon.
+	 */
+	
+	
+	
 	@Override
 	public View getGroupView(int groupPosition, boolean isExpanded,
 			View convertView, ViewGroup parent) {
@@ -148,9 +176,14 @@ public class AdaptadorEliminaDestinosCoordinador extends BaseExpandableListAdapt
 		return true;
 	}
 
+	
+	/**
+	 * Clase que contiene una tarea asincrona que realizará una llamada al servidor 
+	 * para eliminar aquellos destinos que haya marcado el usuario.
+	 * @author Betanzos
+	 *
+	 */
 	public class aTaskEliminarDestinos extends AsyncTask<Void, Void, Void> {
-		//Esto es un comentario
-		// private int idUsu;
 		private GenericResult respuesta;
 		private SessionManager session; // SESSION OBJECT
 		private Activity context;
@@ -200,7 +233,6 @@ public class AdaptadorEliminaDestinosCoordinador extends BaseExpandableListAdapt
 					// nueva interfaz
 					if (respuesta.getErrno() == 0) {
 						// Todo ha ido bien, mostramos un Toast
-						System.out.println("Hola");
 						//Toast t = Toast.makeText(context, "Destino Creado", Toast.LENGTH_SHORT);
 						//t.show();
 
@@ -209,7 +241,6 @@ public class AdaptadorEliminaDestinosCoordinador extends BaseExpandableListAdapt
 					}
 					else if (respuesta.getErrno() == -2) {
 						// Todo ha ido bien, mostramos un Toast
-						System.out.println("Hola");
 						//Toast t = Toast.makeText(context, "Sentencia Incorrecta", Toast.LENGTH_SHORT);
 						//t.show();
 
@@ -219,11 +250,9 @@ public class AdaptadorEliminaDestinosCoordinador extends BaseExpandableListAdapt
 					
 					else if(respuesta.getErrno()==-3){
 						
-						System.out.println("Hola");
 					}
 					else{
 						// Todo ha ido bien, mostramos un Toast
-						System.out.println("Hola");
 						//Toast t = Toast.makeText(context, "Fallo en Conexion", Toast.LENGTH_SHORT);
 						//t.show();
 						
